@@ -43,3 +43,7 @@
 【更新日志】
 v1.0.1  两件药品不再触发「药效太弱」顾客投诉与声望扣减（药效温和属设计）
 v1.0.0  首次发布：澄心剂、消痛片两条化学精制机配方
+
+【源码】
+https://github.com/zszzlzm/probably-stolen-mods
+（Apache-2.0：可以自己改、再发布；构建步骤见仓库 BUILDING.md）

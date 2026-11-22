@@ -38,3 +38,7 @@
 【反馈】
 遇到问题请附上 Player.log（位于
 %LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log）
+
+【源码】
+https://github.com/zszzlzm/probably-stolen-mods
+（Apache-2.0：可以自己改、再发布；构建步骤见仓库 BUILDING.md）
