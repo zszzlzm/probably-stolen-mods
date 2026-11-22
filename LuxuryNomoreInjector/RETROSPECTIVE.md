@@ -154,3 +154,6 @@ if (val != null) {
 - **上架**：条目 **3844271622** 已上传，`visibility 2`。剩两步：在页面粘贴 `dist/workshop_description.txt` 全文；`VIS_OVERRIDE=0 bash scripts/package.sh` 后重传改成公开。
 - **可选的旧档迁移**：`onLoaded` 里遍历已存在的 `pink_alt_injector` 实例，补类型 + 改价（一次性，写个标记避免反复）。目前没做，描述里按"接受原价"写的。
 - **英文界面验收**：交给玩家反馈（系列约定：无人反馈即视为通过）。
+- **源码公开**：六个模组的源码在 https://github.com/zszzlzm/probably-stolen-mods（Apache-2.0），
+  本模组在 `LuxuryNomoreInjector/`；release `builds-2026-11-23` 附了安装包。
+  想让人接手的话，工坊描述末尾可以加一行仓库链接（需要重传描述）。

@@ -22,6 +22,10 @@
 
 四个已公开（滤芯打印机、下层药房、净化无上限、还原蕨），拾荒手记仍是隐藏状态（审核通过后由作者手动公开），奢侈品注射器已上传（3844271622）但还停在隐藏，等页面确认后改公开。
 
+六个模组的源码已公开在 **https://github.com/zszzlzm/probably-stolen-mods**（Apache-2.0，单仓库六个目录），
+release `builds-2026-11-23` 附了六个可直接安装的 zip。仓库里只放源码与文档，**不含**反编译的游戏代码、
+游戏资源与构建产物；README / BUILDING 说明了怎么用本机游戏编译。
+
 ## 2. 平台事实（一次摸清，后面一直用）
 
 - **加载**：`Mods/<文件夹>/manifest.xml` + `<Assemblies>`；`ModLoader` 会 `Assembly.LoadFrom` → 找 `IMod` 实现 → `new Harmony("mod."+ID).PatchAll(assembly)` → `Init/OnEnable`。所以 mod 里**不需要自己 new Harmony**，只要有一个 `IMod` 和一个带 `[HarmonyPatch]` 的类。
