@@ -1,9 +1,10 @@
 import sys, os, re
+from pathlib import Path
 import UnityPy
 
-GAME = r"F:\SteamLibrary\steamapps\common\Probably Stolen\Probably Stolen_Data"
+GAME = os.environ.get("PS_GAME_DATA", r"F:\SteamLibrary\steamapps\common\Probably Stolen\Probably Stolen_Data")
 FILES = ["sharedassets0.assets", "resources.assets"]
-OUT = r"C:\Users\zszzl\Documents\deepseek-harness\default-workspace\Pharmacy\refs"
+OUT = os.environ.get("PS_SPRITE_OUT", str(Path(__file__).resolve().parents[1] / "refs"))
 os.makedirs(OUT, exist_ok=True)
 
 KEYWORDS = sys.argv[1:] or ["dream_dust", "oxycodone_pill", "items_medical"]

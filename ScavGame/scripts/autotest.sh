@@ -4,10 +4,11 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 GAME="${SCAV_ARCADE_GAME_DIR:-/f/SteamLibrary/steamapps/common/Probably Stolen}"
 MODS="$GAME/Mods/ScavArcade"
-DATA="/c/Users/zszzl/AppData/LocalLow/Questing Goose Studio/Probably Stolen/ModData/harness_scav-arcade"
+SAVE_DIR="${PS_SAVE_DIR:-$HOME/AppData/LocalLow/Questing Goose Studio/Probably Stolen}"
+DATA="$SAVE_DIR/ModData/harness_scav-arcade"
 FLAG="$DATA/autotest.flag"
 REPORT="$DATA/autotest-report.txt"
-LOG="/c/Users/zszzl/AppData/LocalLow/Questing Goose Studio/Probably Stolen/Player.log"
+LOG="$SAVE_DIR/Player.log"
 
 if tasklist 2>/dev/null | grep -qi "Probably Stolen"; then
   echo "游戏还在运行。先关掉游戏，否则 DLL 会被锁。" >&2

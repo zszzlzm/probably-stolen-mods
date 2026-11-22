@@ -1,4 +1,5 @@
 """把生成的关键图 + 游戏精灵图排版成创意工坊封面（1280x720）。"""
+import os
 import pathlib
 import sys
 
@@ -9,9 +10,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 GEN = ROOT / "refs" / "gen"
 OUT = ROOT / "mod" / "preview.png"
-GAME = pathlib.Path(
-    r"C:\Users\zszzl\Documents\deepseek-harness\default-workspace\ScavGame\refs\game"
-)
+# 游戏素材目录（默认指向本仓库同级的 ScavGame/refs/game，可用 PS_GAME_REFS 覆盖）
+GAME = pathlib.Path(os.environ.get("PS_GAME_REFS", ROOT.parent / "ScavGame" / "refs" / "game"))
 
 W, H = 1280, 720
 ACCENT = (232, 163, 61)

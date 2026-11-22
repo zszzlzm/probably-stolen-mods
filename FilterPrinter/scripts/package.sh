@@ -21,11 +21,12 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build "$ROOT/FilterPrinter.csproj" -c Release -
 [ -s "$ROOT/build/FilterPrinterMod.dll" ] || { echo "ERROR: build produced no dll" >&2; exit 1; }
 
 echo "== preview =="
-PY="${DSH_PYTHON:-/c/Users/zszzl/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/python.exe}"
-if [ ! -x "$PY" ]; then
-	PY="$(command -v python3 || command -v python || true)"
+# 需要 Python 3 + Pillow；不要用 Windows 应用商店的占位 python（它什么都不做）
+PY="${DSH_PYTHON:-$(command -v python3 || command -v python || true)}"
+if [ -z "$PY" ] || ! "$PY" -c "import PIL" >/dev/null 2>&1; then
+	echo "ERROR: need Python 3 with Pillow; set DSH_PYTHON=/path/to/python" >&2
+	exit 1
 fi
-[ -n "$PY" ] || { echo "ERROR: no python interpreter found" >&2; exit 1; }
 KEYART="$ROOT/refs/gen/keyart.png"
 if [ -f "$KEYART" ]; then
 	"$PY" "$ROOT/scripts/make_cover.py" "$KEYART" || { echo "ERROR: preview generation failed" >&2; exit 1; }

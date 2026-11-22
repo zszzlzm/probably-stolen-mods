@@ -1,4 +1,5 @@
 """生成滤芯打印机封面用的关键图（1280x720）。参考图来自游戏原版滤水/滤芯素材。"""
+import os
 import pathlib
 import sys
 
@@ -8,11 +9,12 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 REFS = ROOT / "refs"
 GEN = REFS / "gen"
-GAME = pathlib.Path(
-    r"C:\Users\zszzl\Documents\deepseek-harness\default-workspace\ScavGame\refs\game"
-)
+# 游戏素材目录（默认指向本仓库同级的 ScavGame/refs/game，可用 PS_GAME_REFS 覆盖）
+GAME = pathlib.Path(os.environ.get("PS_GAME_REFS", ROOT.parent / "ScavGame" / "refs" / "game"))
 
-sys.path.insert(0, r"F:\随笔集\完全自由的异世界之旅\04_工具")
+# 生图入口 qwen_img.py 所在目录，用 QWEN_IMG_DIR 指定
+QWEN_DIR = os.environ.get("QWEN_IMG_DIR", r"F:\随笔集\完全自由的异世界之旅\04_工具")
+sys.path.insert(0, QWEN_DIR)
 import qwen_img  # noqa: E402
 
 PROMPT = (
