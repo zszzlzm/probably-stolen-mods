@@ -1,0 +1,6 @@
+item.calm_agent.name,"Calming Agent"
+item.calm_agent.desc,"A cheap antidepressant brewed in the lower districts. The dream-cap extract is measured so precisely that it calms the mind without the danger."
+item.painkiller_pill.name,"Pain Relief Tablet"
+item.painkiller_pill.desc,"A cheap but powerful painkiller from the lower districts. The dose of fentanyl is small enough to stop the pain and nothing else."
+debug.spawn_calm,"Spawn Calming Agent"
+debug.spawn_pain,"Spawn Pain Relief Tablet"

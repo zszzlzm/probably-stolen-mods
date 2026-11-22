@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod>
+  <ID>harness.scav-probe</ID>
+  <Name>Scav M0 Probe</Name>
+  <Author>harness</Author>
+  <ModVersion>0.1.0</ModVersion>
+  <Description>M0 技术探针：验证 ModHook 生命周期、CustomUI 窗口、物品入包与最简揭示、受伤遮罩、自带音效、PixelWindow 层级。不是正式玩法，验证后删除。</Description>
+  <GameVersions><Version>0.46D</Version></GameVersions>
+  <Prerequisites />
+  <Assemblies><Assembly>ScavProbe.dll</Assembly></Assemblies>
+  <Capabilities />
+</Mod>

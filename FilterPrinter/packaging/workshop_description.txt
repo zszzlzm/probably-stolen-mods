@@ -1,0 +1,40 @@
+[h1]滤芯打印机 / Filter Cartridge Printer[/h1]
+
+[b]按你指定的截留物质，现场打印一枚专用滤芯。[/b]
+
+[h2]它做什么[/h2]
+一台可以放在店里的打印机。在机器面板上选择这枚滤芯要拦截的物质，按下打印，滤芯就从输出槽出来了。
+
+[h2]可选的截留物质（37 种）[/h2]
+[list]
+[*]污染物：重金属、微塑料、微生物、有机物残渣、矿物质、化学污染物、物理杂质、植物残渣、碎屑、全部污染物
+[*]药物：梦帽菇、梦帽菇萃取液、梦魇帽菇、梦魇萃取液、咖啡物质、酒精、咖啡因、芬太、赛纳普斯
+[*]营养：蛋白质、脂肪、淀粉、糖
+[*]化学品：酸、碱、氯、氰化物、还原剂、稳定剂、甲基羟甲基碱、脂合剂、避孕激素、牲畜类固醇、牲畜免疫血清、果酿萃取液、奥克莫吸
+[/list]
+每一枚滤芯只拦截你选中的那一种物质，装进过滤器后其他成分照常通过。
+
+[h2]数值[/h2]
+[list]
+[*]打印一次：120 电（模组设置里可改，0 表示免费）
+[*]电源：普通电池 / 可充电池 / 电流转换器（转换器需先点亮；夜间不扣现金，扣电服务费）
+[*]滤芯耐久：900
+[/list]
+
+[h2]安装[/h2]
+订阅后在「模组」菜单启用，然后重启游戏一次。
+
+[h2]语言[/h2]
+中文、English。
+
+[h2]兼容性[/h2]
+游戏版本 0.46D。仅使用官方模组 API 与一个 Harmony 补丁（WaterHelper.HandleFilter），不声明任何能力（files / network / steam 等）。
+
+[h2]反馈[/h2]
+请附上 Player.log：%LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log
+
+--- English ---
+
+[h1]Filter Cartridge Printer[/h1]
+Adds a printer that grows a filter cartridge for exactly the substance you choose: heavy metals, microplastics, microbes, drugs, nutrients, acids, bases and more — 37 cartridge types for 120 power each, 900 durability.
+Print cost, power sources and the machine UI are all handled by the official mod API; no capabilities declared.

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod>
+  <ID>harness.scav-arcade</ID>
+  <Name>拾荒手记 / Scavenger's Notes</Name>
+  <Author>harness</Author>
+  <ModVersion>0.3.0</ModVersion>
+  <Description>A 6x4 scavenging grid with compass clues, flashlight and magnifier, sealed crates, machines, extra loot, and bandage-or-quit injuries. Chinese/English. / 6×4 拾荒网格：罗盘线索、手电与放大镜、密封箱、机器、多件掉落，受伤可包扎继续。中英双语。</Description>
+  <GameVersions><Version>0.46D</Version></GameVersions>
+  <Prerequisites />
+  <Assemblies><Assembly>ScavArcade.dll</Assembly></Assemblies>
+  <Capabilities />
+</Mod>

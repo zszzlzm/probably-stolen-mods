@@ -1,0 +1,35 @@
+# ---- 不发布的本地内容 ----
+# 游戏反编译源码（版权属于 Questing Goose Studio，不能分发）
+probably_stolen_decomp/
+decomp.log
+
+# 本机抓取的资料、临时文件、工具状态
+tmp/
+research/
+.dsh-ops/
+appdetails.json
+gh.json
+gh_tree.json
+
+# ---- 构建产物 ----
+**/build/
+**/obj/
+**/bin/
+*/dist/
+*.zip
+
+# ---- 生成素材 ----
+# refs/ 是生图候选与参考照片（体积大，且参考照片不是本项目版权）
+*/refs/
+ScavGame/art/
+ScavGame/test-reports/
+ScavGame/tools/AutoHotkey/
+ScavGame/tools/ahk-v2.zip
+
+# ---- 系统垃圾 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+*.bak
+*.log
+!Cargo.lock

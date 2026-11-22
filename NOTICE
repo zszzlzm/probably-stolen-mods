@@ -1,0 +1,12 @@
+Probably Stolen mod sources
+Copyright 2026 zszzlzm
+
+This product includes software developed as unofficial mods for the game
+"Probably Stolen" (Questing Goose Studio). It is not affiliated with,
+endorsed by, or sponsored by the game's developer or publisher.
+
+No game assets are distributed in this repository. Building any mod requires
+a locally installed copy of the game; the game's own assemblies are referenced
+at compile time and are never redistributed here.
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).

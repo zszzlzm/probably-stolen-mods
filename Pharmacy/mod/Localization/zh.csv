@@ -1,0 +1,6 @@
+item.calm_agent.name,"澄心剂"
+item.calm_agent.desc,"下层区自制的一种廉价抗抑郁剂，通过精细控制梦帽菇萃取液剂量达到了安全抗抑郁的效果。"
+item.painkiller_pill.name,"消痛片"
+item.painkiller_pill.desc,"下层区自制的一种廉价强力镇痛剂，通过精细控制芬太剂量达到了安全镇痛的效果。"
+debug.spawn_calm,"生成 澄心剂"
+debug.spawn_pain,"生成 消痛片"

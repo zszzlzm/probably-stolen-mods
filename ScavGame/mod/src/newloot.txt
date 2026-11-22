@@ -1,0 +1,56 @@
+        private static void GiveLoot(CellData cell)
+        {
+            try
+            {
+                List<GameItem> items = cell.items;
+                if (items == null || items.Count == 0)
+                {
+                    AddLine(TextBank.Get("result.empty.1"));
+                    return;
+                }
+
+                RunStats.OnScavengedItems(items);
+                GameGridInventory inventory = EmporiumEntry.Instance.afterhourInventory;
+                for (int i = 0; i < items.Count; i++)
+                {
+                    if (items[i] != null)
+                    {
+                        GraphUtils.TryAcceptAll(inventory, items[i]);
+                    }
+                }
+
+                GameItem backpack = cell.backpack;
+                if (backpack != null)
+                {
+                    if (backpack.identifier == "satchel")
+                    {
+                        PlayerStore.Instance.dumpingGroundSatchelFound = true;
+                    }
+                    else if (backpack.identifier == "kids_backpack")
+                    {
+                        PlayerStore.Instance.dumpingGroundKidsBackpackFound = true;
+                    }
+                }
+
+                foundCount += items.Count;
+                Debug.Log("[ScavArcade] loot " + items.Count + " found, total=" + foundCount);
+                string name = items[0].name;
+                if (string.IsNullOrEmpty(name))
+                {
+                    name = items[0].identifier;
+                }
+                bool high = items[0].GetBaseValue() >= 70;
+                AddLine(Pick(high ? "result.rare" : "result.common", high ? 3 : 4, name));
+                if (items.Count > 2)
+                {
+                    AddLine(TextBank.Get("result.extra.more"));
+                }
+                Play("debris");
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                AddLine(TextBank.Get("result.empty.1"));
+            }
+        }
+

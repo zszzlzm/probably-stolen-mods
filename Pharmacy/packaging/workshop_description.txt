@@ -1,0 +1,54 @@
+[h1]下层药房 / Lower-District Pharmacy[/h1]
+
+[b]合法药品不该只有咖啡因片。[/b]
+
+违禁品卖得提心吊胆，原料堆在仓库里卖不出去，想弄点烟酒还得自己酿酒？
+那这台化学精制机上的两条新配方，就是给下层区的小店准备的。
+
+[h2]两种药[/h2]
+[list]
+[*][b]澄心剂[/b] — 0.8 ml 梦帽菇萃取液
+    下层区自制的一种廉价抗抑郁剂，通过精细控制梦帽菇萃取液剂量达到了安全抗抑郁的效果。基础价值 7。
+[*][b]消痛片[/b] — 0.08 ml 芬太
+    下层区自制的一种廉价强力镇痛剂，通过精细控制芬太剂量达到了安全镇痛的效果。基础价值 2。
+[/list]
+
+[h2]为什么值得做[/h2]
+[list]
+[*]两条配方直接加进[b]化学精制机[/b]的配方表，机器和存档都不用改
+[*]成品带[b]医疗品 / 麻醉品 / 烟酒类[/b]标签，是[b]合法商品[/b]——没有违禁品标签，卖出去不记账、不招警察
+[*]梦帽菇萃取液、芬太这些囤着占格的原料终于有销路
+[*]不需要酿酒也能补上「烟酒类」货架
+[*]成色按你实际投进去的液体纯度结算，和做药、做粉是同一套规则
+[*]药效温和是设计，不是缺陷：这两件药不会被顾客当成「弱效麻醉品」投诉，不扣声望、不退货
+[/list]
+
+[h2]怎么用[/h2]
+[list]
+[*]把化学精制机放在店里，往容器槽里放一瓶对应液体（梦帽菇萃取液 ≥ 0.8 ml，或芬太 ≥ 0.08 ml）
+[*]点「配置」，选「澄心剂」或「消痛片」
+[*]按「产出」，成品掉进输出格，直接摆上柜台
+[/list]
+
+[h2]数值[/h2]
+[list]
+[*]澄心剂：0.8 ml 梦帽菇萃取液 / 基础价值 7 / 麻醉品等级 1
+[*]消痛片：0.08 ml 芬太 / 基础价值 2 / 麻醉品等级 2
+[*]两者成色均为 60%~80%，按实际原料纯度评级
+[/list]
+
+[h2]兼容性[/h2]
+游戏版本 0.46D。只用官方模组 API，不声明任何能力（files / network / steam），无 Harmony 补丁，不影响其他配方。
+
+[h2]语言[/h2]
+中文、English。
+
+[h2]反馈[/h2]
+请附 Player.log：%LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log
+
+--- English ---
+
+[h1]Lower-District Pharmacy[/h1]
+Two legal medicines you can cook in the chem finisher: [b]Calming Agent[/b] (0.8 ml dream-cap extract, value 7) and [b]Pain Relief Tablet[/b] (0.08 ml fentanyl, value 2).
+Both carry the Medical / Narcotic / Substance tags but no contraband tag, so selling them is legal — perfect for players who would rather not traffic in illegal goods, and for anyone tired of caffeine pills being the only legal option.
+Mild potency is the point: customers won't file "weak narcotic" complaints, and no reputation is lost.

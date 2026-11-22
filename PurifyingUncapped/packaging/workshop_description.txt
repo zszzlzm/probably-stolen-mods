@@ -1,0 +1,56 @@
+[h1]净化无上限 / Purifying Uncapped[/h1]
+
+[b]95% 不是设计，是天花板。[/b]
+
+净化水质基因升到 21 级就撞上每晚去除 95% 的硬上限，再往上练也只影响纯度上限、不影响速度；26 级想把一瓶最脏的水清干净仍要好几个晚上。而唯一能提高吞吐的办法是——多摆几台水培机。实体更多、帧数更低、每晚操作更繁。
+
+这个模组只改一行：把公式里的上限从 95% 抬到 100%，其余全部保留。
+
+[h2]改动前后[/h2]
+[list]
+[*]20 级及以下：不变（94.57% 以下）
+[*]21 级：95% → [b]98.10%[/b]（tooltip 显示 98%）
+[*]22–25 级：95% → [b]100%[/b]
+[*]26 级：95% → [b]100%[/b]，一晚清掉除矿物质外的所有污染物
+[/list]
+
+[h2]为什么值得装[/h2]
+[list]
+[*]不用再靠「多摆几台机器」堆吞吐，省实体、省电、省每晚点击
+[*]玩法与 tooltip 同步生效（两者都读同一个函数）
+[*]不写存档、不新增物品/配方，卸掉就完全恢复原版
+[*]和只改物品/配方的模组互不干扰
+[/list]
+
+[h2]一个诚实的说明[/h2]
+「去除比例」和「纯度上限」是两套逻辑。重金属的保留下限是 [b]baseMaxPurity / 等级[/b]，所以 22–25 级重金属仍会停在 0.01%，要到 26 级（下限归零）才会真正「除矿物质外全清」。本模组只拆 95% 上限，没有动这个门槛——想连它一起改的，可以再做一版。
+
+[h2]兼容性[/h2]
+游戏版本 0.46D。只对 PlantWaterQuality.PurifyingShare(int) 打一个 Harmony Prefix，不声明任何能力（files / network / steam），不写存档。请不要和其它同样修改 PurifyingShare 的模组同时启用。
+
+[h2]语言[/h2]
+中文、English（模组内不含文本，tooltip 走游戏本体语言）。
+
+[h2]反馈[/h2]
+请附 Player.log：%LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log
+（模组加载后应出现 [ModLoader] Harmony: 1 method(s) patched）
+
+---
+
+[h1]Purifying Uncapped[/h1]
+[b]95% was a ceiling, not a design. [/b]
+
+The Purifying gene hits a hard 95% per-night removal cap at rank 21. Levelling further only raises the purity ceiling, not the speed — a 26-rank gene still needs several nights per dirty tank. The only way to increase throughput was to place more hydroponic machines: more entities, lower FPS, more clicking.
+
+This mod changes one line: the cap goes from 95% to 100%. Everything else stays vanilla.
+
+[list]
+[*]Rank 20 and below: unchanged
+[*]Rank 21: 95% → 98.10%
+[*]Rank 22–25: 95% → 100%
+[*]Rank 26: 95% → 100%, cleans everything except minerals in a single night
+[/list]
+
+Honest note: the removal share and the purity floor are separate systems. Heavy metals keep a floor of baseMaxPurity / rank, so ranks 22–25 still stop at 0.01%; only rank 26 (floor = 0) fully cleans them. This mod removes the 95% cap only.
+
+Game version 0.46D. One Harmony prefix on PlantWaterQuality.PurifyingShare(int); no capabilities declared, no save data written. Do not combine with another mod that patches the same method.

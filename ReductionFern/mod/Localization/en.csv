@@ -1,0 +1,16 @@
+mod.name,"Reduction Fern"
+plant.name,"Reduction Fern"
+
+item.seed.name,"Reduction Fern Spores"
+item.seed.desc,"A pinch of downy spores. They take root in a water-poor hydroponic tray, and the mature fronds store a pale teal reducing agent in their veins."
+item.seed.flavor,"It doesn't mind the water. It minds the power."
+
+item.fronds.name,"Reduction Fern Fronds"
+item.fronds.desc,"A handful of grey-green fronds. Crushed, they seep reducing agent - one of the few legal sources for Nomore synthesis."
+item.fronds.flavor,"It doesn't mind the water. It minds the power."
+
+debug.spawn,"Spawn Reduction Fern Spores"
+
+upgrade.title,"Reduction Fern Spores"
+upgrade.subtitle,"Hydroponic Crop"
+upgrade.desc,"Request a Reduction Fern through the agricultural network. Two spores arrive at once; grow them in a hydroponic tray and harvest fronds rich in reducing agent."

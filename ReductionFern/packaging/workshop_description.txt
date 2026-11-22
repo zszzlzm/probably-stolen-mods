@@ -1,0 +1,105 @@
+[h1]还原剂蕨 / Reduction Fern[/h1]
+
+[b]还原剂只能拆化学用品（管制）；现在你可以把它种出来。[/b]
+
+想做奥克莫吸可还原剂只能从化学用品（管制）拆出来，根本买不到几个。
+这株「还原蕨」把这条线补上了：孢子进槽，割下叶子揉碎，就是还原剂——
+不碰违禁品，也不用再苦于化学用品（管制）太过稀有了。
+
+[h2]它是什么[/h2]
+一株新的水培作物。当成普通作物种就行：放进水培槽、通电通水、等进度条走完、收叶子。
+
+[list]
+[*][b]还原蕨孢子[/b] — 28 信用点；种一茬会返还孢子。
+[*][b]还原蕨叶[/b] — 按植株健康度出三档：小叶 20.5 克 / 标准叶 40 克 / 大叶 75 克，名字和图标都跟着变。
+[*]叶片同时属于[b]化学用品[/b]与[b]材料[/b]：可以直接卖，也能搅碎取液。
+[*]孢子与叶片都是合法货物，没有违禁标签——卖店、投料、放进柜台都不招麻烦。
+[/list]
+
+[h2]怎么拿到[/h2]
+[list]
+[*]网络界面新增一条「还原蕨孢子」：450 信用点，无前置。
+[*]解锁时一次性给 2 颗孢子，留一颗容错（你可以把梦帽菇的繁殖力强转进去想种多少种多少）。
+[*]只想先试试的话，也可以在存档里自己找找调试入口——不影响正常存档。
+[/list]
+
+[h2]数值（设计值）[/h2]
+[list]
+[*]生长进度 26，一茬 8 片叶；初始特质[b]耐旱I[/b]，[b]产出还原剂I[/b]。
+[*]每片叶：基础 0.25 ml/克还原剂，外加产出特质加成；效力强／效力弱按原版口径一起放大。
+[*]标准叶一茬 120 ml；满血出大叶 190 ml；效力强 I 150 ml、效力弱 I 90 ml。
+[*]每片叶另有 1.2 千卡/克的食用能量（如果不能用就转个「可食用」基因改成食物试试，我没试过）。
+[*]养分 250 / 75 / 30，污染 1.01；水耗约 75 ml 一茬，和原版水培一个量级。
+[/list]
+
+[h2]兼容性[/h2]
+[list]
+[*]游戏版本 0.46D。只用官方模组 API，外加两个 Harmony 补丁（都只做显示层的事）。
+[*]不声明任何能力（files / network / steam）。
+[*]不改原版植物、不新增液体：直接复用现成的「还原剂」，所以和其他种田类 mod 冲突概率很低。
+[*][b]与 Hydroponic Seed Preview 兼容[/b]：种子进槽后的预览显示的是蕨叶立绘，不再是孢子图标。
+[*]原版植物和水培机的其他行为一律不碰；补丁都只在本 mod 的作物上生效，找不到对方 mod 就自动不做事。
+[*]中途卸载：存档里已有的孢子和叶片会变成未知物品（所有加物品的 mod 都这样），建议先处理完再卸。
+[/list]
+
+[h2]安装[/h2]
+订阅后在「模组」菜单里启用，然后重启游戏一次。
+
+[h2]语言[/h2]
+中文、English。
+
+[h2]反馈[/h2]
+出问题时请附上 Player.log：%LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log
+
+--- English ---
+
+[h1]Reduction Fern[/h1]
+
+[b]Reducing agent only came out of Chemical Supplies (Restricted) crates. Now you can grow it.[/b]
+
+Making Nomore meant tearing apart restricted chemical supplies, and you never got more than a handful out of them. This fern closes that gap: spores into the tray, fronds off the plant, crush them and you have reducing agent — no contraband involved, and no more rationing what little restricted chemical stock you can find.
+
+[h2]What it is[/h2]
+A new hydroponic crop. Treat it like any other: put it in a tray, give it power and water, wait out the progress bar, harvest the fronds.
+
+[list]
+[*][b]Reduction Fern Spores[/b] — 28 cr; each harvest returns spores.
+[*][b]Reduction Fern Fronds[/b] — three sizes by plant health: 20.5 g / 40 g / 75 g, each with its own name and icon.
+[*]Fronds are both [b]chemical supplies[/b] and [b]material[/b]: sell them directly, or crush them for the liquid.
+[*]Spores and fronds are legal goods — no contraband flag, so selling, feeding and stocking them is uneventful.
+[/list]
+
+[h2]How to get it[/h2]
+[list]
+[*]A new network offer, "Reduction Fern Spores": 450 cr, no prerequisites.
+[*]Two spores per unlock, so you keep a spare (splice a [b]Fertile[/b] gene — dream caps carry one — into your spores and you can grow as many as you like).
+[*]If you just want to try it out, there is a debug spawn entry as well — it does not touch your save.
+[/list]
+
+[h2]Numbers (design values)[/h2]
+[list]
+[*]26 growth progress, 8 fronds per harvest; innate [b]Drought Resistant I[/b] and [b]Reducing Agent Production I[/b].
+[*]0.25 ml of reducing agent per gram plus the trait bonus; Potent / Weak scale it exactly the way vanilla produce does.
+[*]A standard harvest yields 120 ml; a full-health harvest of large fronds yields 190 ml; 150 ml with Potent I, 90 ml with Weak I.
+[*]Each frond also carries 1.2 kcal per gram of food value (splice an "edible" gene to turn it into FOOD — I have not tested that path).
+[*]Nutriment 250 / 75 / 30, contaminant 1.01, roughly 75 ml of water per harvest.
+[/list]
+
+[h2]Compatibility[/h2]
+[list]
+[*]Game version 0.46D. Official mod API plus two Harmony patches, both presentation-only.
+[*]No capabilities declared (files / network / steam).
+[*]No vanilla plants are modified and no new liquid is added — it reuses the existing reducing agent, so conflicts with other farming mods are unlikely.
+[*][b]Works with Hydroponic Seed Preview[/b]: the seed preview shows the fern art instead of the spore icon.
+[*]Vanilla plants and the rest of the hydroponic machine are untouched; the patches only act on this crop and quietly do nothing when the other mod is absent.
+[*]Uninstalling mid-save turns existing spores and fronds into unknown items (true of any mod that adds items), so clear them out first.
+[/list]
+
+[h2]Install[/h2]
+Subscribe, enable it in the Mods menu, then restart the game once.
+
+[h2]Languages[/h2]
+Chinese, English.
+
+[h2]Feedback[/h2]
+When something breaks, please attach Player.log: %LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log

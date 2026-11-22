@@ -1,0 +1,11 @@
+"workshopitem"
+{
+	"appid"		"4348910"
+	"publishedfileid"		"3841523504"
+	"contentfolder"		"C:\\Users\\zszzl\\Documents\\deepseek-harness\\default-workspace\\ScavGame\\dist\\ScavengerNotes"
+	"previewfile"		"C:\\Users\\zszzl\\Documents\\deepseek-harness\\default-workspace\\ScavGame\\mod\\preview.png"
+	"visibility"		"2"
+	"title"		"拾荒手记 / Scavenger's Notes"
+	"description"		"是不是觉得拾荒只是点一下开盲盒很无聊？我做成了小游戏：24 格挑 5–7 次拾取，手电 3 次、放大镜 1 次，受伤可包扎、剩余次数保留。 / A 6x4 scavenging minigame: 24 cells, 5-7 picks, flashlight x3, magnifier x1, bandage and keep going. Chinese/English."
+	"changenote"		"Cover text aligned with the new description."
+}
