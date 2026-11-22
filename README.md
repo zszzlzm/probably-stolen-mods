@@ -32,6 +32,14 @@ Source for six mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0](L
   哪些数值有原版锚点。改之前建议先读，能省掉一整轮试错。
 - 根目录的 [`RETROSPECTIVE.md`](RETROSPECTIVE.md) 是跨模组的平台经验（Hook、存档信任、SteamCMD、封面流水线）。
 
+## 接手 / Contributing
+
+- Bug、数值调整、新想法都欢迎开 issue 或直接提 PR；单个模组的改动不需要碰其它模组。
+- 如果我不再维护，而你想长期接手某个模组（包括工坊条目），开个 issue 说一声——
+  可以把仓库转成共同维护者，或者把该模组的开发指引整理给你。
+- 提交前请读 `BUILDING.md` 最后一节：不要提交 `build/`、`obj/`、`dist/`、`refs/`，
+  以及任何反编译出来的游戏源码。
+
 ## 仓库结构
 
 ```
