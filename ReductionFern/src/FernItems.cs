@@ -104,7 +104,7 @@ namespace ReductionFernMod
             ChemicalHelper.SetChemContentML(item, FernTraits.LiquidId, ReducingAgentPerGram * weightGrams);
             ChemicalHelper.SetChemContentML(item, "water", 0.35f * weightGrams);
             ChemicalHelper.SetChemContentML(item, "plant_matter", 0.25f * weightGrams);
-            ChemicalHelper.SetChemContentML(item, "protein", 0.05f * weightGrams);
+            ChemicalHelper.SetChemContentML(item, "fat", 0.05f * weightGrams);
             ChemicalHelper.SetChemContentML(item, "mineral", 0.0125f * weightGrams);
             ChemicalHelper.SetChemContentML(item, "physical_contaminant", 0.0375f * weightGrams);
             ChemicalHelper.SetChemContentML(item, "microbe", 0.025f * weightGrams);
