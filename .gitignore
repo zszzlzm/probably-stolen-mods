@@ -37,5 +37,4 @@ desktop.ini
 !Cargo.lock
 
 # 本地工具配置，不属于模组
-/ google-models-snippet.yml
 google-models-snippet.yml
