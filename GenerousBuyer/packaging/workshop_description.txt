@@ -1,0 +1,99 @@
+[h1]慷慨买家 / Generous Buyer[/h1]
+
+[b]「每种物品只买一件」是这条规则里最没意义的一半——现在它没了，+15% 还在。[/b]
+
+带这条规则的客人本来有一半很好用：你放上柜台的每件物品都带 +15% 的价值加成。
+另一半就很难受：同一种物品他只会买一件，第二件直接拒收。仓库里堆着同款货的时候，
+你只能一件一件换着摆，或者干脆不卖给他。
+
+这个模组只做一件事：把「只买一件」拿掉，把剩下的一半留下。
+
+[h2]改了什么[/h2]
+[list]
+[*]规则名从「种类多样」改成「慷慨」；说明文字同步改写。
+[*]客人不再因为「已经买过同一种物品」而拒收——同一个物品可以连续卖给他。
+[*]柜台加成保留：你放上柜台的每件物品仍然 +15% 价值，改名为「慷慨买家加成」。
+[*]商店的其它规则、其它客人、价格系统、存档结构，一律不动。
+[/list]
+
+[h2]为什么不是直接删掉这条规则[/h2]
+[list]
+[*]+15% 是实打实的收益，删掉规则等于把这半条也扔了。
+[*]「只买一件」是限制玩家的那一半：它不增加任何趣味，只是让你在摆柜台时多一步检查。
+[*]改的是判定本身，不是 UI 遮罩：拒收、行内提示、摆上柜台、能否出售四处判定一起放开，
+   不会出现「显示能卖、点下去被拒」这种半修状态。
+[/list]
+
+[h2]注意[/h2]
+[list]
+[*]只影响带这条规则的客人，其它客人完全不受影响。
+[*]已经站在店里的客人，物品上加成的名字可能还显示旧叫法，下一次来访就更新。
+[*]不写入存档，卸载后规则立刻恢复原版。
+[/list]
+
+[h2]兼容性[/h2]
+[list]
+[*]游戏版本 0.46D。两个 Harmony 补丁：一个关掉重复购买判定，一个替换三条界面文本。
+[*]不声明任何能力（files / network / steam）；不新增物品、不改配方、不碰存档结构。
+[*]和其它商店/客人类 mod 的冲突概率很低；如果别的 mod 也重命名这条规则，看谁的补丁后执行。
+[/list]
+
+[h2]安装[/h2]
+订阅后在「模组」菜单里启用，然后重启游戏一次。
+
+[h2]语言[/h2]
+中文、English。
+
+[h2]反馈[/h2]
+出问题时请附上 Player.log：%LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log
+
+--- English ---
+
+[h1]Generous Buyer[/h1]
+
+[b]"Only one of each kind" was the useless half of this rule. It is gone now; the +15% stays.[/b]
+
+Customers with this rule had one good half: every item you put on the counter carries a +15% value bonus.
+The other half was pure friction: they would only ever buy one copy of any given item, and refused the second.
+With a crate of identical goods you had to shuffle the counter or skip the sale.
+
+This mod does one thing: it removes the "one copy only" part and keeps the bonus.
+
+[h2]What it does[/h2]
+[list]
+[*]Renames the rule from "Variety" to "Generous" and rewrites its description.
+[*]The customer no longer refuses an item just because they already bought one: the same item can be sold again.
+[*]The counter bonus stays: every item you place still gets +15% value, now called the Generous Buyer Bonus.
+[*]Nothing else changes: no other rules, no other customers, no pricing, no save format.
+[/list]
+
+[h2]Why not just delete the rule[/h2]
+[list]
+[*]The +15% is real money; deleting the rule would throw that half away too.
+[*]"One of each" is the part that only costs the player time: it adds no interesting decision, just a counter check.
+[*]The patch disables the check itself rather than hiding UI, so all four call sites (refusal, row label,
+    placing on the counter, can-sell test) lift together — no half-patched "looks sellable but gets refused" state.
+[/list]
+
+[h2]Notes[/h2]
+[list]
+[*]Only customers with this rule are affected; everyone else behaves exactly as before.
+[*]A customer already standing in your store may still show the old bonus name; the next visit uses the new one.
+[*]No save data is written; disabling the mod restores the vanilla rule immediately.
+[/list]
+
+[h2]Compatibility[/h2]
+[list]
+[*]Game version 0.46D. Two Harmony patches: one disables the duplicate-refusal check, one swaps three UI strings.
+[*]No capabilities declared (files / network / steam); no new items, no recipe edits, no save changes.
+[*]If another mod also renames this rule, the patch that runs last wins.
+[/list]
+
+[h2]Install[/h2]
+Subscribe, enable it in the Mods menu, then restart the game once.
+
+[h2]Languages[/h2]
+Chinese, English.
+
+[h2]Feedback[/h2]
+When something breaks, please attach Player.log: %LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log

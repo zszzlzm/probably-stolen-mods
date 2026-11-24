@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod>
+  <ID>harness.generous-buyer</ID>
+  <Name>慷慨买家 / Generous Buyer</Name>
+  <Author>harness</Author>
+  <ModVersion>1.0.0</ModVersion>
+  <Description>把「种类多样」特殊规则改成「慷慨」：顾客不再拒绝同一种物品的第二件，柜台上每件物品仍然 +15% 价值。
+Turns the Variety special rule into Generous: the customer no longer refuses a second copy of the same item, and every item on the counter keeps its +15% value bonus.</Description>
+  <GameVersions><Version>0.46D</Version></GameVersions>
+  <Prerequisites />
+  <Assemblies><Assembly>GenerousBuyerMod.dll</Assembly></Assemblies>
+  <Capabilities />
+</Mod>
