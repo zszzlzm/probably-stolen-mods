@@ -127,8 +127,8 @@ cat > "$VDF" <<EOF
 	"contentfolder"		"$WIN_OUT"
 	"previewfile"		"$WIN_PREVIEW"
 	"visibility"		"$VIS"
-	"title"			"慷慨买家 / Generous Buyer"
-	"description"		"「种类多样」不再限制每种只买一件：同一个物品可以重复卖给这类客人，柜台每件物品 +15% 价值照旧。Turns the Variety rule into Generous: no more one-per-kind restriction, the +15% counter bonus stays."
+	"title"			"删除种类多样 / No More Variety"
+	"description"		"删除「种类多样」里的限购：这类客人不再每种只买一件，同一种货可以卖无数次，柜台每件 +15% 价值照旧。Kills the one-per-kind limit: the variety customer now buys as many copies as you can sell, and the +15% counter bonus stays."
 	"changenote"		"$CHANGENOTE"
 }
 EOF

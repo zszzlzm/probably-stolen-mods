@@ -26,16 +26,16 @@ DIM = (150, 152, 150)
 FONT_BOLD = r"C:\Windows\Fonts\msyhbd.ttc"
 FONT_REG = r"C:\Windows\Fonts\msyh.ttc"
 
-TITLE = "慷慨买家"
-SUBTITLE = "GENEROUS BUYER"
+TITLE = "删除种类多样"
+SUBTITLE = "NO MORE VARIETY"
 BULLETS = [
-    "「种类多样」不再限制每种只买一件",
+    "顾客不再限购，同一种货可以卖无数次",
     "柜台物品仍然 +15% 价值",
-    "只关掉拒收判定，其它不动",
+    "规则改名为「慷慨」，其它不动",
 ]
-SELL = "同一样东西，卖他两次"
+SELL = "同一样东西，卖无数次"
 DETAIL = "两个 Harmony 补丁   ·   无能力声明"
-FOOTER = "V1.0.0   ·   慷慨买家   ·   zh / en"
+FOOTER = "V1.0.0   ·   删除种类多样   ·   zh / en"
 
 
 def font(path, size):

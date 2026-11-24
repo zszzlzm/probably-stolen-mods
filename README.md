@@ -15,7 +15,7 @@ Source for seven mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0]
 | 拾荒手记 / Scavenger's Notes | [3841523504](https://steamcommunity.com/sharedfiles/filedetails/?id=3841523504) | 0.3.0 | 6×4 拾荒小游戏：线索、手电、放大镜 | [`ScavGame/`](ScavGame/) |
 | 还原剂蕨 / Reduction Fern | [3844217940](https://steamcommunity.com/sharedfiles/filedetails/?id=3844217940) | 0.1.0 | 新作物还原蕨：种出来、割下来、搅碎就是还原剂 | [`ReductionFern/`](ReductionFern/) |
 | 更好的奥克莫吸注射器 / Luxury Nomore Injector | [3844271622](https://steamcommunity.com/sharedfiles/filedetails/?id=3844271622) | 1.0.0 | 给奥克莫吸注射器加「奢侈品」类型，基础价值 50 → 350 | [`LuxuryNomoreInjector/`](LuxuryNomoreInjector/) |
-| 慷慨买家 / Generous Buyer | 待上架 | 1.0.0 | 「种类多样」去掉「每种只买一件」，改名为「慷慨」，+15% 柜台加成保留 | [`GenerousBuyer/`](GenerousBuyer/) |
+| 删除种类多样 / No More Variety | [3845143246](https://steamcommunity.com/sharedfiles/filedetails/?id=3845143246) | 1.0.0 | 「种类多样」去掉「每种只买一件」，规则改名为「慷慨」，+15% 柜台加成保留 | [`GenerousBuyer/`](GenerousBuyer/) |
 
 ## 玩家：怎么装
 

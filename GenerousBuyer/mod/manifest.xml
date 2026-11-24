@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Mod>
   <ID>harness.generous-buyer</ID>
-  <Name>慷慨买家 / Generous Buyer</Name>
+  <Name>删除种类多样 / No More Variety</Name>
   <Author>harness</Author>
   <ModVersion>1.0.0</ModVersion>
   <Description>把「种类多样」特殊规则改成「慷慨」：顾客不再拒绝同一种物品的第二件，柜台上每件物品仍然 +15% 价值。
