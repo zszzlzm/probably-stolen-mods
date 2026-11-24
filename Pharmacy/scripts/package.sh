@@ -85,7 +85,8 @@ cat "$DIST/SHA256SUMS.txt"
 
 echo "== steamcmd vdf =="
 VDF="$DIST/${MOD_ID}.vdf"
-WIN_PREVIEW="$(cygpath -m "$OUT/preview.png" 2>/dev/null || echo "$OUT/preview.png")"
+# 工坊封面用 mod/preview.png（1280 全画质，不计入包体积）；包内那张是 640x360 缩略图。
+WIN_PREVIEW="$(cygpath -m "$ROOT/mod/preview.png" 2>/dev/null || echo "$ROOT/mod/preview.png")"
 # 已经上传过的模组：沿用原 publishedfileid 和 visibility，否则 steamcmd 会新建重复条目
 # 或把已经公开的物品改回隐藏。
 PUB_ID="0"
@@ -108,7 +109,7 @@ cat > "$VDF" <<EOF
 	"previewfile"		"$WIN_PREVIEW"
 	"visibility"		"$VIS"
 	"title"			"下层药房 / Lower-District Pharmacy"
-	"description"		"两种可以在化学精制机上自制的合法药品：澄心剂（0.8ml 梦帽菇萃取液，价值 7）与消痛片（0.08ml 芬太，价值 2）。带医疗品/麻醉品/烟酒类标签，没有违禁品标签。Two legal medicines for the chem finisher: Calming Agent (0.8 ml dream-cap extract) and Pain Relief Tablet (0.08 ml fentanyl)."
+	"description"		"两种可以在化学精制机上自制的合法药品：澄心剂（0.8ml 梦帽菇萃取液，价值 12）与消痛片（0.08ml 芬太，价值 20）。带医疗品/麻醉品/烟酒类标签，没有违禁品标签。Two legal medicines for the chem finisher: Calming Agent (0.8 ml dream-cap extract, value 12) and Pain Relief Tablet (0.08 ml fentanyl, value 20)."
 	"changenote"		"$CHANGENOTE"
 }
 EOF
