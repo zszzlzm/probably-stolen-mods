@@ -12,6 +12,7 @@ namespace GenerousBuyer
     ///
     ///   UI      / ui_nego_tag_variety              "种类多样"        -> "慷慨"
     ///   UI      / ui_nego_no_variety               the old refusal   -> the new explanation
+    ///   UI      / ui_nego_restrictions             "限制条件："      -> "特殊规则："
     ///   Mechanic/ item_feature_variety_buyer_bonus "多样化买家加成"  -> "慷慨买家加成"
     ///
     /// The item feature name is baked into the ItemFeature instance when the customer arrives,
@@ -80,6 +81,11 @@ namespace GenerousBuyer
                 if (key == "ui_nego_no_variety")
                 {
                     return "tag.variety.info";
+                }
+                // The tag row is headed "Restrictions:", which no longer fits a rule that is only a bonus.
+                if (key == "ui_nego_restrictions")
+                {
+                    return "header.restrictions";
                 }
             }
             else if (table == "Mechanic" && key == "item_feature_variety_buyer_bonus")

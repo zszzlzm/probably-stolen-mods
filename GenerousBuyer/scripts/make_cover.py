@@ -4,7 +4,7 @@
 默认：refs/gen/keyart.png -> mod/preview.png（另出一张 640x360 到 build/preview_640.png）
 
 --zoom / --dx / --dy 是「重新构图」：先按 zoom 裁一刀再缩回 1280x720，dx/dy 是裁切窗口的像素偏移。
-标题只有 4 个字，左侧留白够用，一般不需要重新构图。
+默认 zoom=1.02 / dx=-290 是这张关键图定稿时的构图：把三只盒子整体推到右侧，给三条要点让位。
 """
 import pathlib
 import sys
@@ -116,7 +116,7 @@ if __name__ == "__main__":
     cover(
         keyart,
         out,
-        zoom=float(flags.get("zoom", 1.0)),
-        dx=int(flags.get("dx", 0)),
+        zoom=float(flags.get("zoom", 1.02)),
+        dx=int(flags.get("dx", -290)),
         dy=int(flags.get("dy", 0)),
     )
