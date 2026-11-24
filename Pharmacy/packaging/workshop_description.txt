@@ -37,6 +37,14 @@
 [*]两者成色均为 60%~80%，按实际原料纯度评级
 [/list]
 
+[h2]为什么是 12 和 20[/h2]
+[list]
+[*][b]违禁品自带加价[/b]：原版按违禁等级给溢价——低 35% / 中 70% / 高 100% / 致命 150%。合法药没有这层溢价，基础价值压得太低，就永远比不过同一批原料做出来的违禁品。
+[*][b]管制化学用品拿不到量[/b]：常规来源只有「退休化学家」网络升级（每周到访一次，还不保证带管制化学用品）。一箱 100 信用点，拆开是 2 瓶芬太前体 + 1 瓶还原剂。
+[*][b]芬太本身很麻烦[/b]：前体瓶里甲基醇和稳定剂是 1:1，得先把稳定剂去掉才起反应；甲基醇→芬太转化是 10:1，每反应一份还要吃掉 0.75 份还原剂，温度必须压在 120–130°C。这么一圈下来，每毫升芬太都该比梦帽菇萃取液贵得多，所以消痛片 20。
+[*][b]澄心剂不用那么高[/b]：梦帽菇可以自己种，萃取液来源稳定、量也大，12 是它和原版芬太尼药片同档的位置。
+[/list]
+
 [h2]兼容性[/h2]
 游戏版本 0.46D。只用官方模组 API，不声明任何能力（files / network / steam），无 Harmony 补丁，不影响其他配方。
 
@@ -52,3 +60,11 @@
 Two legal medicines you can cook in the chem finisher: [b]Calming Agent[/b] (0.8 ml dream-cap extract, value 12) and [b]Pain Relief Tablet[/b] (0.08 ml fentanyl, value 20).
 Both carry the Medical / Narcotic / Substance tags but no contraband tag, so selling them is legal — perfect for players who would rather not traffic in illegal goods, and for anyone tired of caffeine pills being the only legal option.
 Mild potency is the point: customers won't file "weak narcotic" complaints, and no reputation is lost.
+
+[h2]Why 12 and 20[/h2]
+[list]
+[*][b]Contraband carries a premium[/b]: the base game marks up illegal goods by level — 35% low / 70% mid / 100% high / 150% critical. A legal drug gets none of that, so if its base value is set too low it can never compete with the same feedstock turned into contraband.
+[*][b]Restricted chemical supplies are rationed[/b]: the only routine source is the Retired Chemist network upgrade — one visit per week, and the visit does not even guarantee restricted chemical supplies. One crate costs 100 credits and unpacks into 2 fentanyl precursor bottles plus 1 reducing agent bottle.
+[*][b]Fentanyl is genuinely awkward[/b]: the precursor bottle holds methylol and stabilizing agent at 1:1, so the stabilizer has to come out before anything reacts; methylol converts to fentanyl at 10:1, each unit reacted also eats 0.75 units of reducing agent, and the temperature has to stay between 120 and 130°C. After all that, a millilitre of fentanyl is worth far more than a millilitre of dream-cap extract — hence 20 for the Pain Relief Tablet.
+[*][b]Calming Agent does not need that much[/b]: dream caps can be farmed, the extract is steady and plentiful, so 12 puts it level with the vanilla fentanyl pill.
+[/list]
