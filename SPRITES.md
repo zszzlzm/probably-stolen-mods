@@ -175,6 +175,7 @@
 | 换/加贴图后游戏拒载 | 日志报指纹不符 | 重新跑 `tools/trust_local.py`（PNG 也会进 folderHash） |
 | 老存档里的物品不换皮 | 只有新造的物品是新贴图 | 在 `onLoaded` 里重定向 `spriteAtlasPath/spritePath` |
 | 老档里的机器显示成「？」问号图 | `useSpriteFromMod=true` 但 atlas/path 被存档覆盖回原版值（`SaveManager.cs:182` 只覆盖路径、不清标志）→ `GameItemElement` 把原版 atlas 当 mod id 查 → `unknownSprite` | 判据改成三者同时匹配；兜底分支手动 `useSpriteFromMod = false` |
+| 机器图标外面一圈黑框 | 把 48×48 画布整张填成不透明黑（误以为原版机器是"整张不透明"） | 画布透明，只保留沿轮廓的那 1 px 描边；机身盖住 9 个格心即可 |
 | 工坊封面变糊 | `previewfile` 指到包内的 640×360 | vdf 的 `previewfile` 指 `mod/preview.png`（1280） |
 
 ---
