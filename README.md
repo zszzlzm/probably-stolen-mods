@@ -29,6 +29,8 @@ Source for seven mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0]
 ## 改代码的人：从这里开始
 
 - 构建、部署、打包的完整步骤见 **[BUILDING.md](BUILDING.md)**。
+- 要做物品/机器贴图，先读 **[SPRITES.md](SPRITES.md)**：三条画法路线、尺寸与占格规则、原版色板、
+  验收清单，以及还原蕨和滤芯打印机踩过的坑。
 - 每个模组都有一份 `RETROSPECTIVE.md`，写的是**为什么这么做**：踩过的坑、反编译出来的平台事实、
   哪些数值有原版锚点。改之前建议先读，能省掉一整轮试错。
 - 根目录的 [`RETROSPECTIVE.md`](RETROSPECTIVE.md) 是跨模组的平台经验（Hook、存档信任、SteamCMD、封面流水线）。
@@ -51,6 +53,8 @@ Source for seven mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0]
   packaging/       README.txt（玩家说明）、UPLOAD.md（上传步骤）、workshop_description.txt
   RETROSPECTIVE.md 这个模组的开发复盘
 tools/             本地工具（写模组信任记录）
+SPRITES.md         像素贴图手册（尺寸/占格/色板/画法/验收，跨模组）
+BUILDING.md        构建、部署、打包步骤
 ```
 
 ## 许可证与免责

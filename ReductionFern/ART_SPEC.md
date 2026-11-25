@@ -3,6 +3,7 @@
 > 对象：[PLAN.md](PLAN.md) v0.3 里的 5 张精灵图。
 > 环境：Probably Stolen 0.46D，原版精灵全部从 `resources.assets` 导出（`refs/vanilla/`），色板取自这 26 张原版种植图。
 > 本文件只定**画什么、多大多大、用什么色、怎么验收**；生成与抠图脚本在 `tools/`。
+> 跨模组的通用画法与踩坑记录见仓库根目录 [SPRITES.md](../SPRITES.md)。
 
 ---
 
