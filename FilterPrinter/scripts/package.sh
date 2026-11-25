@@ -21,12 +21,10 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build "$ROOT/FilterPrinter.csproj" -c Release -
 [ -s "$ROOT/build/FilterPrinterMod.dll" ] || { echo "ERROR: build produced no dll" >&2; exit 1; }
 
 echo "== preview =="
-# 需要 Python 3 + Pillow；不要用 Windows 应用商店的占位 python（它什么都不做）
-PY="${DSH_PYTHON:-$(command -v python3 || command -v python || true)}"
-if [ -z "$PY" ] || ! "$PY" -c "import PIL" >/dev/null 2>&1; then
-	echo "ERROR: need Python 3 with Pillow; set DSH_PYTHON=/path/to/python" >&2
-	exit 1
-fi
+# 需要 Python 3 + Pillow。不要用 `command -v python3`：这台机器上是应用商店的占位程序（退出 49）。
+# 中文 Windows 上 Python 的 stdout 默认 GBK，写中文进 vdf 会 UnicodeEncodeError，统一 UTF-8。
+PY="$(bash "$ROOT/../tools/find-python.sh" "import PIL")" || exit 1
+export PYTHONIOENCODING=utf-8
 KEYART="$ROOT/refs/gen/keyart.png"
 if [ -f "$KEYART" ]; then
 	"$PY" "$ROOT/scripts/make_cover.py" "$KEYART" || { echo "ERROR: preview generation failed" >&2; exit 1; }
@@ -134,6 +132,24 @@ if [ -f "$VDF" ]; then
 fi
 VIS="${VIS_OVERRIDE:-$VIS}"
 CHANGENOTE="${CHANGENOTE:-v$VER 更新。}"
+
+# 工坊长描述直接写进 vdf，省掉每次上线手动粘贴。
+# 坑：KeyValues **没有转义**，值里的 ASCII 双引号会提前截断字符串、整份 vdf 解析失败。
+# 所以源文件禁止 ASCII 引号（用中文引号），反斜杠是字面量、换行在值里合法。
+DESC_FILE="$ROOT/packaging/workshop_description.txt"
+[ -s "$DESC_FILE" ] || { echo "ERROR: $DESC_FILE missing" >&2; exit 1; }
+DESC_ESC="$("$PY" -c '
+import sys
+t = open(sys.argv[1], encoding="utf-8").read().rstrip()
+bad = [i + 1 for i, l in enumerate(t.split("\n")) if chr(34) in l]
+if bad:
+    sys.stderr.write("ERROR: ASCII double quote in %s at line(s) %s; "
+                     "KeyValues cannot escape it, use \u201c \u201d instead\n"
+                     % (sys.argv[1], ", ".join(map(str, bad))))
+    raise SystemExit(1)
+sys.stdout.write(t)
+' "$DESC_FILE")" || exit 1
+
 cat > "$VDF" <<EOF
 "workshopitem"
 {
@@ -143,7 +159,7 @@ cat > "$VDF" <<EOF
 	"previewfile"		"$WIN_PREVIEW"
 	"visibility"		"$VIS"
 	"title"			"滤芯打印机 / Filter Cartridge Printer"
-	"description"		"按你指定的截留物质打印专用滤芯：重金属、微塑料、微生物、药物、化学品、营养物……共 37 种，打印一次 120 电。Print a filter cartridge for exactly the substance you choose - 37 types, 120 power each."
+	"description"		"$DESC_ESC"
 	"changenote"		"$CHANGENOTE"
 }
 EOF

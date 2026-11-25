@@ -1,14 +1,14 @@
 # 工坊上传步骤（滤芯打印机）
 
-> **当前状态（2026-11-25）**：v1.1.0 已上传（`Upload finished ... : OK`），条目 id **3840097356**，`visibility 0`（公开）。
+> **当前状态（2026-11-25 23:45）**：条目 id **3840097356**，`visibility 0`（公开）。
+> v1.1.0 已上传；**v1.1.1 已打包、已本地部署，待游戏内确认后上传**（见 §5）。
 > SteamCMD 会把 id 写回 `.vdf`，之后 `package.sh` 每次都会沿用这个 id 和可见性。
-> v1.1.0 只改了机器贴图（见 §3），其余数值、配方、UI 都没动。
+> 从 v1.1.1 起，工坊长描述也由 `package.sh` 写进 vdf 的 `description` 字段，不用再手动粘贴。
 
 ## 1. 打包
 
 ```bash
-export DSH_PYTHON=/c/Users/zszzl/.dsh/dsh-runtimes/dsh-primary-runtime/dependencies/python/python.exe
-CHANGENOTE="v1.1.0：机器换了专用机身贴图……" bash scripts/package.sh
+CHANGENOTE="v1.1.1：修老存档里机器显示成「？」问号图的问题。" bash scripts/package.sh
 ```
 
 产物在 `dist/`：
@@ -63,3 +63,37 @@ python tools/trust_local.py --folder "<游戏>/Mods/FilterPrinter" \
 
 **加文件会改 folderHash**：v1.1.0 新增了 `Textures/Items/fp_printer.png`，不重新跑 trust 脚本，
 游戏会以「文件指纹不符」拒绝加载这个模组。部署和信任都要在游戏关闭时做（DLL 被占用）。
+
+## 5. v1.1.1：老存档里的机器显示成「？」问号图
+
+**症状**：1.0.x 时代存档里留下的那台打印机，图标和工具提示里的图变成一个紫色「？」。
+`Player.log` 里恰好一条：
+
+```
+Mod sprite 'printer_off' from mod 'Items/items_tool2' not found. Loading dummy sprite.
+```
+
+**这条日志就是判据**：`GameItemElement.ResolveSpriteByName`（`GameItemElement.cs:222-232`）只会在
+`useSpriteFromMod == true` 时走这个分支，并且把 `spriteAtlasPath` 当成 **mod id** 去查。它说
+mod 叫 `Items/items_tool2` —— 一个原版图集路径 —— 说明物品处在「标志说用 mod 贴图、路径却是原版值」
+这种自相矛盾的状态，查不到就画 `RenderHandler.unknownSprite`（`Items/itematlas` 里的 `unknown`，
+正是那张问号图）。
+
+**为什么会出现**：读档顺序是 `SaveManager.cs:182`
+
+1. `DirectoryMaster.Item(id)` 先跑我们的工厂 → `SetSpriteAndShapeFromMod` 成功，标志置 true；
+2. 紧接着 `GameItem.SetSprite(saved.atlas, saved.path)` 用存档里的值把两个路径覆盖掉，
+   **但不清 `useSpriteFromMod`**；
+3. v1.0.x 存档里存的是原版 `Items/items_tool2` / `printer_off` → 状态自相矛盾；
+4. `onLoaded` 里我们的修复被 `if (item.useSpriteFromMod) return;` 挡住 —— 这个守卫恰好只在
+   「不需要修」的情况下放行，在真正需要修的时候跳过。
+
+**修法**（`src/FilterPrinterMachine.cs` 的 `RepointSprite`）：
+
+- 判据从「`useSpriteFromMod` 是否为真」改成「标志 + `spriteAtlasPath == ModId` + `spritePath == fp_printer` 三者同时成立」才跳过；
+- 走原版兜底（安装里没有 PNG）时显式 `item.useSpriteFromMod = false`，否则原版路径会继续被当 mod id 查，
+  问号图依旧；
+- 工厂里也复用这一个函数，创建和读档只有一条代码路径。
+
+**教训**：`useSpriteFromMod` 是个**不可信的缓存**——它只有一个写入点（`GameItem.cs:396`），
+且从不被 `SetSprite` / `SetSpriteAndShape` 清掉。任何「已设置过就别再设」的守卫都要连路径一起验证。

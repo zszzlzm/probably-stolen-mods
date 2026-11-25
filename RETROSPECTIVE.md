@@ -171,6 +171,7 @@ release `builds-2026-11-23` 附了六个可直接安装的 zip。仓库里只放
 | 改了价，老档里的物品还是旧价 | 价格存在物品实例上（存档里 `unitValue` 逐件保存） | 接受并写进描述「注意」，或加读档迁移 |
 | 加奢侈品标签后，收废品/水客拒收这支药 | `IsRefusingLuxuryItem`：求购表含 `WATER` 的客人拒收奢侈品（游客与上层除外） | 改标签前全库 grep 它被谁读；副作用写进更新说明 |
 | 以为摆进展示柜就会有收藏家 | `MAJOR_TYPES_LIST` 不含 `LUXURY_ITEM`，`CreateClientByStockType` 无奢侈品分支 | 奢侈品客靠 `UL_DISCERNING_TASTE` 特权 + `GetTypeCount`；描述别写过头 |
+| 加了专用贴图的机器，老档里显示成「？」问号图 | 读档顺序：`SaveManager.cs:182` 先用工厂造（工厂把 `useSpriteFromMod` 置 true），**再**用存档里的 `SetSprite(atlas, path)` 覆盖两个路径——覆盖不清标志位。于是旧档（存的是原版 `Items/items_tool2`/`printer_off`）变成「标志说用 mod 贴图、路径却是原版」，`GameItemElement.ResolveSpriteByName` 把 atlas 当 mod id 找，找不到就画 `RenderHandler.unknownSprite`（问号） | 换皮逻辑的判据永远不要只看 `item.useSpriteFromMod`：确认「标志 + atlas + key」三者都对才跳过，否则重指一次；走原版兜底时**手动把 `useSpriteFromMod = false`**，否则原版路径也被塞进 mod 查找 |
 
 ## 8. 可复用清单
 

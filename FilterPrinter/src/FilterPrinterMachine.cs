@@ -75,11 +75,7 @@ namespace FilterPrinterMod
             // otherwise a player running both cannot tell them apart. Ships as
             // mod/Textures/Items/fp_printer.png (48x48 = 3x3 cells); the vanilla sprite
             // stays as a fallback for folders that somehow lack the PNG.
-            machine.SetSpriteAndShapeFromMod(FilterPrinterMod.ModId, MachineSprite);
-            if (string.IsNullOrEmpty(machine.spritePath))
-            {
-                machine.SetSpriteAndShape("Items/items_tool2", "printer_off");
-            }
+            RepointSprite(machine);
             machine.name = Text.Get("printer.name");
             machine.shortDescription = Text.Get("printer.desc");
             machine.flavorText = Text.Get("printer.flavor");
@@ -110,21 +106,65 @@ namespace FilterPrinterMod
         }
 
         /// <summary>
-        /// Machines saved by older versions stored the vanilla 3D printer sprite
-        /// ("Items/items_tool2" / "printer_off") per item, so loading them kept the old
-        /// look. Re-point them at the mod sprite once, on load.
+        /// Point the item at <c>Textures/Items/fp_printer.png</c>, falling back to the vanilla 3D
+        /// printer when that PNG is missing.
+        ///
+        /// The guard must never be <c>item.useSpriteFromMod</c> alone. Vanilla load order is
+        /// <c>SaveManager.cs:182</c>: <c>DirectoryMaster.Item(id)</c> runs our factory first (which
+        /// sets the mod sprite and the flag), and <em>then</em> <c>GameItem.SetSprite(saved.atlas,
+        /// saved.path)</c> overwrites both paths without clearing the flag. A machine saved by 1.0.0
+        /// therefore comes back as <c>useSpriteFromMod = true</c> with atlas
+        /// <c>Items/items_tool2</c> — and <c>GameItemElement.ResolveSpriteByName</c> treats the atlas
+        /// field as a <em>mod id</em>, finds no mod called "Items/items_tool2" and draws
+        /// <c>RenderHandler.unknownSprite</c> (the "?" tile) with a warning.
+        ///
+        /// So: repoint unless the pair already is exactly our mod sprite, and clear the flag on the
+        /// fallback path or the vanilla pair is stuck behind the same broken lookup.
         /// </summary>
         private static void RepointSprite(GameItem item)
         {
-            if (item == null || item.useSpriteFromMod)
+            if (item == null)
             {
                 return;
             }
-            item.SetSpriteAndShapeFromMod(FilterPrinterMod.ModId, MachineSprite);
-            if (string.IsNullOrEmpty(item.spritePath))
+            if (item.useSpriteFromMod && item.spriteAtlasPath == FilterPrinterMod.ModId && item.spritePath == MachineSprite)
             {
-                item.SetSpriteAndShape("Items/items_tool2", "printer_off");
+                return;
             }
+            // Only a saved item arrives with paths already filled in; a brand-new one starts empty.
+            bool hadSavedSprite = !string.IsNullOrEmpty(item.spriteAtlasPath) || !string.IsNullOrEmpty(item.spritePath);
+            string was = item.spriteAtlasPath + "/" + item.spritePath + (item.useSpriteFromMod ? " (flag set)" : "");
+            item.SetSpriteAndShapeFromMod(FilterPrinterMod.ModId, MachineSprite);
+            if (item.spriteAtlasPath == FilterPrinterMod.ModId)
+            {
+                if (hadSavedSprite)
+                {
+                    ReportRepair(was);
+                }
+                return;
+            }
+            // No Textures/Items/fp_printer.png in this install.
+            FilterPrinterMod.LogInfo("fp_printer sprite missing, falling back to the vanilla printer art");
+            item.useSpriteFromMod = false;
+            item.SetSpriteAndShape("Items/items_tool2", "printer_off");
+        }
+
+        private static bool reportedRepair;
+
+        /// <summary>
+        /// One line per session: the "?"-sprite bug is silent apart from the vanilla dummy-sprite
+        /// warning, so the log needs a positive record that we actually repointed something
+        /// ("patched" and "worked" have to be different lines).
+        /// </summary>
+        private static void ReportRepair(string was)
+        {
+            if (reportedRepair)
+            {
+                return;
+            }
+            reportedRepair = true;
+            FilterPrinterMod.LogInfo("repointed a saved printer sprite: " + was + " -> "
+                + FilterPrinterMod.ModId + "/" + MachineSprite);
         }
 
         private static void ApplySelection(List<MachineryRadioButton> buttons, List<string> ids, string target)

@@ -3,7 +3,7 @@
   <ID>harness.filter-printer</ID>
   <Name>滤芯打印机 / Filter Cartridge Printer</Name>
   <Author>harness</Author>
-  <ModVersion>1.1.0</ModVersion>
+  <ModVersion>1.1.1</ModVersion>
   <Description>增加一台滤芯打印机：在机器面板上自由选择滤芯要截留的物质（重金属、微生物、微塑料等，或全部污染物），打印出只拦截该物质的专用滤芯。
 Adds a Filter Cartridge Printer: pick exactly which substance a cartridge should retain, then print it.</Description>
   <GameVersions><Version>0.46D</Version></GameVersions>

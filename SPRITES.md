@@ -173,6 +173,7 @@
 | 参考图给同角色原版贴图 | 造型容易被抄 | 想要原创造型就换参考（同图集别的机器/别的植物） |
 | 换/加贴图后游戏拒载 | 日志报指纹不符 | 重新跑 `tools/trust_local.py`（PNG 也会进 folderHash） |
 | 老存档里的物品不换皮 | 只有新造的物品是新贴图 | 在 `onLoaded` 里重定向 `spriteAtlasPath/spritePath` |
+| 老档里的机器显示成「？」问号图 | `useSpriteFromMod=true` 但 atlas/path 被存档覆盖回原版值（`SaveManager.cs:182` 只覆盖路径、不清标志）→ `GameItemElement` 把原版 atlas 当 mod id 查 → `unknownSprite` | 判据改成三者同时匹配；兜底分支手动 `useSpriteFromMod = false` |
 | 工坊封面变糊 | `previewfile` 指到包内的 640×360 | vdf 的 `previewfile` 指 `mod/preview.png`（1280） |
 
 ---
@@ -183,14 +184,21 @@
 // 贴图文件：<mod>/Textures/Items/<名字>.png（文件名就是 sprite key）
 // 游戏在 ModLoader.LoadTextures 里把它读成 mod.Sprites["<名字>"]（ModLoader.cs:1717-1750），
 // 点过滤、无 mipmap；运行期由 GameItemElement 按 useSpriteFromMod 取（GameItemElement.cs:222-232）。
-machine.SetSpriteAndShapeFromMod(ModId, "fp_printer");
-if (string.IsNullOrEmpty(machine.spritePath))            // 兜底：目录里没有 PNG
+// 判据必须是「标志 + atlas + key」三者都对，不能只看 useSpriteFromMod（见 §8 的问号图一行）。
+if (!(item.useSpriteFromMod && item.spriteAtlasPath == ModId && item.spritePath == "fp_printer"))
 {
-    machine.SetSpriteAndShape("Items/items_tool2", "printer_off");
+    item.SetSpriteAndShapeFromMod(ModId, "fp_printer");
+}
+if (item.spriteAtlasPath != ModId)                       // 兜底：目录里没有 PNG
+{
+    item.useSpriteFromMod = false;                       // 不清标志，原版路径会被当 mod id 查
+    item.SetSpriteAndShape("Items/items_tool2", "printer_off");
 }
 ```
 
 - 旧存档按物品记 `spriteAtlasPath`/`spritePath`，换皮要在 `onLoaded` 里再指一次，否则老物品保持旧贴图。
+  但**`onLoaded` 拿到的物品字段已经被存档覆盖过了**（`SaveManager.cs:182`），所以这一步不只是"再指一次"，
+  而是唯一的修复点：此时 `useSpriteFromMod` 可能为 true 而 atlas/path 还是旧的原版值。
 - 透明像素想点得中要 `alphaHitTestMinimumThreshold = 0`（还原蕨用到了）。
 - 打包：`build.sh` / `package.sh` 要把 `Textures/` 一起复制并校验（尺寸、RGBA、DLL 里真的有这个 key；
   .NET 字符串是 UTF-16，`grep` 找不到，用 python 按 UTF-16LE 查）。
