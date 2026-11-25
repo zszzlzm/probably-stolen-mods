@@ -3,8 +3,8 @@
   <ID>harness.chem-resale</ID>
   <Name>试剂可售 / Reagent Resale</Name>
   <Author>harness</Author>
-  <ModVersion>0.1.0</ModVersion>
-  <Description>拆包后的化学试剂按水的费率计价，并可作为化学用品出售。/ Unpacked chemical reagents are priced at the water rate and can be sold as chemical supplies.</Description>
+  <ModVersion>1.0.0</ModVersion>
+  <Description>拆包后的化学试剂按水的费率计价，可作为化学用品出售。/ Unpacked chemical reagents are priced at the water rate and can be sold as chemical supplies.</Description>
   <GameVersions><Version>0.46D</Version></GameVersions>
   <Prerequisites />
   <Assemblies><Assembly>ChemResaleMod.dll</Assembly></Assemblies>

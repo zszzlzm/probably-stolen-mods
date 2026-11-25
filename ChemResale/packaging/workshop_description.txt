@@ -1,0 +1,61 @@
+[h1]试剂可售 / Reagent Resale[/h1]
+
+[b]拆包后的化学试剂，终于能卖钱了。[/b]
+
+[h2]问题[/h2]
+化学用品（普通）买 50 点，拆包后给你 5 瓶试剂：2 瓶迷你酒精、亲脂结合剂、酸、碱。问题出在后面：
+[list]
+[*]这些瓶子没有价格。液体从不参与计价，瓶子的账面价值只有空瓶的 3 点。
+[*]也没有买家。化学买家只认"化学用品"这个物品类型，而拆包产物身上没有它。
+[*]即使能卖，价格也会被打一折——原版把所有非水液体判成"沟渠水"，价值 −90%。
+[/list]
+结果就是：拆包等于把 50 点变成一堆只能自己用的东西。拆错了、或者配方用不上，就纯亏。
+
+[h2]模组做了什么[/h2]
+[list]
+[*][b]计价[/b]：按游戏自己的水价费率（40 信用点 / 1000 ml）给试剂瓶定价。250 ml 的酸/碱/酒精 ≈ 10 点内容价值，加瓶子基价 3，一件约 13 点。
+[*][b]可售[/b]：给试剂瓶补上"化学用品"类型，毒药买家、药品商、管制化学品买家都会收——和整包化学用品走同一套买家。
+[*][b]修正 −90%[/b]：把试剂瓶移出水质评级。原版对纯度不匹配任何档位的液体兜底到最低档"沟渠水"，而那一档的修正值是 −90%。
+[/list]
+覆盖的液体：酒精、甲基化碱、还原剂、酸、碱、稳定剂、亲脂结合剂、氯。污染物（化学污染物、物理杂质等）不在内，脏水不会被当成化学用品卖掉。
+
+[h2]经济位置[/h2]
+普通化学用品包 50 点，拆出来的 5 瓶按这个价格卖约 61 点（+22%）。这个差价落在游戏自带的批发折扣区间（供应商卖你 −15%~−33%）里，属于正常贸易利润，不是新印钞机——化学品包没有批量补货渠道，都是拾荒、易货、委托来的。
+把试剂做成药（澄心剂、消痛片……）再卖，赚得比散装多得多。所以"拆包→做产品"仍然是最优解，"卖散装"只是止损退路。
+
+[h2]它改了什么设计[/h2]
+说清楚一点：原版的弹窗明写"这将会把物资拆解为[b]不可交易[/b]的化学品"。这不是漏做，是有意让你在"留着卖整包"和"拆开用"之间做一次不可逆的取舍。
+本模组移除的就是这道取舍——代价是那句弹窗文案变成了假话。我们暂时没有覆盖它：那句话打包在 Unity 本地化资源里，改动的影响面比这个模组本身大。介意的话请不要订阅。
+
+[h2]兼容性[/h2]
+[list]
+[*]游戏版本 0.46D
+[*]不改存档结构，装卸自由；卸掉后物品上会留一个无害的未知标记，不影响游戏
+[*]与不修改化学/交易系统的模组基本无冲突
+[*]试剂瓶不能再塞进自动售货机（原版对"化学用品"类型就是这么限制的）
+[/list]
+
+[h2]安装[/h2]
+订阅后在「模组」菜单启用，然后重启游戏一次。已经在包里的旧试剂瓶会在第一次被检查时自动生效。
+
+[h2]语言[/h2]
+中文、English（物品名与界面文本全部来自游戏本体）。
+
+[h2]反馈[/h2]
+请附上 GameLog：%LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\GameLog_*.txt
+以及当时的操作（哪一瓶、卖给谁、结算多少）。
+
+--- English ---
+
+[h1]Reagent Resale[/h1]
+Chemical supplies are sold as a sealed bag. Unpack it and you get five reagent bottles — and in vanilla those bottles are worth nothing and nobody will buy them: the liquid never enters the price, the bottles lack the chemical-supplies item type that every chemical buyer checks, and any non-water liquid is graded as "gutterflow" water, which knocks 90% off the value.
+
+This mod fixes all three: reagent bottles are priced at the game's own water rate (40 credits per litre, so a 250 ml bottle is about 13), they carry the chemical-supplies type so the vanilla chemical buyers take them, and they are taken out of water grading so the gutterflow penalty no longer applies.
+
+Covered liquids: alcohol, methylol, reducing agent, acid, base, stabilizing agent, lipobond agent, chlorine. Contaminants are deliberately excluded.
+
+Economics: a 50-credit bag unpacks into bottles worth about 61, a +22% margin that sits inside the game's own wholesale range. Chemical supply bags have no bulk supplier, so this is not a money loop. Crafting the reagents into medicine still pays far more — selling them loose is a way to stop losing money on a bag you should not have opened, not a new way to get rich.
+
+A note on design: the vanilla unpack prompt says the supplies become [b]untradable[/b] chemicals. That is deliberate — a one-way choice between selling the bag and using its contents. This mod removes that choice, which makes the prompt a lie; we have not overridden that string because it lives in Unity's localization assets. If that matters to you, skip this mod.
+
+Game version 0.46D. No save-format change; safe to install and remove.

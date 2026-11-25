@@ -1,9 +1,9 @@
 # Probably Stolen 模组源码 / Mod Sources
 
-《Probably Stolen》（0.46D，Unity 2021.3.45f2 / Mono / netstandard2.1）的七个模组源码。
+《Probably Stolen》（0.46D，Unity 2021.3.45f2 / Mono / netstandard2.1）的八个模组源码。
 每个模组都对应一个创意工坊条目，源码放在这里，方便后来的人改数值、修 bug、或者接着往下做。
 
-Source for seven mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0](LICENSE).
+Source for eight mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0](LICENSE).
 
 ## 模组列表
 
@@ -16,6 +16,7 @@ Source for seven mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0]
 | 还原剂蕨 / Reduction Fern | [3844217940](https://steamcommunity.com/sharedfiles/filedetails/?id=3844217940) | 0.1.0 | 新作物还原蕨：种出来、割下来、搅碎就是还原剂 | [`ReductionFern/`](ReductionFern/) |
 | 更好的奥克莫吸注射器 / Luxury Nomore Injector | [3844271622](https://steamcommunity.com/sharedfiles/filedetails/?id=3844271622) | 1.0.0 | 给奥克莫吸注射器加「奢侈品」类型，基础价值 50 → 350 | [`LuxuryNomoreInjector/`](LuxuryNomoreInjector/) |
 | 删除种类多样 / No More Variety | [3845143246](https://steamcommunity.com/sharedfiles/filedetails/?id=3845143246) | 1.0.0 | 「种类多样」去掉「每种只买一件」，规则改名为「慷慨」，+15% 柜台加成保留 | [`GenerousBuyer/`](GenerousBuyer/) |
+| 试剂可售 / Reagent Resale | 未上传 | 1.0.0 | 拆包后的化学试剂按水价计价、可作为化学用品出售，并修掉原版把非水液体判成「沟渠水 −90%」的兜底 | [`ChemResale/`](ChemResale/) |
 
 ## 玩家：怎么装
 
