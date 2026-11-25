@@ -81,3 +81,22 @@ python LuxuryNomoreInjector/scripts/make_cover.py art.png out.png --zoom=1.1 --d
 - 不要提交 `build/`、`obj/`、`dist/`、`refs/`（已在 `.gitignore` 里）。
 - 不要提交任何反编译出来的游戏源码。
 - 改了 `manifest.xml` 的版本号记得同步 `packaging/README.txt` 与工坊描述的版本行。
+
+## 8. 网络（GitHub / 工坊）
+
+这台机器的出口是「半墙」：同一个地址有时候通、有时候不通，属于中国互联网长城的预期表现，
+不是谁的配置错，也不该在这上面花时间做工程化绕行。
+
+判断顺序：
+
+| 症状 | 含义 | 处理 |
+|---|---|---|
+| `Failed to connect ... over proxy 127.0.0.1 after 0 ms` | shell 里带着 `http_proxy`，但代理客户端没开 | `env -u http_proxy -u https_proxy -u HTTP_PROXY -u HTTPS_PROXY` + `git -c http.proxy= -c https.proxy=` 直连 |
+| `Failed to connect to github.com:443 after 21 s` / `Connection was reset` | 链路当时的解析或出口不通 | 直连重试 2~3 次，间隔十几秒；通常有一次会过 |
+| 同时 `api.github.com` 正常、`github.com` 不通 | 两个域名不是同一条路，不代表整体断网 | 同上，别据此判断「网没问题」 |
+
+重试几次仍失败就**停下来问用户**（他会检查代理是否开启、地址是否正确），不要自己改 hosts、
+不要写临时代理、不要动系统网络配置——试过，收益为零，还会留下需要收尾的东西。
+
+SteamCMD 上传不受这个影响（它不走 shell 的 `http_proxy`），所以「推不上 GitHub」和
+「传不了工坊」是两件独立的事。
