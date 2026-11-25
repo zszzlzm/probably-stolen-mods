@@ -41,6 +41,10 @@ cp "$ROOT/build/FilterPrinterMod.dll" "$OUT/"
 cp "$MANIFEST" "$OUT/"
 cp "$ROOT/mod/preview.png" "$OUT/"
 cp "$ROOT/mod/Localization/"*.csv "$OUT/Localization/"
+if [ -d "$ROOT/mod/Textures/Items" ]; then
+	mkdir -p "$OUT/Textures/Items"
+	cp "$ROOT/mod/Textures/Items/"*.png "$OUT/Textures/Items/"
+fi
 cp "$ROOT/packaging/README.txt" "$OUT/"
 
 echo "== verify =="
@@ -51,6 +55,27 @@ fail() { echo "VERIFY FAILED: $*" >&2; exit 1; }
 [ -s "$OUT/preview.png" ] || fail "preview.png missing"
 PREVIEW_SIZE=$(stat -c%s "$OUT/preview.png")
 [ "$PREVIEW_SIZE" -lt 1048576 ] || fail "preview.png is larger than 1 MB ($PREVIEW_SIZE bytes)"
+
+# 专用贴图：必须是 48x48（16px 网格 3x3），否则物品占位和原版打印机不一致
+SPRITE="$OUT/Textures/Items/fp_printer.png"
+[ -s "$SPRITE" ] || fail "Textures/Items/fp_printer.png missing"
+"$PY" - "$SPRITE" <<'PYEOF' || fail "fp_printer.png failed the size/mode check"
+import sys
+from PIL import Image
+im = Image.open(sys.argv[1])
+print("  sprite       %s %s" % (im.size, im.mode))
+if im.size != (48, 48):
+    sys.exit("expected 48x48, got %s" % (im.size,))
+if im.mode != "RGBA":
+    sys.exit("expected RGBA, got %s" % (im.mode,))
+PYEOF
+# .NET 把字符串常量存成 UTF-16，grep 找不到 "fp_printer"，用 python 按 UTF-16LE 查
+"$PY" - "$OUT/FilterPrinterMod.dll" <<'PYEOF' || fail "dll does not reference the fp_printer sprite key"
+import sys
+blob = open(sys.argv[1], "rb").read()
+needle = "fp_printer".encode("utf-16-le")
+sys.exit(0 if needle in blob else 1)
+PYEOF
 
 LOC_COUNT=$(ls "$OUT/Localization/"*.csv 2>/dev/null | wc -l)
 [ "$LOC_COUNT" -ge 2 ] || fail "expected at least 2 localization files, found $LOC_COUNT"

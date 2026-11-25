@@ -21,6 +21,9 @@
 [*]滤芯耐久：900
 [/list]
 
+[h2]外观[/h2]
+机器有自己的机身贴图：左侧一排滤芯弹匣、右侧漏斗图标屏幕、下方出料口里躺着一枚滤芯。和原版 3D 打印机摆在一起，一眼就能分清哪台是哪台。
+
 [h2]安装[/h2]
 订阅后在「模组」菜单启用，然后重启游戏一次。
 
@@ -37,4 +40,5 @@
 
 [h1]Filter Cartridge Printer[/h1]
 Adds a printer that grows a filter cartridge for exactly the substance you choose: heavy metals, microplastics, microbes, drugs, nutrients, acids, bases and more — 37 cartridge types for 120 power each, 900 durability.
+The machine has its own cabinet sprite (cartridge rack, funnel screen, output slot), so it never gets confused with the vanilla 3D printer even when both are in the same store.
 Print cost, power sources and the machine UI are all handled by the official mod API; no capabilities declared.

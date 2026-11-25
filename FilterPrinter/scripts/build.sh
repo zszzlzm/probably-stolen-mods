@@ -18,6 +18,11 @@ fi
 cp "$ROOT/mod/manifest.xml" "$MODS/"
 rm -f "$MODS/Localization/"*.csv
 cp "$ROOT/mod/Localization/"*.csv "$MODS/Localization/"
+if [ -d "$ROOT/mod/Textures" ]; then
+	mkdir -p "$MODS/Textures/Items"
+	rm -f "$MODS/Textures/Items/"*.png
+	cp "$ROOT/mod/Textures/Items/"*.png "$MODS/Textures/Items/"
+fi
 if [ -f "$ROOT/mod/preview.png" ]; then
 	cp "$ROOT/mod/preview.png" "$MODS/"
 fi
@@ -40,6 +45,12 @@ LOC_LINES=$(cat "$MODS/Localization/"*.csv | grep -c .)
 if [ ! -s "$MODS/FilterPrinterMod.dll" ] || [ ! -s "$MODS/manifest.xml" ]; then
 	echo "DEPLOY FAILED: dll or manifest missing" >&2
 	exit 1
+fi
+if [ -d "$ROOT/mod/Textures/Items" ]; then
+	[ -s "$MODS/Textures/Items/fp_printer.png" ] || {
+		echo "DEPLOY FAILED: Textures/Items/fp_printer.png missing in $MODS" >&2
+		exit 1
+	}
 fi
 
 echo "deployed -> $MODS"

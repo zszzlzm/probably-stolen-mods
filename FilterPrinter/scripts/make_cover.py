@@ -73,7 +73,7 @@ def cover(keyart, out=OUT):
     d.text((margin, 550), "电池或电流转换器供电   ·   中英双语", font=font(FONT_REG, 24), fill=DIM + (255,))
 
     d.line([(margin, 620), (margin + 600, 620)], fill=(255, 255, 255, 30), width=1)
-    d.text((margin, 640), "V1.0.0   ·   37 种可打印滤芯   ·   zh / en",
+    d.text((margin, 640), "V1.1.0   ·   37 种可打印滤芯   ·   zh / en",
            font=font(FONT_REG, 22), fill=DIM + (255,))
 
     # 关键图里已经有刚打印出来的滤芯，这里不再叠加像素精灵，保持画面干净。

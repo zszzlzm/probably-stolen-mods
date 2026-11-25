@@ -5,6 +5,7 @@ namespace FilterPrinterMod
     internal static class FilterPrinterMachine
     {
         internal const string ItemId = "fp_printer";
+        internal const string MachineSprite = "fp_printer";
         internal const string SelectedTag = "FP_SELECTED_TARGET_TAG";
         private const int RowsPerColumn = 5;
 
@@ -69,8 +70,16 @@ namespace FilterPrinterMod
                 MachineHelper.Panel(Text.Get("printer.panel.control"), control, "control"));
 
             machine = ItemDirectory.CreateEmptyItem(ItemId)
-                .SetContentWindow(window)
-                .SetSpriteAndShape("Items/items_tool2", "printer_off");
+                .SetContentWindow(window);
+            // Dedicated sprite: the machine must not share the vanilla 3D printer's art,
+            // otherwise a player running both cannot tell them apart. Ships as
+            // mod/Textures/Items/fp_printer.png (48x48 = 3x3 cells); the vanilla sprite
+            // stays as a fallback for folders that somehow lack the PNG.
+            machine.SetSpriteAndShapeFromMod(FilterPrinterMod.ModId, MachineSprite);
+            if (string.IsNullOrEmpty(machine.spritePath))
+            {
+                machine.SetSpriteAndShape("Items/items_tool2", "printer_off");
+            }
             machine.name = Text.Get("printer.name");
             machine.shortDescription = Text.Get("printer.desc");
             machine.flavorText = Text.Get("printer.flavor");
@@ -87,6 +96,7 @@ namespace FilterPrinterMod
             print.SetCallback(() => TryPrint(machine, output, battery, status));
             machine.onLoaded = (GameItem loaded) =>
             {
+                RepointSprite(loaded);
                 ApplySelection(allButtons, allIds, ReadSelected(loaded));
                 RefreshStatus(status, battery);
             };
@@ -97,6 +107,24 @@ namespace FilterPrinterMod
             machine.Validate();
             AudioHelper.InitSmallMachine(machine);
             return machine;
+        }
+
+        /// <summary>
+        /// Machines saved by older versions stored the vanilla 3D printer sprite
+        /// ("Items/items_tool2" / "printer_off") per item, so loading them kept the old
+        /// look. Re-point them at the mod sprite once, on load.
+        /// </summary>
+        private static void RepointSprite(GameItem item)
+        {
+            if (item == null || item.useSpriteFromMod)
+            {
+                return;
+            }
+            item.SetSpriteAndShapeFromMod(FilterPrinterMod.ModId, MachineSprite);
+            if (string.IsNullOrEmpty(item.spritePath))
+            {
+                item.SetSpriteAndShape("Items/items_tool2", "printer_off");
+            }
         }
 
         private static void ApplySelection(List<MachineryRadioButton> buttons, List<string> ids, string target)
