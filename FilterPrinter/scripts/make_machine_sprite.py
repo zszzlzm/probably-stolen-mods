@@ -22,12 +22,12 @@ Volume rules (what the vanilla machines do and a flat front view does not):
   rim on the bottom/right, and the front lip of the slot covers the bottom of the
   cartridge lying in it;
 * every raised part (well lip, lamp plate, feet) casts a 1 px shadow on the surface
-  below it, and the whole shell keeps the vanilla treatment: 1 px black ring + 1 px
-  navy border hugging the silhouette, 1 px ``L`` bevel top/left, 1 px ``D`` bevel
-  bottom/right. **The background is transparent** - vanilla machines such as
-  ``blender`` and ``chem_finisher`` are not opaque squares; only ``printer_off`` looks
-  full-bleed because its cabinet reaches the canvas edge. An inset machine on a black
-  canvas renders in game as a black frame around the art.
+  below it, and the shell is closed by **one** line: the navy border traced along the
+  silhouette by ``shell()``, with 1 px ``L`` bevel top/left and 1 px ``D`` bevel
+  bottom/right. **The background is transparent and nothing is added outside the body** -
+  vanilla machines (``blender``, ``chem_finisher``) are not opaque squares either; only
+  ``printer_off`` looks full-bleed because its cabinet reaches the canvas edge. A second
+  black ring outside the navy one just thickens the edge into a frame.
 
 Colours are sampled from ``items_tool2`` (navy ``#292234``, body ``#5f6868``, cream
 ``#d5d2b8``, teal ``#275654``/``#45918b``, glass ``#4b5b5d``, lamps
@@ -45,7 +45,6 @@ import pathlib
 W, H = 48, 48
 
 PALETTE = {
-    "E": (0x00, 0x00, 0x00),  # outline hugging the silhouette (opaque)
     "K": (0x29, 0x22, 0x34),  # navy outline / recess
     "M": (0x27, 0x34, 0x56),  # dark navy backing
     "m": (0x44, 0x46, 0x4C),  # seam / panel joint
@@ -241,32 +240,14 @@ def front_face(g):
     g.put(40, 37, "a")
 
 
-def silhouette_outline(g):
-    """Opaque black 1 px ring hugging the body; everything else stays transparent.
-
-    Vanilla machines (``blender``, ``chem_finisher``) are **not** opaque squares: the
-    background is empty and the dark edge follows the silhouette. ``printer_off`` only
-    looks full-bleed because its cabinet reaches the canvas edge - an inset body with a
-    black canvas gives the black frame this sprite used to show in game.
-    """
-    inside = [[g.get(x, y) != "." for x in range(W)] for y in range(H)]
-    for y in range(H):
-        for x in range(W):
-            if inside[y][x]:
-                continue
-            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-                nx, ny = x + dx, y + dy
-                if 0 <= nx < W and 0 <= ny < H and inside[ny][nx]:
-                    g.put(x, y, "E")
-                    break
-
-
 def build():
     g = Grid(W, H, ".")
     shell(g)
     top_well(g)
     front_face(g)
-    silhouette_outline(g)
+    # No extra ring outside the body: `shell()` already traces the silhouette with the
+    # navy outline (K), and that line is the machine's edge. An added black ring only
+    # thickens it into a frame.
     return g
 
 
