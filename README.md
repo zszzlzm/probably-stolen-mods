@@ -16,7 +16,7 @@ Source for eight mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0]
 | 还原剂蕨 / Reduction Fern | [3844217940](https://steamcommunity.com/sharedfiles/filedetails/?id=3844217940) | 0.1.0 | 新作物还原蕨：种出来、割下来、搅碎就是还原剂 | [`ReductionFern/`](ReductionFern/) |
 | 更好的奥克莫吸注射器 / Luxury Nomore Injector | [3844271622](https://steamcommunity.com/sharedfiles/filedetails/?id=3844271622) | 1.0.0 | 给奥克莫吸注射器加「奢侈品」类型，基础价值 50 → 350 | [`LuxuryNomoreInjector/`](LuxuryNomoreInjector/) |
 | 删除种类多样 / No More Variety | [3845143246](https://steamcommunity.com/sharedfiles/filedetails/?id=3845143246) | 1.0.0 | 「种类多样」去掉「每种只买一件」，规则改名为「慷慨」，+15% 柜台加成保留 | [`GenerousBuyer/`](GenerousBuyer/) |
-| 试剂可售 / Reagent Resale | 未上传 | 1.0.0 | 拆包后的化学试剂按水价计价、可作为化学用品出售，并修掉原版把非水液体判成「沟渠水 −90%」的兜底 | [`ChemResale/`](ChemResale/) |
+| 试剂可售 / Reagent Resale | [3845593063](https://steamcommunity.com/sharedfiles/filedetails/?id=3845593063) | 1.0.0 | 拆包后的化学试剂按水价计价、可作为化学用品出售，并修掉原版把非水液体判成「沟渠水 −90%」的兜底 | [`ChemResale/`](ChemResale/) |
 
 ## 玩家：怎么装
 

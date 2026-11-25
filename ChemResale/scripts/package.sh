@@ -21,6 +21,8 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build "$ROOT/ChemResale.csproj" -c Release -o "
 
 echo "== preview =="
 PY="$(bash "$ROOT/scripts/find-python.sh")" || exit 1
+# 中文 Windows 上 Python 默认 stdout 是 GBK，写中文描述会炸（U+2212 之类），统一成 UTF-8
+export PYTHONIOENCODING=utf-8
 "$PY" "$ROOT/scripts/make_cover.py" || { echo "ERROR: cover generation failed" >&2; exit 1; }
 
 echo "== assemble =="
@@ -105,6 +107,25 @@ if [ -f "$VDF" ]; then
 fi
 VIS="${VIS_OVERRIDE:-$VIS}"
 CHANGENOTE="${CHANGENOTE:-v$VER。}"
+
+# 工坊长描述直接写进 vdf，省掉每次上线手动粘贴。
+# 坑：Steam 的 KeyValues **没有转义**，值里出现 ASCII 双引号会提前截断字符串、
+# 整个 vdf 解析失败（"Bad expression token"）。所以源文件里禁止 ASCII 引号，用中文引号。
+# 反斜杠是字面量，不用转义；换行在值里合法。
+DESC_FILE="$ROOT/packaging/workshop_description.txt"
+[ -s "$DESC_FILE" ] || { echo "ERROR: $DESC_FILE missing" >&2; exit 1; }
+DESC_ESC="$("$PY" -c '
+import sys
+t = open(sys.argv[1], encoding="utf-8").read().rstrip()
+bad = [i + 1 for i, l in enumerate(t.split("\n")) if chr(34) in l]
+if bad:
+    sys.stderr.write("ERROR: ASCII double quote in %s at line(s) %s; "
+                     "KeyValues cannot escape it, use \u201c \u201d instead\n"
+                     % (sys.argv[1], ", ".join(map(str, bad))))
+    raise SystemExit(1)
+sys.stdout.write(t)
+' "$DESC_FILE")" || exit 1
+
 cat > "$VDF" <<EOF
 "workshopitem"
 {
@@ -114,7 +135,7 @@ cat > "$VDF" <<EOF
 	"previewfile"		"$WIN_PREVIEW"
 	"visibility"		"$VIS"
 	"title"			"试剂可售 / Reagent Resale"
-	"description"		"拆包后的化学试剂不再是一堆卖不掉的中间品：按水价计价，可以卖给化学买家。Unpacked chemical reagents get a price and a buyer instead of sitting in your bag forever."
+	"description"		"$DESC_ESC"
 	"changenote"		"$CHANGENOTE"
 }
 EOF

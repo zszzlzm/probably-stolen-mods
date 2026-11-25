@@ -1,7 +1,26 @@
 # 工坊上传步骤（试剂可售）
 
-> **当前状态（2026-11-25 13:20）**：包已打好（`dist/ReagentResale-v1.0.0.zip`），**尚未上传**。
-> `.vdf` 里 `publishedfileid` 还是 `"0"`、`visibility "2"`（隐藏），首次上传后 SteamCMD 会把 id 写回。
+> **当前状态（2026-11-25 13:22）**：**已发布** →
+> <https://steamcommunity.com/sharedfiles/filedetails/?id=3845593063>（公开，`visibility 0`）。
+> 1.0.0 已上线，长描述与封面都由 vdf 自动写入，无需再手动粘贴。
+
+## 0. 已发布条目
+
+| 项 | 值 |
+|---|---|
+| publishedfileid | `3845593063` |
+| 页面 | <https://steamcommunity.com/sharedfiles/filedetails/?id=3845593063> |
+| 可见性 | `0` 公开（先在 `2` 隐藏状态传过一次，确认后改公开） |
+| file_size | 90764 = contentfolder 四个文件之和 |
+| 封面 | 1280×720 `mod/preview.png`（`previewfile`，不进包） |
+
+发布后回查（匿名 GET 即可，公开条目）：
+
+```bash
+curl -s -X POST "https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1/" \
+  -d "itemcount=1&publishedfileids[0]=3845593063" | grep -o '"visibility":[0-9]*'
+```
+
 
 ## 1. 打包
 
@@ -36,16 +55,24 @@ C:\steamcmd\steamcmd.exe +login <账号> +workshop_build_item "C:\Users\zszzl\Do
 ```
 
 3. 首次发布需要在浏览器里接受创意工坊协议。
-4. 成功标志：`[AppID 4348910] Upload finished for workshop item <id> : OK`，
-   以及 `Uploaded new workshop preview file ...`。
-5. 把 id 记在这份文件里，然后 `package.sh` 会沿用它。
+4. **SteamCMD 会把新 id 直接写回 `.vdf`**（不用手抄）；`package.sh` 之后会沿用它。
+5. 成功标志：`Committing update...Success.`，退出码 0。
+
+> **坑：KeyValues 没有转义。** 长描述整个塞进 vdf 的 `description` 字段时，值里出现
+> ASCII 双引号（`"`）会让 KeyValues 提前截断字符串，报
+> `Bad expression token` / `key name too long` / `Failed to parse build config file`。
+> 所以 `packaging/workshop_description.txt` 里禁止 ASCII 引号，一律用中文引号 `“ ”`
+> （`package.sh` 会检查，命中就报错退出）。反斜杠是字面量、不用转义，换行在值里合法。
+> 顺带一个环境坑：中文 Windows 上 Python 的 stdout 默认 GBK，`−90%` 这类字符会
+> `UnicodeEncodeError`，`package.sh` 里统一 `export PYTHONIOENCODING=utf-8`。
 
 ## 3. 上线前检查
 
-- [ ] 页面描述 = `dist/workshop_description.txt` 全文（**手动粘贴**，SteamCMD 只传 vdf 里的短描述）
-- [ ] 封面 = 1280×720 的 `mod/preview.png`
-- [ ] 可见性改公开
+- [x] 页面描述 = `dist/workshop_description.txt` 全文（**已由 vdf 自动写入**，回查见上面 `curl`）
+- [x] 封面 = 1280×720 的 `mod/preview.png`
+- [x] 可见性改公开
 - [ ] 本地装好 1.0.0 后重启游戏，确认模组列表显示 1.0.0 且能启用
+
 
 ## 4. 本地部署（开发用）
 
