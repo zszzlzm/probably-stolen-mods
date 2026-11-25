@@ -22,15 +22,21 @@ Volume rules (what the vanilla machines do and a flat front view does not):
   rim on the bottom/right, and the front lip of the slot covers the bottom of the
   cartridge lying in it;
 * every raised part (well lip, lamp plate, feet) casts a 1 px shadow on the surface
-  below it, and the whole shell keeps the vanilla treatment: 2 px black margin, 1 px
-  navy border, 1 px ``L`` bevel top/left, 1 px ``D`` bevel bottom/right.
+  below it, and the whole shell keeps the vanilla treatment: 1 px black ring + 1 px
+  navy border hugging the silhouette, 1 px ``L`` bevel top/left, 1 px ``D`` bevel
+  bottom/right. **The background is transparent** - vanilla machines such as
+  ``blender`` and ``chem_finisher`` are not opaque squares; only ``printer_off`` looks
+  full-bleed because its cabinet reaches the canvas edge. An inset machine on a black
+  canvas renders in game as a black frame around the art.
 
 Colours are sampled from ``items_tool2`` (navy ``#292234``, body ``#5f6868``, cream
 ``#d5d2b8``, teal ``#275654``/``#45918b``, glass ``#4b5b5d``, lamps
 ``#3d823f``/``#9f526d``/``#d5a54a``) so the machine sits in the same family.
 
-The sprite is 48x48 with all nine grid-cell centres opaque: 3x3 cells at the game's
-16 px grid, the same footprint as the vanilla printer.
+The sprite is 48x48 and the cabinet covers all nine grid-cell centres, so the game
+samples 3x3 cells (``GameItem.SetSpriteAndShapeFromMod`` reads the centre pixel of each
+cell) - the same footprint as the vanilla printer. Transparency only lives where those
+centres are not.
 """
 
 import argparse
@@ -39,7 +45,7 @@ import pathlib
 W, H = 48, 48
 
 PALETTE = {
-    "E": (0x00, 0x00, 0x00),  # margin
+    "E": (0x00, 0x00, 0x00),  # outline hugging the silhouette (opaque)
     "K": (0x29, 0x22, 0x34),  # navy outline / recess
     "M": (0x27, 0x34, 0x56),  # dark navy backing
     "m": (0x44, 0x46, 0x4C),  # seam / panel joint
@@ -62,7 +68,7 @@ PALETTE = {
 
 
 class Grid:
-    def __init__(self, w, h, fill="E"):
+    def __init__(self, w, h, fill="."):
         self.w, self.h = w, h
         self.cells = [[fill] * w for _ in range(h)]
 
@@ -235,22 +241,46 @@ def front_face(g):
     g.put(40, 37, "a")
 
 
+def silhouette_outline(g):
+    """Opaque black 1 px ring hugging the body; everything else stays transparent.
+
+    Vanilla machines (``blender``, ``chem_finisher``) are **not** opaque squares: the
+    background is empty and the dark edge follows the silhouette. ``printer_off`` only
+    looks full-bleed because its cabinet reaches the canvas edge - an inset body with a
+    black canvas gives the black frame this sprite used to show in game.
+    """
+    inside = [[g.get(x, y) != "." for x in range(W)] for y in range(H)]
+    for y in range(H):
+        for x in range(W):
+            if inside[y][x]:
+                continue
+            for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                nx, ny = x + dx, y + dy
+                if 0 <= nx < W and 0 <= ny < H and inside[ny][nx]:
+                    g.put(x, y, "E")
+                    break
+
+
 def build():
-    g = Grid(W, H, "E")
+    g = Grid(W, H, ".")
     shell(g)
     top_well(g)
     front_face(g)
+    silhouette_outline(g)
     return g
 
 
 def render(grid):
     from PIL import Image
 
-    img = Image.new("RGBA", (W, H))
+    img = Image.new("RGBA", (W, H), (0, 0, 0, 0))
     px = img.load()
     for y in range(H):
         for x in range(W):
-            r, g_, b = PALETTE[grid.get(x, y)]
+            key = grid.get(x, y)
+            if key == ".":
+                continue                      # transparent: the inventory grid shows through
+            r, g_, b = PALETTE[key]
             px[x, y] = (r, g_, b, 255)
     return img
 
