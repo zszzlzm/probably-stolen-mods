@@ -100,3 +100,23 @@ python LuxuryNomoreInjector/scripts/make_cover.py art.png out.png --zoom=1.1 --d
 
 SteamCMD 上传不受这个影响（它不走 shell 的 `http_proxy`），所以「推不上 GitHub」和
 「传不了工坊」是两件独立的事。
+
+## 9. 脚本怎么调用（shell 环境）
+
+这个工作区里所有 `scripts/*.sh`、`tools/*.sh` 都是 **bash 脚本**，但 agent 侧能用的
+「bash」工具在不同插件配置下指向不同的 shell，写法必须跟着变：
+
+| 情况 | `bash` 工具实际执行的 | 怎么跑 `.sh` |
+|---|---|---|
+| 装了 dsh-ops（`ops_bash`） | 真 bash（git-bash） | `bash scripts/package.sh` 直接可用 |
+| 只有内置工具（当前） | **PowerShell 7**（`bash.exe` 是 WSL 启动器，不是 git-bash） | `& "C:\Program Files\Git\bin\bash.exe" -lc 'cd /c/... && bash scripts/package.sh'` |
+
+踩过的具体差异：
+
+- `bash` 工具在 PowerShell 下**不认 `/c/...` 这种 MSYS 路径**，`cd /c/...` 会报「找不到路径」；
+  要么写 `C:\...`，要么把整段命令交给 git-bash 执行。
+- `git-bash` 里的 `python3` 指向 Windows 应用商店的占位程序（退出码 49），仍然必须用
+  `tools/find-python.sh` 解析（它优先用 DSH 运行时自带的解释器）。
+- PowerShell 下 `&&` 可用（7.x），但 `head`/`tail`/`uname`/`sed`/`awk` 都没有；要这些就走 git-bash。
+
+**判断方法**：`$PSVersionTable.PSVersion` 有输出 = 当前是 PowerShell；`uname -s` 输出 `MINGW64_NT-*` = 真 bash。
