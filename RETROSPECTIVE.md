@@ -153,7 +153,7 @@ release `builds-2026-11-23` 附了六个可直接安装的 zip。仓库里只放
 | 工坊条目"文件大小翻倍" | 包内 `preview.png` 从 345 KB（扁平图）换成 817 KB（照片型封面） | 包内放 640×360，封面单独 1280 上传 |
 | 工坊提交 `Access Denied` | 条目审核中 / 未审批完成 | 等审核通过后重试，不要重建条目 |
 | 差点新建重复工坊条目 / 把公开条目改隐藏 | `package.sh` 写死 `publishedfileid 0` + `visibility 2` | 打包脚本沿用现有 vdf 的 id 和 visibility |
-| `steamcmd` 命令找不到 | 不在 PATH，PowerShell 不搜当前目录 | 全路径 + `&`，或 `cd` 后用 `.\` |
+| `steamcmd` 命令找不到 | 不在 PATH，PowerShell 不搜当前目录（**PS 7.7 仍是这个行为**） | 全路径 + `&`，或 `cd` 后用 `.\` |
 | 明文密码进日志 | steamcmd 把 `+login` 参数原样写入 `console_log.txt` | 脱敏 + 改密码 |
 | mod 被拒载（用了 System.IO） | 未声明 capability | 改用 `ModHelper` 的 ModData API |
 | 干净安装出现重复 ID | `Mods/` 里留了 `.bak`，加载器会扫描 | 备份放 `Mods/` 外 |

@@ -125,3 +125,25 @@ SteamCMD 上传不受这个影响（它不走 shell 的 `http_proxy`），所以
   'Microsoft.PowerShell.Archive', but the module could not be loaded」。同一个脚本在普通
   终端里却正常——所以打包脚本**不再用 PowerShell 压缩**，统一走 `tools/make_zip.sh`
   （python `shutil.make_archive`，顶层目录名与旧 zip 一致）。
+
+## 10. PowerShell 7.7 复核（哪些坑已消失）
+
+同一份探针 [tools/ps_probe.ps1](tools/ps_probe.ps1) 在 7.7 和系统自带的 5.1 下各跑一次：
+
+    pwsh -NoProfile -File tools/ps_probe.ps1
+    powershell -NoProfile -ExecutionPolicy Bypass -File tools/ps_probe.ps1
+
+| 项 | Windows PowerShell 5.1 | PowerShell 7.7 | 结论 |
+|---|---|---|---|
+| `&&` / `\|\|` | 语法错误 | 可用（本仓库文档里的链式命令就是 7.x 的写法） | ✅ 已修好 |
+| `curl` | **是 `Invoke-WebRequest` 的别名**，`-s` / `-X POST` / `-o` 全不认 | 真 `curl.exe`（8.22.0），参数与 bash 一致 | ✅ 已修好，Steam API 查询可以直接写 |
+| 读无 BOM 的 UTF-8 中文文件 | 按 ANSI 解码 → 乱码（实测 `试剂可售` → `璇曞墏鍙敭`） | 默认 UTF-8 → 正确 | ✅ 已修好 |
+| `$OutputEncoding` | `us-ascii`（管道交给外部程序时非 ASCII 会丢） | `utf-8` | ✅ 已修好 |
+| 执行策略 | `Restricted`：本地 `.ps1` 直接拒跑 | `RemoteSigned`：本地脚本可跑 | ✅ 已修好 |
+| `Compress-Archive` | 自动加载模块；父进程把 PS7 的 `PSModulePath` 传下来时加载失败 | 内置可用 | ✅ 已修好（打包脚本仍用 `tools/make_zip.sh`，不想依赖 shell） |
+| 按名字调用当前目录里的程序 | 不搜 cwd | 不搜 cwd | ❌ 未变，仍需 `.\` 或全路径 |
+| `/c/...` 这种 MSYS 路径 | 不认 | 不认 | ❌ 未变（这是路径格式，不是 PowerShell 的问题） |
+| 脚本文件的编码 | 无 BOM 的 UTF-8 中文注释会让解析错位（行号、语法都可能乱） | 无 BOM 也能正确解析 | ✅ 已修好，但**要兼容 5.1 就得存 BOM** |
+
+结论：凡是「PowerShell 怪癖」类的坑，7.7 基本都消掉了；剩下两条跟我们自己的路径写法有关，跟版本无关。
+平时仍然可以放心用 `curl`、`&&`、直接 `Get-Content` 读 UTF-8；只有 `steamcmd` 这种不在 PATH 的程序继续写全路径。
