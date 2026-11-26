@@ -12,9 +12,9 @@ import sys
 
 HERE = pathlib.Path(__file__).resolve().parent
 REF = HERE.parent / "refs" / "model"
-sys.path.insert(0, r"F:\随笔集\完全自由的异世界之旅\04_工具")
+sys.path.insert(0, str(HERE.parent.parent / "tools"))
 
-import qwen_img  # noqa: E402
+import qwen_gen  # noqa: E402
 
 STYLE = (
     "Pixel-art game item sprite for a 2D space-station farming game. "
@@ -134,7 +134,8 @@ def main():
     spec = ASSETS[args.asset]
     gw, gh = spec["grid"]
     flat = args.asset.endswith("_flat")
-    scale = min(32, 1024 // max(gw, gh))
+    # 文档档位：长边至少 1024 px（模型在 512 以下细节会塌），仍保持整数倍最近邻缩放
+    scale = max(32, (1024 + max(gw, gh) - 1) // max(gw, gh))
     width, height = gw * scale, gh * scale
     if flat:
         prompt = FLAT_STYLE + " " + spec["prompt"]
@@ -146,19 +147,20 @@ def main():
             raise SystemExit(f"missing ref {r}")
 
     out = pathlib.Path(args.out) / f"{args.asset}_s{args.seed}.png"
-    res = qwen_img.generate(
+    res = qwen_gen.generate(
         prompt,
         out=out,
+        size=(width, height),
         negative=(
             "blurry, 3d render, realistic photo, smooth gradient, airbrush, glow, bloom, neon, halo, "
             "perspective, multiple scattered objects, scenery, text, watermark, frame, border, "
             "anti-aliasing, noise, film grain, tiny details"
         ),
-        width=width,
-        height=height,
         steps=args.steps,
         seed=args.seed,
         refs=refs,
+        manifest=pathlib.Path(args.out) / "manifest.json",
+        note=f"{gw}x{gh} logical px, upscale {scale}x",
     )
     print(res)
 

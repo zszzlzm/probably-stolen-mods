@@ -7,6 +7,10 @@ Inputs are reference images, not prompts alone: the current 48x48 sprite blown u
 blown up 16x (so it keeps the game's modelling language - chamfers, recessed panels,
 cast shadows). The point is to *see* alternatives quickly; the pixel sprite itself is
 still finished by hand afterwards.
+
+改图那条路在 `qwen_img` 里只有「9B 增强器先改写指令」一种（文档 §13），所以本脚本
+需要 `QWEN_ENHANCE=1`：先让增强器看着参考图写出改造指令，再把指令交给 T2I。
+不设这个变量时它只会生成一张纯 T2I 图，参考图会被忽略。
 """
 
 import argparse
@@ -17,8 +21,8 @@ HERE = pathlib.Path(__file__).resolve().parents[1]
 GEN = HERE / "refs" / "gen"
 GEN.mkdir(parents=True, exist_ok=True)
 
-sys.path.insert(0, r"F:\随笔集\完全自由的异世界之旅\04_工具")
-import qwen_img  # noqa: E402
+sys.path.insert(0, str(HERE.parent / "tools"))
+import qwen_gen  # noqa: E402
 
 PROMPT = (
     "像素艺术游戏贴图改造：把参考图 1 里的这台机器重新画成有体积的立体机器，"
@@ -55,17 +59,15 @@ def main() -> int:
             print("skip", out.name)
             continue
         print("generating", seed, flush=True)
-        res = qwen_img.generate(
+        res = qwen_gen.generate(
             PROMPT,
             out=out,
-            negative=qwen_img.NEG_DEFAULT,
-            width=1024,
-            height=1024,
+            size=qwen_gen.ICON,
             steps=args.steps,
             seed=seed,
-            unload_27b=True,
             refs=refs,
-            timeout=900,
+            manifest=GEN / "manifest.json",
+            note="立体化概念图（增强器改写指令后 T2I）",
         )
         print(res.get("ok"), out, flush=True)
     return 0

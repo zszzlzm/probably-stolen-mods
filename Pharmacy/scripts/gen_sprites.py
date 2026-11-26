@@ -20,9 +20,9 @@ REFS = ROOT / "refs"
 GEN = REFS / "gen"
 GEN.mkdir(parents=True, exist_ok=True)
 
-sys.path.insert(0, r"F:\随笔集\完全自由的异世界之旅\04_工具")
+sys.path.insert(0, str(ROOT.parent / "tools"))
 sys.path.insert(0, str(HERE))
-import qwen_img  # noqa: E402
+import qwen_gen  # noqa: E402
 import pixify as px  # noqa: E402
 
 STYLE = (
@@ -64,17 +64,19 @@ def refs_for(key):
     return refs
 
 
-def generate(key, seed=0, size=512):
+def generate(key, seed=0, size=1024):
+    # 文档档位：图标也按 1024² 出图，之后 pixify 最近邻缩到 16×16；
+    # 512 以下模型细节会塌（见 生图部署方案.md「日常建议 1024–1536」）
     out = GEN / f"{key}_{size}.png"
-    res = qwen_img.generate(
+    res = qwen_gen.generate(
         PROMPTS[key],
         out=out,
-        width=size,
-        height=size,
+        size=(size, size),
         steps=25,
         seed=seed,
         refs=refs_for(key),
-        unload_27b=False,
+        manifest=GEN / "manifest.json",
+        note="药品 16×16 图标，pixify 之后缩到 16",
     )
     print(key, {k: res.get(k) for k in ("ok", "seconds", "error", "size")})
     return out if res.get("ok") else None

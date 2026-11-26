@@ -81,3 +81,21 @@
 3. 每次生图都要落 `refs/gen/manifest.json`：`prompt / negative / steps / cfg / seed / refs / 选中文件`，
    否则连"哪些是模型产物"都说不清——这次的审计就是靠 grep 文档拼出来的。
 4. 任何模型产物进发布包之前，在 `packaging/workshop_description.txt` 与 `README.txt` 里写明来源。
+
+## 6. 修复进展（2026-11-26）
+
+按上面 §2 的偏差，脚本与文档已改成文档配方：
+
+| 改动 | 文件 |
+|---|---|
+| 统一生图入口：尺寸档位、steps 25、强制卸载 27B、参考图不进 T2I、自动写 manifest | [tools/qwen_gen.py](tools/qwen_gen.py) |
+| 等比裁切（3:2 关键图 → 16:9 封面不再被压扁） | [tools/img_fit.py](tools/img_fit.py)、7 个 `scripts/make_cover.py` |
+| 裁切几何自检 | [tools/test_img_fit.py](tools/test_img_fit.py)（8 条断言） |
+| 各模组生成脚本改用上面的入口 | `Pharmacy`/`PurifyingUncapped`/`FilterPrinter`/`ScavGame`/`GenerousBuyer` 的 `gen_keyart.py`、`gen_machine_art.py`、`gen_3d_edit.py`、`gen_sprites.py`、`ReductionFern/tools/gen_assets.py` |
+| 配方与坑写进文档 | `BUILDING.md` §6.1、`SPRITES.md` §5 |
+
+没修的（做不到，不是漏了）：
+
+- **已发布的图不重新生成**：重出一轮的收益不确定，等真要改封面时再按新配方来。
+- **老图没有 manifest**：seed/prompt 当时没记，事后补不出真实值，只能标注「来源未知」。
+- **奢侈品不再注射器的生图命令已丢失**（`refs/gen/keyart_a..j.png` 还在，脚本没了），这一份的出处只能写"本地生成·参数未知"。

@@ -13,6 +13,9 @@ OUT = ROOT / "mod" / "preview.png"
 # 游戏素材目录（默认指向本仓库同级的 ScavGame/refs/game，可用 PS_GAME_REFS 覆盖）
 GAME = pathlib.Path(os.environ.get("PS_GAME_REFS", ROOT.parent / "ScavGame" / "refs" / "game"))
 
+sys.path.insert(0, str(ROOT.parent / "tools"))
+from img_fit import cover_fit  # noqa: E402
+
 W, H = 1280, 720
 ACCENT = (232, 163, 61)
 CYAN = (110, 210, 205)
@@ -28,8 +31,7 @@ def font(path, size):
 
 def cover(keyart, out=OUT):
     base = Image.open(keyart).convert("RGB")
-    if base.size != (W, H):
-        base = base.resize((W, H), Image.LANCZOS)
+    base = cover_fit(base, (W, H))     # 等比铺满后裁切，不拉伸（3:2 关键图 → 16:9 封面）
     img = base.convert("RGBA")
 
     # 左侧压暗，保证文字可读

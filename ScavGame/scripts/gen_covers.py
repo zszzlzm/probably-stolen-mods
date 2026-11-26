@@ -1,4 +1,4 @@
-"""用游戏原版素材当参考图，生成「拾荒手记」创意工坊封面关键图（1280x720，不带字）。
+"""用游戏原版素材当参考图，生成「拾荒手记」创意工坊封面关键图（文档档位 1536×1024，之后由 make_cover.py 裁成 1280×720）。
 
 用法：
     python scripts/gen_covers.py a 111
@@ -13,9 +13,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 ROOT = HERE.parent
 REFS = ROOT / "refs"
 GEN = ROOT / "art" / "gen"
-GEN_QWEN = pathlib.Path(r"F:\随笔集\完全自由的异世界之旅\04_工具")
-sys.path.insert(0, str(GEN_QWEN))
-import qwen_img  # noqa: E402
+sys.path.insert(0, str(ROOT.parent / "tools"))
+import qwen_gen  # noqa: E402
 
 NEG = (
     "text, letters, logo, watermark, cartoon, anime, bright daylight, clean neon, "
@@ -69,16 +68,16 @@ def main():
         upscale(game / "debris_pile3.png", 512, GEN / "ref_debris3.png"),
     ]
     out = GEN / f"cover_{shot}.png"
-    res = qwen_img.generate(
+    res = qwen_gen.generate(
         SHOTS[shot],
         negative=NEG,
         out=out,
-        width=1280,
-        height=720,
-        steps=30,
+        size=qwen_gen.COVER,
+        steps=qwen_gen.STEPS,
         seed=seed,
         refs=refs,
-        unload_27b=False,
+        manifest=GEN / "manifest.json",
+        note="工坊封面关键图；裁切由 make_cover.py 做",
     )
     print({k: res.get(k) for k in ("ok", "seconds", "error", "size", "path")})
 

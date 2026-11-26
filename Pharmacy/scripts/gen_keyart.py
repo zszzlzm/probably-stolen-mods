@@ -1,4 +1,8 @@
-"""生成创意工坊封面用的关键图（1280x720），参考图用游戏自己的素材。"""
+"""生成创意工坊封面用的关键图（文档档位 1536×1024，后续由 make_cover.py 裁成 1280×720）。
+
+参数走 `tools/qwen_gen.py`：steps 25 / cfg 1.0 / 生图前卸载 27B / 参考图不进 T2I，
+并把每张图的 prompt、seed、尺寸、输出哈希记进 `refs/gen/manifest.json`。
+"""
 import pathlib
 import sys
 
@@ -9,8 +13,8 @@ ROOT = HERE.parent
 REFS = ROOT / "refs"
 GEN = REFS / "gen"
 
-sys.path.insert(0, r"F:\随笔集\完全自由的异世界之旅\04_工具")
-import qwen_img  # noqa: E402
+sys.path.insert(0, str(ROOT.parent / "tools"))
+import qwen_gen  # noqa: E402
 
 PROMPT = (
     "像素艺术风格的游戏场景插画，16 位机像素画，赛博朋克下层区的一间小药店工作台。"
@@ -35,15 +39,15 @@ def main():
         upscale(ROOT / "mod/Textures/Items/painkiller_pill.png", 16, GEN / "ref_pill_x16.png"),
     ]
     out = GEN / "keyart.png"
-    res = qwen_img.generate(
+    res = qwen_gen.generate(
         PROMPT,
         out=out,
-        width=1280,
-        height=720,
-        steps=30,
+        size=qwen_gen.COVER,
+        steps=qwen_gen.STEPS,
         seed=int(sys.argv[1]) if len(sys.argv) > 1 else 7,
         refs=refs,
-        unload_27b=False,
+        manifest=GEN / "manifest.json",
+        note="工坊封面关键图；裁切由 make_cover.py 做",
     )
     print({k: res.get(k) for k in ("ok", "seconds", "error", "size", "path")})
 

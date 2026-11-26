@@ -1,4 +1,4 @@
-"""生成创意工坊封面用的关键图（1280x720）。风格参考 Pharmacy 的封面关键图（同一套下层区色调）。"""
+"""生成创意工坊封面用的关键图（文档档位 1536×1024，之后由 make_cover.py 裁成 1280×720）。风格参考 Pharmacy 的封面关键图（同一套下层区色调）。"""
 import pathlib
 import sys
 
@@ -9,8 +9,8 @@ ROOT = HERE.parent
 REFS = ROOT / "refs"
 GEN = REFS / "gen"
 
-sys.path.insert(0, r"F:\随笔集\完全自由的异世界之旅\04_工具")
-import qwen_img  # noqa: E402
+sys.path.insert(0, str(ROOT.parent / "tools"))
+import qwen_gen  # noqa: E402
 
 STYLE_REF = pathlib.Path(r"F:\随笔集\完全自由的异世界之旅") / "deepseek-harness/default-workspace/Pharmacy/refs/gen/keyart.png"
 
@@ -28,15 +28,15 @@ def main():
     GEN.mkdir(parents=True, exist_ok=True)
     refs = [STYLE_REF] if STYLE_REF.exists() else []
     out = GEN / "keyart.png"
-    res = qwen_img.generate(
+    res = qwen_gen.generate(
         PROMPT,
         out=out,
-        width=1280,
-        height=720,
-        steps=30,
+        size=qwen_gen.COVER,
+        steps=qwen_gen.STEPS,
         seed=int(sys.argv[1]) if len(sys.argv) > 1 else 7,
         refs=refs,
-        unload_27b=False,
+        manifest=GEN / "manifest.json",
+        note="工坊封面关键图；裁切由 make_cover.py 做",
     )
     print({k: res.get(k) for k in ("ok", "seconds", "error", "size", "path")})
 

@@ -1,3 +1,12 @@
+"""一次性 ComfyUI 客户端：读一份 JSON 配置跑 Qwen-Image 2.1。
+
+注意（2026-11-26 审计）：**这不是仓库规定的生图入口**。默认走 `tools/qwen_gen.py`
+（文档配方：1536×1024 / steps 25 / cfg 1.0 / 生成前卸载 27B / 落 manifest）。
+本脚本保留下来是因为 Turbo LoRA 那条路 `qwen_img.py` 没有包装：用 Turbo 时
+步数必须跟着 LoRA 走（5–8 步、cfg 1），不能套 25 步，否则会糊。
+用它的场合是「想更快出草稿」，草稿定稿仍应回到 `qwen_gen` 复现一张。
+"""
+
 import json, sys, time, urllib.request, urllib.parse, os
 
 BASE = "http://127.0.0.1:8188"

@@ -82,6 +82,31 @@ python LuxuryNomoreInjector/scripts/make_cover.py art.png out.png --zoom=1.1 --d
 > 详见 [AI_ART_LICENSE_AUDIT.md](AI_ART_LICENSE_AUDIT.md)；新封面照 `ChemResale/scripts/make_cover.py`
 > 的路子纯代码绘制，或手排像素，或换一个许可已核实并写进本文件的模型。
 
+### 6.1 生图配方（拿到许可后照这个跑）
+
+配方出处：`F:\随笔集\完全自由的异世界之旅\02_文档\工具与流程\生图部署方案.md`。
+唯一入口是 [tools/qwen_gen.py](tools/qwen_gen.py)，它替各模组把当年踩歪的四条固定住：
+
+| 项 | 规定 | 以前错在哪 |
+|---|---|---|
+| 尺寸 | 封面 `COVER = 1536×1024`、图标 `ICON = 1024×1024` | 直接向模型要 1280×720：不是模型档位，而 `TextEncodeQwenImage21` 的 `resolution` 写死 1024，16:9 配 1:1 编码尺度 |
+| 裁切 | 1280×720 由 [tools/img_fit.py](tools/img_fit.py) 的 `cover_fit` **等比裁切**产生 | `make_cover.py` 直接 `resize((1280,720))`，3:2 会被横向压扁 ~18% |
+| 采样 | `steps=25, cfg=1.0, euler/simple` | 一律 30 步，且没有档位依据 |
+| 显存 | **生成前卸载 27B**（wrapper 强制 `unload_27b=True`） | 5 个脚本传了 `False`，把文档的硬规则关掉了 |
+| 参考图 | 默认**不进 T2I**；要借用就设 `QWEN_ENHANCE=1`，先让 9B 增强器看图写指令（文档 §13） | 把原版素材当 `refs` 塞进空 latent 的 T2I，两边都不算 |
+| 出处 | 自动写 `refs/gen/manifest.json`：prompt/negative/steps/seed/尺寸/模型/输出 sha256 | 一张都没记，事后分不清哪些是模型产物 |
+
+用法（在模组目录里）：
+
+```bash
+python scripts/gen_keyart.py 7        # 内部调 qwen_gen.generate(...) → refs/gen/keyart.png (1536×1024)
+python scripts/make_cover.py          # cover_fit 裁成 1280×720 + 排字 → mod/preview.png
+python tools/test_img_fit.py          # 裁切几何自检（改 img_fit 后必跑）
+```
+
+Turbo LoRA 那条路 `qwen_img.py` 没有包装，仍用 `ScavGame/scripts/comfy_gen.py`；
+但 **步数必须跟着 LoRA 走（5–8 步、cfg 1）**，不能套 25 步，草稿定稿后回到 `qwen_gen` 复现一张。
+
 ## 7. 提交前
 
 - 不要提交 `build/`、`obj/`、`dist/`、`refs/`（已在 `.gitignore` 里）。

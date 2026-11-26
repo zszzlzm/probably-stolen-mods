@@ -17,8 +17,8 @@ HERE = pathlib.Path(__file__).resolve().parents[1]
 GEN = HERE / "refs" / "gen"
 GEN.mkdir(parents=True, exist_ok=True)
 
-sys.path.insert(0, r"F:\随笔集\完全自由的异世界之旅\04_工具")
-import qwen_img  # noqa: E402
+sys.path.insert(0, str(HERE.parent / "tools"))
+import qwen_gen  # noqa: E402
 
 STYLE = (
     "像素艺术游戏道具贴图，复古 16 位像素风，单台机器，正面平视，机器居中占满画面，"
@@ -54,17 +54,15 @@ def main() -> int:
             print("skip existing", out.name)
             continue
         print("generating seed", seed, flush=True)
-        res = qwen_img.generate(
+        res = qwen_gen.generate(
             PROMPT,
             out=out,
-            negative=qwen_img.NEG_DEFAULT,
-            width=args.width,
-            height=args.height,
+            size=(args.width, args.height),
             steps=args.steps,
             seed=seed,
-            unload_27b=True,
             refs=refs or None,
-            timeout=900,
+            manifest=GEN / "manifest.json",
+            note="机器概念图（只定构图，最终像素图由 pixify_machine.py 重画）",
         )
         print(res.get("ok"), out, flush=True)
     return 0

@@ -1,4 +1,4 @@
-"""生成滤芯打印机封面用的关键图（1280x720）。参考图来自游戏原版滤水/滤芯素材。"""
+"""生成滤芯打印机封面用的关键图（文档档位 1536×1024，之后由 make_cover.py 裁成 1280×720）。参考图来自游戏原版滤水/滤芯素材。"""
 import os
 import pathlib
 import sys
@@ -12,10 +12,8 @@ GEN = REFS / "gen"
 # 游戏素材目录（默认指向本仓库同级的 ScavGame/refs/game，可用 PS_GAME_REFS 覆盖）
 GAME = pathlib.Path(os.environ.get("PS_GAME_REFS", ROOT.parent / "ScavGame" / "refs" / "game"))
 
-# 生图入口 qwen_img.py 所在目录，用 QWEN_IMG_DIR 指定
-QWEN_DIR = os.environ.get("QWEN_IMG_DIR", r"F:\随笔集\完全自由的异世界之旅\04_工具")
-sys.path.insert(0, QWEN_DIR)
-import qwen_img  # noqa: E402
+sys.path.insert(0, str(ROOT.parent / "tools"))
+import qwen_gen  # noqa: E402
 
 PROMPT = (
     "像素艺术风格的游戏场景插画，16 位机像素画，赛博朋克下层区的一间小型印刷工坊工作台。"
@@ -42,15 +40,15 @@ def main():
         upscale(GAME / "water_filter_adv.png", 12, GEN / "ref_filter_adv_x12.png"),
     ]
     out = GEN / "keyart.png"
-    res = qwen_img.generate(
+    res = qwen_gen.generate(
         PROMPT,
         out=out,
-        width=1280,
-        height=720,
-        steps=30,
+        size=qwen_gen.COVER,
+        steps=qwen_gen.STEPS,
         seed=int(sys.argv[1]) if len(sys.argv) > 1 else 7,
         refs=refs,
-        unload_27b=False,
+        manifest=GEN / "manifest.json",
+        note="工坊封面关键图；裁切由 make_cover.py 做",
     )
     print({k: res.get(k) for k in ("ok", "seconds", "error", "size", "path")})
 

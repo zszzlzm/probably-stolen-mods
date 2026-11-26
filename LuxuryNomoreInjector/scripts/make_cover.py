@@ -19,6 +19,9 @@ GEN = ROOT / "refs" / "gen"
 OUT = ROOT / "mod" / "preview.png"
 SMALL_SIZE = (640, 360)
 
+sys.path.insert(0, str(ROOT.parent / "tools"))
+from img_fit import cover_fit  # noqa: E402
+
 W, H = 1280, 720
 ACCENT = (232, 163, 61)
 CYAN = (110, 210, 205)
@@ -56,8 +59,7 @@ def reframe(base, zoom=1.0, dx=0, dy=0):
 
 def cover(keyart, out=OUT, zoom=1.0, dx=0, dy=0):
     base = Image.open(keyart).convert("RGB")
-    if base.size != (W, H):
-        base = base.resize((W, H), Image.LANCZOS)
+    base = cover_fit(base, (W, H))     # 等比铺满后裁切，不拉伸（3:2 关键图 → 16:9 封面）
     base = reframe(base, zoom, dx, dy)
     img = base.convert("RGBA")
 
