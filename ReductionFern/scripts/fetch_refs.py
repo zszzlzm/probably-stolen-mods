@@ -3,8 +3,8 @@
 Tries Huaban's JSON API first (the search page itself is JS-rendered), then falls
 back to Wikimedia Commons (freely licensed botanicals).
 
-  python tools/fetch_refs.py huaban
-  python tools/fetch_refs.py commons
+  python scripts/fetch_refs.py huaban
+  python scripts/fetch_refs.py commons
 """
 import json
 import pathlib

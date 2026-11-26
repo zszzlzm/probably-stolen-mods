@@ -2,7 +2,7 @@
 
 > 2026-11-22 ~ 11-23 · Probably Stolen 0.46D（Unity 2021.3.45f2 / Mono / netstandard2.1）
 > 进度：代码 / 实机验收 / 封面 / 双语描述 / 打包都已完成，条目 3844271622 已上传但仍是隐藏状态。
-> 平台通用经验（Hook、打包、SteamCMD、封面流水线）见根目录 `RETROSPECTIVE.md`，本文只写**这个「一行补丁」的 mod 带来的新东西**。
+> 平台通用经验（Hook、打包、SteamCMD、封面流水线）见仓库根 `docs/RETROSPECTIVE.md`，本文只写**这个「一行补丁」的 mod 带来的新东西**。
 
 ## 0. 一句话
 

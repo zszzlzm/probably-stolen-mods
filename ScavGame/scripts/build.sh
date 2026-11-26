@@ -14,12 +14,12 @@ if ! cp "$ROOT/build/ScavArcade.dll" "$MODS/" 2>/dev/null; then
   echo "DEPLOY FAILED: ScavArcade.dll is locked (game still running?)" >&2
   exit 1
 fi
-cp "$ROOT/manifest.xml" "$MODS/"
+cp "$ROOT/mod/manifest.xml" "$MODS/"
 rm -f "$MODS/Localization/"*.csv
-cp "$ROOT/Localization/"*.csv "$MODS/Localization/"
-if [ -d "$ROOT/Sounds" ]; then
+cp "$ROOT/mod/Localization/"*.csv "$MODS/Localization/"
+if [ -d "$ROOT/mod/Sounds" ]; then
   rm -rf "$MODS/Sounds"
-  cp -r "$ROOT/Sounds" "$MODS/Sounds"
+  cp -r "$ROOT/mod/Sounds" "$MODS/Sounds"
 fi
 
 echo "deployed -> $MODS"

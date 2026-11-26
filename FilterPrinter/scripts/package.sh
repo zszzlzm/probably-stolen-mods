@@ -23,7 +23,7 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build "$ROOT/FilterPrinter.csproj" -c Release -
 echo "== preview =="
 # 需要 Python 3 + Pillow。不要用 `command -v python3`：这台机器上是应用商店的占位程序（退出 49）。
 # 中文 Windows 上 Python 的 stdout 默认 GBK，写中文进 vdf 会 UnicodeEncodeError，统一 UTF-8。
-PY="$(bash "$ROOT/../tools/find-python.sh" "import PIL")" || exit 1
+PY="$(bash "$ROOT/../tools/find-python.sh" "import PIL, numpy")" || exit 1
 export PYTHONIOENCODING=utf-8
 KEYART="$ROOT/refs/gen/keyart.png"
 if [ -f "$KEYART" ]; then

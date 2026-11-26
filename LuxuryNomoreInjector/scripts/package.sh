@@ -25,11 +25,8 @@ DOTNET_CLI_UI_LANGUAGE=en dotnet build "$ROOT/LuxuryNomoreInjector.csproj" -c Re
 
 echo "== preview =="
 # 需要 Python 3 + Pillow；不要用 Windows 应用商店的占位 python（它什么都不做）
-PY="${DSH_PYTHON:-$(command -v python3 || command -v python || true)}"
-if [ -z "$PY" ] || ! "$PY" -c "import PIL" >/dev/null 2>&1; then
-	echo "ERROR: need Python 3 with Pillow; set DSH_PYTHON=/path/to/python" >&2
-	exit 1
-fi
+PY="$(bash "$ROOT/../tools/find-python.sh" "import PIL, numpy")" || exit 1
+export PYTHONIOENCODING=utf-8
 # 默认输入就是实际用的那张关键图（keyart_shift2），默认缩放/偏移不改变既有构图。
 "$PY" "$ROOT/scripts/make_cover.py" || { echo "ERROR: preview generation failed" >&2; exit 1; }
 

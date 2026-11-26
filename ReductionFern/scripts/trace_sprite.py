@@ -1,6 +1,6 @@
 """Trace a model render into a flat, grid-snapped sprite (no mush, no lost gaps).
 
-  python tools/trace_sprite.py --src refs/gen/fern_s203.png --grid 16x32 \
+  python scripts/trace_sprite.py --src refs/gen/fern_s203.png --grid 16x32 \
       --out refs/final/restoring_fern.png
 
 The Qwen render uses ~32 px per logical pixel but is not aligned to that grid, so a

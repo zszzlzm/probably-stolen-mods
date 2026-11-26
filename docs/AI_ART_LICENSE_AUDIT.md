@@ -91,7 +91,7 @@
 | 统一生图入口：尺寸档位、steps 25、强制卸载 27B、参考图不进 T2I、自动写 manifest | [tools/qwen_gen.py](tools/qwen_gen.py) |
 | 等比裁切（3:2 关键图 → 16:9 封面不再被压扁） | [tools/img_fit.py](tools/img_fit.py)、7 个 `scripts/make_cover.py` |
 | 裁切几何自检 | [tools/test_img_fit.py](tools/test_img_fit.py)（8 条断言） |
-| 各模组生成脚本改用上面的入口 | `Pharmacy`/`PurifyingUncapped`/`FilterPrinter`/`ScavGame`/`GenerousBuyer` 的 `gen_keyart.py`、`gen_machine_art.py`、`gen_3d_edit.py`、`gen_sprites.py`、`ReductionFern/tools/gen_assets.py` |
+| 各模组生成脚本改用上面的入口 | `Pharmacy`/`PurifyingUncapped`/`FilterPrinter`/`ScavGame`/`GenerousBuyer` 的 `gen_keyart.py`、`gen_machine_art.py`、`gen_3d_edit.py`、`gen_sprites.py`、`ReductionFern/scripts/gen_assets.py` |
 | 配方与坑写进文档 | `BUILDING.md` §6.1、`SPRITES.md` §5 |
 
 没修的（做不到，不是漏了）：

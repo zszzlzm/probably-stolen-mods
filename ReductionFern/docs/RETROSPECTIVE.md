@@ -3,7 +3,7 @@
 > 2026-11-22 · Probably Stolen 0.46D（Unity 2021.3.45f2 / Mono / netstandard2.1）
 > 进度：P1 骨架已完成并实机验收；P2 产出数值待验；P3 网络升级 / P4 封面 / P5 发布未做。
 > 相关文档：`PLAN.md`（参数、里程碑、拍板记录）、`ART_SPEC.md`（五张图的像素规格）。
-> 平台通用经验（Hook、打包、SteamCMD、封面流水线）见根目录 `RETROSPECTIVE.md`，本文只写**这一株植物带来的新东西**。
+> 平台通用经验（Hook、打包、SteamCMD、封面流水线）见仓库根 `docs/RETROSPECTIVE.md`，本文只写**这一株植物带来的新东西**。
 
 ## 0. 一句话
 

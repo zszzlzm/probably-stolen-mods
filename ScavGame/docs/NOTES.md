@@ -30,7 +30,7 @@ F:\SteamLibrary\steamapps\common\Probably Stolen\Mods\ScavArcade\
   README.md
 ```
 
-发布包：`ScavGame/dist/ScavengerNotes/`，压缩包 `ScavGame/dist/ScavengerNotes-0.3.0.zip`；工坊上传见 `ScavGame/workshop/README.md`。
+发布包：`ScavGame/dist/ScavengerNotes/`，压缩包 `ScavGame/dist/ScavengerNotes-0.3.0.zip`；工坊上传见 `ScavGame/packaging/README.md`。
 
 重新构建/部署：
 

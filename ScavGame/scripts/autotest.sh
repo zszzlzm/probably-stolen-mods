@@ -16,7 +16,7 @@ if tasklist 2>/dev/null | grep -qi "Probably Stolen"; then
 fi
 
 echo "== build/deploy =="
-bash "$ROOT/mod/scripts/build.sh"
+bash "$ROOT/scripts/build.sh"
 
 rm -f "$REPORT" "$FLAG" "$MODS/autotest.flag"
 mkdir -p "$DATA"

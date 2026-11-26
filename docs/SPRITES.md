@@ -86,9 +86,9 @@
 ## 5. 工作流（机器与植物通用）
 
 1. **导出原版**：UnityPy 读 `resources.assets`，按名字或所在图集筛 sprite（`FilterPrinter/scripts/extract_vanilla_sprites.py`、
-   `ReductionFern/tools/extract_sprites.py`），存到 `refs/vanilla/`。
+   `ReductionFern/scripts/extract_sprites.py`），存到 `refs/vanilla/`。
 2. **建色板**：对导出的图统计颜色，定 8 色左右；只从里面取色。
-3. **参考图放大**：喂模型之前把原版贴图**最近邻放大 16×**（`ReductionFern/tools/make_refs.py`）；
+3. **参考图放大**：喂模型之前把原版贴图**最近邻放大 16×**（`ReductionFern/scripts/make_refs.py`）；
    直接给 16×16 原图，模型看到的是糊的。
 4. **模型定构图**：一次 4 个 seed，长边至少 1024 px（`tools/qwen_gen.py` 的 `ICON = 1024²`；512 以下细节会塌）；
    提示词写清「像素块约 N 像素、深色描边、无渐变、无文字、无投影、无背景」。
@@ -153,9 +153,9 @@
 
 | 检查 | 脚本 |
 |---|---|
-| 尺寸/留边/色数/描边/alpha（植物） | `ReductionFern/tools/check_sprites.py`（改 `SIZES` 表即可用于新尺寸） |
-| 与原版并排看 | `ReductionFern/tools/contact_sheet.py` |
-| 单张放大看 | `ReductionFern/tools/ascii_sprite.py`、`compare_sprite.py` |
+| 尺寸/留边/色数/描边/alpha（植物） | `ReductionFern/scripts/check_sprites.py`（改 `SIZES` 表即可用于新尺寸） |
+| 与原版并排看 | `ReductionFern/scripts/contact_sheet.py` |
+| 单张放大看 | `ReductionFern/scripts/ascii_sprite.py`、`compare_sprite.py` |
 | 占格是否 3×3 / 1×2 | 读图算每 16 px 格心的 alpha（`FilterPrinter/scripts/make_machine_sprite.py` 出的图，用 6 行 python 核对过 9/9 格） |
 
 **人眼**：一定要出 **1×** 的图。游戏里物品就是 1× 显示的，10× 好看不代表 1× 能认出来；

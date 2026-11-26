@@ -29,33 +29,33 @@ Source for eight mods for **Probably Stolen** 0.46D. Reusable under [Apache-2.0]
 
 ## 改代码的人：从这里开始
 
-- 构建、部署、打包的完整步骤见 **[BUILDING.md](BUILDING.md)**。
-- 要做物品/机器贴图，先读 **[SPRITES.md](SPRITES.md)**：三条画法路线、尺寸与占格规则、原版色板、
+- 构建、部署、打包的完整步骤见 **[docs/BUILDING.md](docs/BUILDING.md)**；目录与命名规则见 **[docs/LAYOUT.md](docs/LAYOUT.md)**。
+- 要做物品/机器贴图，先读 **[docs/SPRITES.md](docs/SPRITES.md)**：三条画法路线、尺寸与占格规则、原版色板、
   验收清单，以及还原蕨和滤芯打印机踩过的坑。
-- 每个模组都有一份 `RETROSPECTIVE.md`，写的是**为什么这么做**：踩过的坑、反编译出来的平台事实、
+- 每个模组都有一份 `docs/RETROSPECTIVE.md`，写的是**为什么这么做**：踩过的坑、反编译出来的平台事实、
   哪些数值有原版锚点。改之前建议先读，能省掉一整轮试错。
-- 根目录的 [`RETROSPECTIVE.md`](RETROSPECTIVE.md) 是跨模组的平台经验（Hook、存档信任、SteamCMD、封面流水线）。
+- [`docs/RETROSPECTIVE.md`](docs/RETROSPECTIVE.md) 是跨模组的平台经验（Hook、存档信任、SteamCMD、封面流水线）。
 
 ## 接手 / Contributing
 
 - Bug、数值调整、新想法都欢迎开 issue 或直接提 PR；单个模组的改动不需要碰其它模组。
 - 如果我不再维护，而你想长期接手某个模组（包括工坊条目），开个 issue 说一声——
   可以把仓库转成共同维护者，或者把该模组的开发指引整理给你。
-- 提交前请读 `BUILDING.md` 最后一节：不要提交 `build/`、`obj/`、`dist/`、`refs/`，
+- 提交前请读 `docs/BUILDING.md` 最后一节：不要提交 `build/`、`obj/`、`dist/`、`refs/`，
   以及任何反编译出来的游戏源码。
 
 ## 仓库结构
 
 ```
 <每个模组>/
-  src/             C# 源码
-  mod/             manifest.xml + 运行时资源（打包进工坊条目的东西）
-  scripts/         build.sh（构建+部署）、package.sh（打包+vdf）、make_cover.py（封面排版）
-  packaging/       README.txt（玩家说明）、UPLOAD.md（上传步骤）、workshop_description.txt
-  RETROSPECTIVE.md 这个模组的开发复盘
-tools/             本地工具（写模组信任记录）
-SPRITES.md         像素贴图手册（尺寸/占格/色板/画法/验收，跨模组）
-BUILDING.md        构建、部署、打包步骤
+  src/               C# 源码
+  mod/               manifest.xml + 运行时资源（打包进工坊条目的东西）
+  scripts/           build.sh（构建+部署）、package.sh（打包+vdf）、make_cover.py、gen_*.py
+  packaging/         README.txt（玩家说明）、UPLOAD.md（上传步骤）、workshop_description.txt
+  docs/              这个模组的 PLAN / HANDOFF / RETROSPECTIVE / ART_SPEC / spec
+  refs/ dist/        草稿与产物（不进 git）
+tools/               跨模组共用脚本（信任记录、打包 zip、生图入口、几何自检）
+docs/                项目级文档：BUILDING、SPRITES、RETROSPECTIVE、LAYOUT、AI_ART_LICENSE_AUDIT
 ```
 
 ## 许可证与免责

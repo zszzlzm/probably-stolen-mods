@@ -1,6 +1,6 @@
 """Hand-lay the 48x64 hydroponic growth portrait (``restoring_fern_p``).
 
-    python tools/draw_fern_p.py [--out refs/final/restoring_fern_p.png]
+    python scripts/draw_fern_p.py [--out refs/final/restoring_fern_p.png]
 
 This is not an inventory icon: the sprite is drawn behind/on the hydroponic module, so
 it has to match the vanilla growth sprites. Both vanilla ``_p`` sprites keep their

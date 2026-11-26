@@ -1,6 +1,6 @@
 """Second-stage pixelizer: majority downscale, restricted palette, 1px outline, speck cleanup.
 
-  python tools/pixelize2.py --src refs/gen/fern_s2.png --grid 16x32 --out refs/pix/fern.png
+  python scripts/pixelize2.py --src refs/gen/fern_s2.png --grid 16x32 --out refs/pix/fern.png
 """
 import argparse
 import pathlib

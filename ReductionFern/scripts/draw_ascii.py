@@ -1,6 +1,6 @@
 """Render a 16xN palette-letter art grid to a sprite (no outline; draw_ascii adds it).
 
-  python tools/draw_ascii.py refs/art/fern.txt refs/final/restoring_fern.png
+  python scripts/draw_ascii.py refs/art/fern.txt refs/final/restoring_fern.png
 """
 import pathlib
 import sys

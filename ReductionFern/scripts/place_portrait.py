@@ -1,6 +1,6 @@
 """Place a pixelized portrait sprite into the vanilla ``_p`` box and flatten its palette.
 
-    python tools/place_portrait.py refs/pix/plant_p_301.png refs/final/restoring_fern_p.png
+    python scripts/place_portrait.py refs/pix/plant_p_301.png refs/final/restoring_fern_p.png
 
 The vanilla growth sprites keep their artwork inside rows 11-46 and columns 1-46. The
 model render has a different aspect and sits lower, so the content is shifted into that

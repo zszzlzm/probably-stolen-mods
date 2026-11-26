@@ -1,6 +1,6 @@
 """Generate sprite candidates with the local Qwen-Image model.
 
-  python tools/gen_assets.py <asset> <seed> [--out DIR]
+  python scripts/gen_assets.py <asset> <seed> [--out DIR]
 
 Each asset is generated at an exact multiple of its logical pixel grid (32x per
 logical pixel, capped at 1024 px), so a nearest-neighbour downscale reproduces

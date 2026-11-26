@@ -1,6 +1,6 @@
 """Key the magenta background, snap the sprite to a 16px-grid size and quantize it to the vanilla palette.
 
-  python tools/pixelize.py --src refs/gen/fern_s2.png --grid 16x32 --out refs/pix/fern.png
+  python scripts/pixelize.py --src refs/gen/fern_s2.png --grid 16x32 --out refs/pix/fern.png
 """
 import argparse
 import pathlib

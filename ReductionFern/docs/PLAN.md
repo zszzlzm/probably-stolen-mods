@@ -315,7 +315,7 @@ new PlantTrait("production_reducing_agent", "Reducing Agent Production", 3)
 | `Textures/Items/restoring_fern_p.png` | 水培槽立绘 | 48 × 64 | 生长期 |
 
 - 加载方式：`Textures/Items/` 下 PNG 自动成为 `mod.Sprites["名字"]`（`ModLoader.cs:1717-1750`），三档工厂各自 `SetSpriteAndShapeFromMod(ModId, "restoring_fern_s" / "restoring_fern" / "restoring_fern_l")`（`GameItem.cs:386`）。
-- 画风：全部手排（`tools/draw_fern*.py`）+ 48×64 立绘用模型定形状再像素化；色板、留边、描边规则见 `ART_SPEC.md`。
+- 画风：全部手排（`scripts/draw_fern*.py`）+ 48×64 立绘用模型定形状再像素化；色板、留边、描边规则见 `ART_SPEC.md`。
 
 ### 6.2 `_p` 立绘怎么进原版图集
 

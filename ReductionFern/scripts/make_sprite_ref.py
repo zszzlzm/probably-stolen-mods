@@ -1,6 +1,6 @@
 """Turn a finished sprite into a magenta-backed, 16x reference image for the model.
 
-    python tools/make_sprite_ref.py refs/final/restoring_fern_l.png
+    python scripts/make_sprite_ref.py refs/final/restoring_fern_l.png
 
 The model needs references that look like pixel art, not like smoothed renders: the
 sprite is upscaled with nearest neighbour and padded onto flat magenta, the same way

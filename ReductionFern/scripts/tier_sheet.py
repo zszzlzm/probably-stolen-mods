@@ -1,6 +1,6 @@
 """Build the sprite sheet: all five fern sprites at 6x with a 1x thumbnail.
 
-    python tools/tier_sheet.py
+    python scripts/tier_sheet.py
 
 The three leaf tiers share one item id, so they are shown together to check that the
 weight of the drawing grows with the slot size; the seed and the hydroponic portrait

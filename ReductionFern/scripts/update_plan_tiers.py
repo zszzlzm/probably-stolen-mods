@@ -7,7 +7,7 @@ The frozen v0.3 numbers assumed one 40 g leaf. The art now ships three tiers (20
     value               = 0.45 cr/g   (40 g -> 18 cr, unchanged)
     production trait    = +5 ml per item, flat (vanilla convention)
 
-Run:  python tools/update_plan_tiers.py
+Run:  python scripts/update_plan_tiers.py
 """
 import pathlib
 
@@ -179,7 +179,7 @@ static void HarvestRestoringFern(PlantHarvestContext ctx)
 | `Textures/Items/restoring_fern_p.png` | 水培槽立绘 | 48 × 64 | 生长期 |
 
 - 加载方式：`Textures/Items/` 下 PNG 自动成为 `mod.Sprites["名字"]`（`ModLoader.cs:1717-1750`），三档工厂各自 `SetSpriteAndShapeFromMod(ModId, "restoring_fern_s" / "restoring_fern" / "restoring_fern_l")`（`GameItem.cs:386`）。
-- 画风：全部手排（`tools/draw_fern*.py`）+ 48×64 立绘用模型定形状再像素化；色板、留边、描边规则见 `ART_SPEC.md`。
+- 画风：全部手排（`scripts/draw_fern*.py`）+ 48×64 立绘用模型定形状再像素化；色板、留边、描边规则见 `ART_SPEC.md`。
 
 """
     text = text[:old61_start] + new61 + text[old61_end:]

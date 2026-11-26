@@ -1,6 +1,6 @@
 """Hand-lay the 16x32 standard frond (``restoring_fern``).
 
-    python tools/draw_fern.py [--out refs/final/restoring_fern.png]
+    python scripts/draw_fern.py [--out refs/final/restoring_fern.png]
 
 The large tier is a five frond bouquet; 16 px of width cannot hold that, so the
 standard tier is the same plant at the size where it reads: **one** frond crown with a

@@ -1,6 +1,6 @@
 """Hand-lay the 32x32 large frond (``restoring_fern_l``).
 
-    python tools/draw_fern_l.py [--out refs/final/restoring_fern_l.png]
+    python scripts/draw_fern_l.py [--out refs/final/restoring_fern_l.png]
 
 Composition: a **bouquet**, not five parallel stalks. All five fronds root inside a
 six pixel wide base (x 13-19) and fan outwards as they rise, so the clump is dense

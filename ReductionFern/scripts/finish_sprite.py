@@ -1,6 +1,6 @@
 """Finish a downscaled sprite: keep a 1px margin on every side, then add the 1px dark outline.
 
-  python tools/finish_sprite.py refs/pix/fern_203.png refs/final/restoring_fern.png
+  python scripts/finish_sprite.py refs/pix/fern_203.png refs/final/restoring_fern.png
 """
 import pathlib
 import sys

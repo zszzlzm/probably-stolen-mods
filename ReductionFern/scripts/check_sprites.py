@@ -1,6 +1,6 @@
 """Check generated sprites against ART_SPEC.md.
 
-  python tools/check_sprites.py refs/hand
+  python scripts/check_sprites.py refs/hand
 
 Checks: canvas size multiple of 16, 1px margin, alpha=255/0 body over a (0,0,0,3)
 filler, palette subset of the 9 spec colors, <= 8 colors, outline present.
