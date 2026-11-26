@@ -73,8 +73,14 @@ python LuxuryNomoreInjector/scripts/make_cover.py art.png out.png --zoom=1.1 --d
 `--zoom/--dx/--dy` 用来重新构图（裁一刀再缩回 1280×720），只有部分模组的脚本带这三个参数。
 
 封面统一版式：左侧压暗 + 中文标题 + 英文副标题 + 三条要点 + 卖点 + 页脚。
-关键图是用本地 ComfyUI + Qwen-Image 生成的，仓库里只保留排版后的成品
+早期封面（试剂可售以外）用的是本地 ComfyUI + Qwen-Image 2.1 生成的关键图，仓库里只保留排版后的成品
 （`mod/preview.png`），不含生图候选。
+
+> **硬规则（2026-11-26 起）：不要再用 Qwen-Image 2.1 出任何要发布的图。**
+> 该模型是 `qwen-research` 许可而非 Apache-2.0，许可证把 "Non-Commercial" 定义为
+> "for research or evaluation purposes only"（§1.i、§2.a），公开发布的工坊素材落在授权之外。
+> 详见 [AI_ART_LICENSE_AUDIT.md](AI_ART_LICENSE_AUDIT.md)；新封面照 `ChemResale/scripts/make_cover.py`
+> 的路子纯代码绘制，或手排像素，或换一个许可已核实并写进本文件的模型。
 
 ## 7. 提交前
 
