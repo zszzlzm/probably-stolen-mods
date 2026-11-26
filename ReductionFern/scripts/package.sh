@@ -95,11 +95,9 @@ echo "  files        $(find "$OUT" -type f | wc -l)"
 echo "== zip =="
 ZIP="$DIST/$PKG_NAME.zip"
 rm -f "$ZIP"
-# cygpath -m 给出 C:/... 形式，VDF 与 Compress-Archive 都不需要转义反斜杠
+# cygpath -m 给出 C:/... 形式，VDF 里的路径不需要转义反斜杠
 WIN_OUT="$(cygpath -m "$OUT" 2>/dev/null || echo "$OUT")"
-WIN_ZIP="$(cygpath -m "$ZIP" 2>/dev/null || echo "$ZIP")"
-powershell -NoProfile -NonInteractive -Command \
-	"Compress-Archive -Path '${WIN_OUT}' -DestinationPath '${WIN_ZIP}' -CompressionLevel Optimal -Force" >/dev/null
+bash "$ROOT/../tools/make_zip.sh" "$ZIP" "$OUT"
 [ -s "$ZIP" ] || fail "zip was not created"
 echo "  $ZIP ($(stat -c%s "$ZIP") bytes)"
 

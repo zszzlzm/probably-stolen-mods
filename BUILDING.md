@@ -120,3 +120,8 @@ SteamCMD 上传不受这个影响（它不走 shell 的 `http_proxy`），所以
 - PowerShell 下 `&&` 可用（7.x），但 `head`/`tail`/`uname`/`sed`/`awk` 都没有；要这些就走 git-bash。
 
 **判断方法**：`$PSVersionTable.PSVersion` 有输出 = 当前是 PowerShell；`uname -s` 输出 `MINGW64_NT-*` = 真 bash。
+- `Compress-Archive` 在 PowerShell 5.1 里是**自动加载模块**。如果父进程是 pwsh 7 / git-bash，
+  `PSModulePath` 会带上 PS7 的模块目录，5.1 于是报「command was found in the module
+  'Microsoft.PowerShell.Archive', but the module could not be loaded」。同一个脚本在普通
+  终端里却正常——所以打包脚本**不再用 PowerShell 压缩**，统一走 `tools/make_zip.sh`
+  （python `shutil.make_archive`，顶层目录名与旧 zip 一致）。
