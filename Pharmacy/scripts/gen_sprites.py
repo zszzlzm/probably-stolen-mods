@@ -72,6 +72,7 @@ def generate(key, seed=0, size=1024):
         PROMPTS[key],
         out=out,
         size=(size, size),
+        route="style",            # 参考图当风格提示；画布仍是 1024²
         steps=25,
         seed=seed,
         refs=refs_for(key),

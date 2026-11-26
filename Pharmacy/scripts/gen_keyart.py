@@ -1,7 +1,8 @@
 """生成创意工坊封面用的关键图（文档档位 1536×1024，后续由 make_cover.py 裁成 1280×720）。
 
-参数走 `tools/qwen_gen.py`：steps 25 / cfg 1.0 / 生图前卸载 27B / 参考图不进 T2I，
-并把每张图的 prompt、seed、尺寸、输出哈希记进 `refs/gen/manifest.json`。
+参数走 `tools/qwen_gen.py`：steps 25 / cfg 1.0 / 生图前卸载 27B / `route="style"`
+（原版图集只当风格提示，画布仍按 `COVER`），并把 route、prompt、seed、尺寸、输出哈希
+记进 `refs/gen/manifest.json`。
 """
 import pathlib
 import sys
@@ -43,6 +44,7 @@ def main():
         PROMPT,
         out=out,
         size=qwen_gen.COVER,
+        route="style",            # 原版医疗图集只当风格提示，画布仍是 1536×1024
         steps=qwen_gen.STEPS,
         seed=int(sys.argv[1]) if len(sys.argv) > 1 else 7,
         refs=refs,

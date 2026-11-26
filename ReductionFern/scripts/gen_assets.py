@@ -151,6 +151,7 @@ def main():
         prompt,
         out=out,
         size=(width, height),
+        route="style",            # 原版种植图（放大 16 倍）当风格提示；画布按本资产的网格算
         negative=(
             "blurry, 3d render, realistic photo, smooth gradient, airbrush, glow, bloom, neon, halo, "
             "perspective, multiple scattered objects, scenery, text, watermark, frame, border, "

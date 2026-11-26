@@ -73,6 +73,7 @@ def main():
         negative=NEG,
         out=out,
         size=qwen_gen.COVER,
+        route="style",            # 原版废料堆贴图只当风格提示，画布仍是 1536×1024
         steps=qwen_gen.STEPS,
         seed=seed,
         refs=refs,

@@ -97,8 +97,10 @@
 6. **量化**：所有像素落到色板（`pixify.py` 的 premultiplied 缩放 + 最近色量化；`place_portrait.py` 的压色板）。
 7. **对图**：出 1× / 3× / 10× 三档对比图，和原版同角色贴图并排（`contact_sheet.py`）。
 8. **记录**：`tools/qwen_gen.py` 会自动往 `refs/gen/manifest.json` 追加
-   `prompt / negative / steps / cfg / seed / 尺寸 / 模型 / 输出 sha256`；手搓的图也要按同样的字段补一条。
-   参考图**不要直接塞进 T2I**：要借参考就设 `QWEN_ENHANCE=1` 走 9B 增强器（见 `BUILDING.md` §6.1）。
+   `route / prompt / 增强后全文 / negative / steps / cfg / seed / 尺寸 / 模型 / 输出 sha256`；手搓的图也要按同样的字段补一条。
+   参考图必须配 `route`：给原版贴图当风格提示写 `route="style"`（画布仍按 `ICON`），
+   要改造现有贴图写 `route="edit"`（画布跟着参考图走，9B 增强器默认开）。见 `BUILDING.md` §6.1。
+   图标类**别开增强器**：它会把「9 个格心不透明、≤8 色、1px 描边」改写成散文，约束就丢了。
 
 ---
 

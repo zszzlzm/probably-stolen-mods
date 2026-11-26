@@ -38,6 +38,11 @@
 那个项目规定的是**怎么跑模型**（本地 ComfyUI `127.0.0.1:8188` + `qwen_img.py`、int8 三件套、画面里不让模型写字），
 而不是**产物能用到哪里**。
 
+同一发行包里的另外两个权重不会改变上述判断：文本编码器 `qwen3vl_8b_int8_convrot`（8.71 GB）与提示词增强器
+`qwen3.5_9b_qwen_image_2.1_pe_i2i`（8.82 GB）。它们和 DiT 同属 Qwen-Image 2.1 的发布物，这里按同一个
+`qwen-research` 标签保守处理——用增强器改写指令、或用编码器读参考图，都不能把产物挪出 §2.a 的范围。
+（这两份权重各自的模型卡没有单独核对过；要精确到文件级，得回 ModelScope 的仓库页看 LICENSE。）
+
 ## 2. 使用清单（逐模组）
 
 | 模组 | 工坊封面 | 游戏内贴图 | 产物来源 | 出处记录 |
@@ -88,14 +93,19 @@
 
 | 改动 | 文件 |
 |---|---|
-| 统一生图入口：尺寸档位、steps 25、强制卸载 27B、参考图不进 T2I、自动写 manifest | [tools/qwen_gen.py](tools/qwen_gen.py) |
+| 统一生图入口：尺寸档位、steps 25、强制卸载 27B、自动写 manifest | [tools/qwen_gen.py](tools/qwen_gen.py) |
+| 参考图三条路线（`t2i` 拒收参考图、`style` 当风格提示、`edit` 改造参考图），不再静默丢弃 | [tools/qwen_gen.py](tools/qwen_gen.py) |
+| 编辑图按文档 §13 细节 1 接 `TextEncodeQwenImage21` 的参考图尺寸 latent | [tools/qwen_edit.py](tools/qwen_edit.py) |
+| 9B 提示词增强器接进 `edit` 路线（默认开），改写全文进 manifest | [tools/qwen_gen.py](tools/qwen_gen.py) |
 | 等比裁切（3:2 关键图 → 16:9 封面不再被压扁） | [tools/img_fit.py](tools/img_fit.py)、7 个 `scripts/make_cover.py` |
-| 裁切几何自检 | [tools/test_img_fit.py](tools/test_img_fit.py)（8 条断言） |
-| 各模组生成脚本改用上面的入口 | `Pharmacy`/`PurifyingUncapped`/`FilterPrinter`/`ScavGame`/`GenerousBuyer` 的 `gen_keyart.py`、`gen_machine_art.py`、`gen_3d_edit.py`、`gen_sprites.py`、`ReductionFern/scripts/gen_assets.py` |
+| 裁切几何自检 / 生图接线自检 | [tools/test_img_fit.py](tools/test_img_fit.py)（8 条）、[tools/test_qwen_gen.py](tools/test_qwen_gen.py)（13 条） |
+| 各模组生成脚本改用上面的入口并声明 route | `Pharmacy`/`PurifyingUncapped`/`FilterPrinter`/`ScavGame`/`GenerousBuyer` 的 `gen_keyart.py`、`gen_machine_art.py`、`gen_3d_edit.py`、`gen_sprites.py`、`ReductionFern/scripts/gen_assets.py` |
 | 配方与坑写进文档 | `BUILDING.md` §6.1、`SPRITES.md` §5 |
 
 没修的（做不到，不是漏了）：
 
 - **已发布的图不重新生成**：重出一轮的收益不确定，等真要改封面时再按新配方来。
+- **增强器对已发布图零贡献**：2026-11-26 之前没有任何一次调用（`qwen_gen` 是那天才出现的），
+  所以上面 8 个模组的图不受影响；以后再出图才走 `edit` 路线的增强器。
 - **老图没有 manifest**：seed/prompt 当时没记，事后补不出真实值，只能标注「来源未知」。
 - **奢侈品不再注射器的生图命令已丢失**（`refs/gen/keyart_a..j.png` 还在，脚本没了），这一份的出处只能写"本地生成·参数未知"。

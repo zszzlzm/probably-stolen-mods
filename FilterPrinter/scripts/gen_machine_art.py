@@ -58,6 +58,7 @@ def main() -> int:
             PROMPT,
             out=out,
             size=(args.width, args.height),
+            route="style" if refs else "t2i",   # --refs 给了才走风格提示
             steps=args.steps,
             seed=seed,
             refs=refs or None,

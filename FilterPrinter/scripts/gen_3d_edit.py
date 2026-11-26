@@ -8,9 +8,10 @@ blown up 16x (so it keeps the game's modelling language - chamfers, recessed pan
 cast shadows). The point is to *see* alternatives quickly; the pixel sprite itself is
 still finished by hand afterwards.
 
-改图那条路在 `qwen_img` 里只有「9B 增强器先改写指令」一种（文档 §13），所以本脚本
-需要 `QWEN_ENHANCE=1`：先让增强器看着参考图写出改造指令，再把指令交给 T2I。
-不设这个变量时它只会生成一张纯 T2I 图，参考图会被忽略。
+走 `route="edit"`：画布由第一张参考图（放大 10 倍的现有贴图）决定，
+采样起点是 `TextEncodeQwenImage21` 的参考图尺寸 latent，不是自己新建的空 latent
+（文档 §13 细节 1，`nodes_qwen.py:138-140`）。提示词增强器默认开，
+用 `QWEN_ENHANCE=0` 可以只跑原始提示词做对比。
 """
 
 import argparse
@@ -62,12 +63,13 @@ def main() -> int:
         res = qwen_gen.generate(
             PROMPT,
             out=out,
-            size=qwen_gen.ICON,
+            route="edit",             # 改造现有贴图：画布跟着参考图走
+            resolution=1024,
             steps=args.steps,
             seed=seed,
             refs=refs,
             manifest=GEN / "manifest.json",
-            note="立体化概念图（增强器改写指令后 T2I）",
+            note="立体化概念图（增强器改写指令 → 编辑图）",
         )
         print(res.get("ok"), out, flush=True)
     return 0

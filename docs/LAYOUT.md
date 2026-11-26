@@ -22,7 +22,7 @@ Steam 工坊条目的标识和本机部署目录名，改名的收益远小于�
 |---|---|---|
 | `<模组名>/` ×8 | 每个模组一个，见 §3 | 跨模组共用脚本 |
 | `docs/` | 项目级文档：构建、贴图、复盘、合规审计、本文件 | 模组专属文档（放 `<模组名>/docs/`） |
-| `tools/` | 跨模组共用脚本（`trust_local.py`、`make_zip.sh`、`qwen_gen.py`…） | 某个模组专用的脚本 |
+| `tools/` | 跨模组共用脚本（`trust_local.py`、`make_zip.sh`、`qwen_gen.py`、`qwen_edit.py`…） | 某个模组专用的脚本 |
 | `research/` | 本机抓取的资料、日志、临时实验（gitignore） | 任何发布物 |
 | `tmp/` | 一次性草稿（gitignore） | 要长期留的东西 |
 | `probably_stolen_decomp/` | 游戏反编译源码（gitignore，**版权不属于我们，永远不提交**） | 任何被引用的代码 |
@@ -74,7 +74,7 @@ Steam 工坊条目的标识和本机部署目录名，改名的收益远小于�
 | 区域 | 规则 |
 |---|---|
 | `refs/` | 草稿：可以覆盖、可以清空、不进 git |
-| `refs/gen/manifest.json` | 每次生图由 `tools/qwen_gen.py` 追加：prompt / steps / seed / 尺寸 / 模型 / 输出 sha256 |
+| `refs/gen/manifest.json` | 每次生图由 `tools/qwen_gen.py` 追加：route / prompt / 增强后全文 / steps / seed / 尺寸 / 模型 / 输出 sha256 |
 | `mod/` | 定稿：只有发布需要的文件；改它 = 改发布物，改完要重跑 `tools/trust_local.py` |
 
 ## 6. 改动流程
@@ -82,5 +82,5 @@ Steam 工坊条目的标识和本机部署目录名，改名的收益远小于�
 1. **先改本文件**，再动文件系统；
 2. 用 `git mv` 搬（保留历史），不要 `mv` + 重新 `git add`；
 3. 同步更新：`README.md` 的模组表、`docs/BUILDING.md` 里的路径示例、各模组 `packaging/UPLOAD.md` 的命令；
-4. 验证：`dotnet build` 每个改过的模组 + `python tools/test_img_fit.py` + 全仓库 grep 一遍旧路径；
+4. 验证：`dotnet build` 每个改过的模组 + `python tools/test_img_fit.py` + `python tools/test_qwen_gen.py` + 全仓库 grep 一遍旧路径；
 5. 提交时**只 add 相关路径**，不要 `git add -A`（工作区里有实验文件时会一起扫进去）。

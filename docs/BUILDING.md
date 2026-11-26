@@ -93,8 +93,29 @@ python LuxuryNomoreInjector/scripts/make_cover.py art.png out.png --zoom=1.1 --d
 | 裁切 | 1280×720 由 [tools/img_fit.py](tools/img_fit.py) 的 `cover_fit` **等比裁切**产生 | `make_cover.py` 直接 `resize((1280,720))`，3:2 会被横向压扁 ~18% |
 | 采样 | `steps=25, cfg=1.0, euler/simple` | 一律 30 步，且没有档位依据 |
 | 显存 | **生成前卸载 27B**（wrapper 强制 `unload_27b=True`） | 5 个脚本传了 `False`，把文档的硬规则关掉了 |
-| 参考图 | 默认**不进 T2I**；要借用就设 `QWEN_ENHANCE=1`，先让 9B 增强器看图写指令（文档 §13） | 把原版素材当 `refs` 塞进空 latent 的 T2I，两边都不算 |
-| 出处 | 自动写 `refs/gen/manifest.json`：prompt/negative/steps/seed/尺寸/模型/输出 sha256 | 一张都没记，事后分不清哪些是模型产物 |
+| 参考图 | 必须显式声明 `route`：`"t2i"` 不收参考图、`"style"` 只当风格提示、`"edit"` 改造参考图（画布由参考图定） | 传了 `refs` 却不声明路线时被静默丢弃，而提示词里还写着「与参考图里的…同一种美术风格」——模型根本没看见那张图 |
+| 出处 | 自动写 `refs/gen/manifest.json`：route/prompt/增强后全文/negative/steps/seed/尺寸/模型/输出 sha256 | 一张都没记，事后分不清哪些是模型产物 |
+
+**三条路线**（`qwen_gen.generate(route=...)`）：
+
+| route | 用途 | 参考图 | 画布 | 增强器 |
+|---|---|---|---|---|
+| `"t2i"` | 从零画（场景、图标） | 给了就报错 | `size` | 不适用 |
+| `"style"` | 参考图只当风格提示 | 1–4 张进编码器 | `size` | 默认关，`QWEN_ENHANCE=1` 开 |
+| `"edit"` | 改造参考图（立体化、换场景） | 1–4 张，第一张定画布 | 参考图尺寸 | **默认开**，`QWEN_ENHANCE=0` 关 |
+
+`"style"` 是官方不保证的用法：`nodes_qwen.py:138-140` 说画布尺寸与参考图不一致会让「编辑」位移，
+只适合当风格提示；要严格保持构图必须走 `"edit"`，它把 KSampler 的 latent 接到
+`TextEncodeQwenImage21` 的第 3 个输出（[tools/qwen_edit.py](tools/qwen_edit.py)），不是自建空 latent。
+
+**提示词增强器**：官方 9B 权重 `qwen3.5_9b_qwen_image_2.1_pe_i2i`（8.82 GB），系统提示词
+`04_工具/prompts/edit_enhancer_system.txt`（10,571 字符），只吃 `refs[0]` 这一张图。它是**编辑**
+增强器：会把一句糙指令扩写成三百字、逐条「保留 X 不变」的改造指令。对像素图那套硬约束
+（9 个格心不透明、≤8 色、1px 描边）反而是稀释，所以图标继续手写提示词，只让 `"edit"` 路线用。
+2026-11-26 之前它一次都没被调用过——已上架的图全部是手写提示词直出。
+
+**画布**：`resolution` 是「面积约等于 resolution²」（`nodes_qwen.py:156-158`）。要 1536×1024
+得填 1248（`qwen_edit.resolution_for(1536, 1024)`），填 1536 会得到 1888×1248。
 
 用法（在模组目录里）：
 
@@ -102,6 +123,7 @@ python LuxuryNomoreInjector/scripts/make_cover.py art.png out.png --zoom=1.1 --d
 python scripts/gen_keyart.py 7        # 内部调 qwen_gen.generate(...) → refs/gen/keyart.png (1536×1024)
 python scripts/make_cover.py          # cover_fit 裁成 1280×720 + 排字 → mod/preview.png
 python tools/test_img_fit.py          # 裁切几何自检（改 img_fit 后必跑）
+python tools/test_qwen_gen.py         # 生图接线自检：编辑图 latent、画布取整、route 守卫
 ```
 
 Turbo LoRA 那条路 `qwen_img.py` 没有包装，仍用 `ScavGame/scripts/comfy_gen.py`；
