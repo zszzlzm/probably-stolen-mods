@@ -62,6 +62,20 @@ bash LuxuryNomoreInjector/scripts/package.sh
 仓库里的 vdf 仍写着 `visibility 2`，直接打包上传会把公开条目改回隐藏——
 这种情况要 `VIS_OVERRIDE=0` 打包，或者手动改 vdf 里的数字。
 
+### 4.1 模组设置项用什么控件
+
+`ModHelper.GetConfig(id).Define(...)` 的控件由类型和参数决定（`ModConfigWindow.cs:99-117`）：
+
+| 声明 | 控件 | 看得见当前值吗 |
+|---|---|---|
+| `bool` | 开关 | 是 |
+| `int` + `min`/`max` | **滑条**（`AddSlider`） | **否**——只有一条滑轨，标签只在开窗时生成一次 |
+| `int` / `float` 不带范围 | 输入框 | 是（可编辑） |
+| `string` + `choices` | **下拉框**（`AddDropdown`） | 是，永远显示当前选中项 |
+
+所以离散档位（1–10 倍、几档耗电）一律用 `string` + `choices`；连续数值用输入框。
+滤芯打印机的 `print_power` 当年用了滑条，玩家反馈「拖完不知道设了多少」，就是这张表的第一行。
+
 ## 5. 本地信任（改完代码不出现「未审核」）
 
 游戏会把每个模组的指纹（manifest 哈希 + DLL 哈希 + 整包文件哈希）记在存档里。

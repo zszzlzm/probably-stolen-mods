@@ -1,4 +1,4 @@
-更好的奥克莫吸注射器 / Luxury Nomore Injector  v1.1.0
+更好的奥克莫吸注射器 / Luxury Nomore Injector  v1.1.1
 ============================================================
 
 【关于这个模组】
@@ -32,10 +32,10 @@
 所以 1.1.0 把默认降到 4 倍，同时把倍率开放成设置：想要原来那个价位，调到 7 倍即可。
 
 【安装】
-1. 把压缩包里的整个 LuxuryNomoreInjector-v1.1.0 文件夹放进：
+1. 把压缩包里的整个 LuxuryNomoreInjector-v1.1.1 文件夹放进：
        <游戏目录>/Mods/
    （Steam 版一般是 ...\steamapps\common\Probably Stolen\Mods\，
-     放好后路径形如 Mods\LuxuryNomoreInjector-v1.1.0\manifest.xml）
+     放好后路径形如 Mods\LuxuryNomoreInjector-v1.1.1\manifest.xml）
 2. 启动游戏，打开「模组」菜单，找到「奢侈品奥克莫吸注射器 / Luxury Nomore Injector」，
    点「审核并启用」
 3. 启用后可能需要重启游戏一次

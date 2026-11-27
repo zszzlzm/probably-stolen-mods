@@ -1,14 +1,14 @@
 # 工坊上传步骤（奢侈品奥克莫吸注射器）
 
 > **当前状态（2026-11-27 11:00）**：条目 id **3844271622**，**已公开**（`visibility 0`，Steam API 实查），
-> 最新上传 v1.1.0（加价倍数改成设置）。
+> 最新上传 v1.1.1（加价倍数改成**下拉框**：滑条看不到当前挡位）。
 > **注意**：仓库里的 `.vdf` 仍是首次发布时写的 `visibility 2`，`package.sh` 会沿用旧值——
 > 直接打包上传会把已经公开的条目改回隐藏。**每次打包都要带 `VIS_OVERRIDE=0`**。
 
 ## 1. 打包
 
 ```bash
-VIS_OVERRIDE=0 CHANGENOTE="v1.1.0：加价倍数改成设置（1–10 倍，默认 4 倍）。" bash scripts/package.sh
+VIS_OVERRIDE=0 CHANGENOTE="v1.1.1：加价倍数改成下拉框（滑条看不到当前挡位）。" bash scripts/package.sh
 ```
 
 产物在 `dist/`：

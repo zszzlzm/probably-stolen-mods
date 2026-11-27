@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Reflection;
 using HarmonyLib;
 
@@ -30,7 +31,7 @@ namespace LuxuryNomoreInjectorMod
 
         internal static ModLog Log { get; private set; }
 
-        private static ConfigEntry<int> valueMultiplier;
+        private static ConfigEntry<string> valueMultiplier;   // "1".."10"：下拉框的挡位
         private static Harmony harmony;
         private static bool loggedOnce;
 
@@ -39,7 +40,13 @@ namespace LuxuryNomoreInjectorMod
         {
             get
             {
-                int value = valueMultiplier != null ? valueMultiplier.Value : Balance.DefaultMultiplier;
+                int value = Balance.DefaultMultiplier;
+                int parsed;
+                if (valueMultiplier != null
+                    && int.TryParse(valueMultiplier.Value, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed))
+                {
+                    value = parsed;
+                }
                 if (value < Balance.MinMultiplier)
                 {
                     return Balance.MinMultiplier;
@@ -89,13 +96,14 @@ namespace LuxuryNomoreInjectorMod
         {
             try
             {
+                // 字符串 + Choices → 游戏画的是下拉框，永远显示当前挡位；
+                // 数字 + min/max 会变成没有读数的滑条（ModConfigWindow.cs:103-107）。
                 valueMultiplier = ModHelper.GetConfig(manifest.ID).Define(
                     Balance.ConfigKey,
-                    Balance.DefaultMultiplier,
+                    Balance.DefaultMultiplier.ToString(CultureInfo.InvariantCulture),
                     Balance.ConfigSection,
-                    () => Text.Get("config.multiplier", ValueMultiplier),
-                    Balance.MinMultiplier,
-                    Balance.MaxMultiplier,
+                    () => Text.Get("config.multiplier", ValueMultiplier, Balance.FallbackBaseValue * ValueMultiplier),
+                    Balance.Choices,
                     tooltip: () => Text.Get("config.multiplier_help"));
             }
             catch (Exception e)
