@@ -14,10 +14,10 @@
   · 孢子与叶片都没有违禁标签，卖店、投料、上柜台都不招麻烦
 
 【安装】
-1. 把压缩包里的整个 ReductionFern-v0.1.1 文件夹放进：
+1. 把压缩包里的整个 ReductionFern-v0.1.2 文件夹放进：
        <游戏目录>/Mods/
    （Steam 版一般是 ...\steamapps\common\Probably Stolen\Mods\，
-     放好后路径形如 Mods\ReductionFern-v0.1.1\manifest.xml）
+     放好后路径形如 Mods\ReductionFern-v0.1.2\manifest.xml）
 2. 启动游戏，打开「模组」菜单，找到「还原蕨 / Reduction Fern」，点「审核并启用」
 3. 启用后可能需要重启游戏一次
 4. 进游戏 → 店铺电脑 → 网络界面 → 解锁「还原蕨孢子」（450 信用点，无前置）

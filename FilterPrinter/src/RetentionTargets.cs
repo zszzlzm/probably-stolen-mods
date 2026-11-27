@@ -17,6 +17,9 @@ namespace FilterPrinterMod
     {
         internal const string AllId = "all";
 
+        /// <summary>普通水滤芯：不按物质拦截，交给原版按颗粒大小处理。</summary>
+        internal const string PlainId = "plain";
+
         private static readonly HashSet<string> Contaminants = new HashSet<string>
         {
             "microbe",
@@ -57,12 +60,13 @@ namespace FilterPrinterMod
             "livestock_immunity", "wine_extract", "nomore",
         };
 
-        internal static readonly string[] CartridgeTargetIds = Combine(ContaminantIds, DrugIds, NutrientIds, ChemicalIds);
+        internal static readonly string[] CartridgeTargetIds = Combine(new[] { PlainId }, ContaminantIds, DrugIds, NutrientIds, ChemicalIds);
 
         internal static List<RetentionCategory> BuildCategories()
         {
             List<RetentionCategory> result = new List<RetentionCategory>();
             HashSet<string> known = new HashSet<string>();
+            AddCategory(result, known, "tab.basic", new[] { PlainId });
             AddCategory(result, known, "tab.contaminants", ContaminantIds);
             AddCategory(result, known, "tab.drugs", DrugIds);
             AddCategory(result, known, "tab.nutrients", NutrientIds);
@@ -85,7 +89,7 @@ namespace FilterPrinterMod
             RetentionCategory category = new RetentionCategory(captionKey);
             foreach (string id in ids)
             {
-                if (id != AllId && !Liquid.LiquidDict.ContainsKey(id))
+                if (id != AllId && id != PlainId && !Liquid.LiquidDict.ContainsKey(id))
                 {
                     continue;
                 }
@@ -106,6 +110,10 @@ namespace FilterPrinterMod
             {
                 return false;
             }
+            if (target == PlainId)
+            {
+                return false;      // 不走物质拦截，由原版按颗粒大小处理
+            }
             if (target == AllId)
             {
                 return Contaminants.Contains(liquidId);
@@ -118,6 +126,10 @@ namespace FilterPrinterMod
             if (liquidId == AllId)
             {
                 return Text.Get("target.all");
+            }
+            if (liquidId == PlainId)
+            {
+                return Text.Get("target.plain");
             }
             Liquid liquid;
             if (!string.IsNullOrEmpty(liquidId) && Liquid.LiquidDict.TryGetValue(liquidId, out liquid) && liquid != null && !string.IsNullOrEmpty(liquid.displayName))

@@ -2,12 +2,12 @@ mod.name,"还原蕨"
 plant.name,"还原蕨"
 
 item.seed.name,"还原蕨孢子"
-item.seed.desc,"一小撮覆着细绒的孢子。能在贫水的水培槽里扎根，成熟后叶脉里会积起一层淡青色的还原剂。"
-item.seed.flavor,"它不挑水，只挑电。"
+item.seed.desc,"一小撮覆着细绒的孢子。能在贫水的水培槽里扎根，成熟后叶脉里会浮起一层淡青色的还原剂。"
+item.seed.flavor,"它经过基因编辑，可以通过电流驱动矿物质和水生产还原剂。"
 
 item.fronds.name,"还原蕨叶"
-item.fronds.desc,"一把泛着青灰的蕨叶。揉碎后会渗出还原剂，是奥克莫吸合成里少见的合法来源。"
-item.fronds.flavor,"它不挑水，只挑电。"
+item.fronds.desc,"一把浮着淡青色的蕨叶。揉碎后会渗出还原剂，是奥克莫吸合成的合法来源。"
+item.fronds.flavor,"它经过基因编辑，可以通过电流驱动矿物质和水生产还原剂。"
 
 debug.spawn,"生成还原蕨孢子"
 

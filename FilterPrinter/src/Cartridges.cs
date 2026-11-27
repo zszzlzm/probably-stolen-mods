@@ -32,16 +32,26 @@ namespace FilterPrinterMod
         {
             GameItem item = ItemDirectory.CreateEmptyItem(ItemId(target));
             item.SetSpriteAndShape("Items/items_amenities", "water_filter");
-            string targetName = RetentionTargets.DisplayName(target);
-            item.name = Text.Get("cartridge.name", targetName);
-            item.shortDescription = Text.Get("cartridge.desc", targetName);
-            item.flavorText = Text.Get("cartridge.flavor");
+            bool plain = target == RetentionTargets.PlainId;
+            if (plain)
+            {
+                item.name = Text.Get("cartridge.plain.name");
+                item.shortDescription = Text.Get("cartridge.plain.desc");
+                item.flavorText = Text.Get("cartridge.plain.flavor");
+            }
+            else
+            {
+                string targetName = RetentionTargets.DisplayName(target);
+                item.name = Text.Get("cartridge.name", targetName);
+                item.shortDescription = Text.Get("cartridge.desc", targetName);
+                item.flavorText = Text.Get("cartridge.flavor");
+            }
             item.SetGameItemType("HOUSEHOLD_GOOD");
             item.SetGameItemType("FILTER");
             item.SetGameItemType("WATER_PURIFICATION_SUPPLY");
             item.ModifyTag(FilterSizeTag, (TagState state) =>
             {
-                state.Enable().SetInt(Balance.CartridgeFilterSize);
+                state.Enable().SetInt(plain ? Balance.PlainFilterSize : Balance.CartridgeFilterSize);
             });
             item.EnableTag("WATER_FILTER");
             item.EnableTag(Tag);

@@ -3,7 +3,7 @@
   <ID>harness.reduction-fern</ID>
   <Name>还原蕨 / Reduction Fern</Name>
   <Author>harness</Author>
-  <ModVersion>0.1.1</ModVersion>
+  <ModVersion>0.1.2</ModVersion>
   <Description>增加一种能种出还原剂的合法作物：孢子种进普通水培槽，长成后收获还原蕨叶，搅碎即可得到还原剂——原本只能从化学用品（管制）里拆出来的试剂。
 Adds a legal crop that yields reducing agent: plant the spores in any hydroponic tray, harvest the fronds, and blend them down.</Description>
   <GameVersions><Version>0.46D</Version></GameVersions>

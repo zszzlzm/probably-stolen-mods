@@ -12,6 +12,11 @@ namespace FilterPrinterMod
             {
                 return true;
             }
+            // 普通水滤芯不按物质拦截：让原版 HandleFilter 用 FILTER_SIZE_TAG 按颗粒大小处理
+            if (Cartridges.TargetOf(filter) == RetentionTargets.PlainId)
+            {
+                return true;
+            }
             __result = Filter(identifier, amount, filter);
             return false;
         }

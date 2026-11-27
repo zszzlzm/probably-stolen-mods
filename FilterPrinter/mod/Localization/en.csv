@@ -39,3 +39,8 @@ printer.msg.blackout,"The store is in a blackout, so the current converter canno
 printer.msg.credits,"Not enough credits: this print costs {0} credits."
 printer.msg.hypertech,"The hypertech cell only outputs {0}, this print needs {1}."
 printer.msg.no_power_generic,"This power source cannot provide {0} energy."
+cartridge.plain.name,"Water Filter"
+cartridge.plain.desc,"Traps by particle size: anything coarser than the pores stays behind, while dissolved substances and microbes pass through. This is the filter a vanilla purifier uses."
+cartridge.plain.flavor,"The printer's default run: no retention pattern, just pores."
+tab.basic,"Basic"
+target.plain,"Water Filter"
