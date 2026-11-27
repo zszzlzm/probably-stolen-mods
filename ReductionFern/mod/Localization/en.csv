@@ -2,12 +2,12 @@ mod.name,"Reduction Fern"
 plant.name,"Reduction Fern"
 
 item.seed.name,"Reduction Fern Spores"
-item.seed.desc,"A pinch of downy spores. They take root in a water-poor hydroponic tray, and the mature fronds store a pale teal reducing agent in their veins."
-item.seed.flavor,"It doesn't mind the water. It minds the power."
+item.seed.desc,"A pinch of downy spores. They take root in a water-poor hydroponic tray, and the mature fronds grow a pale teal layer of reducing agent in their veins."
+item.seed.flavor,"Gene-edited: current drives it to turn minerals and water into reducing agent."
 
 item.fronds.name,"Reduction Fern Fronds"
-item.fronds.desc,"A handful of grey-green fronds. Crushed, they seep reducing agent - one of the few legal sources for Nomore synthesis."
-item.fronds.flavor,"It doesn't mind the water. It minds the power."
+item.fronds.desc,"A handful of fronds tinged pale teal. Crushed, they seep reducing agent - a legal source for Nomore synthesis."
+item.fronds.flavor,"Gene-edited: current drives it to turn minerals and water into reducing agent."
 
 debug.spawn,"Spawn Reduction Fern Spores"
 
