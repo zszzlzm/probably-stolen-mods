@@ -17,6 +17,12 @@ if ! cp "$ROOT/build/LuxuryNomoreInjectorMod.dll" "$MODS/" 2>/dev/null; then
 	exit 1
 fi
 cp "$ROOT/mod/manifest.xml" "$MODS/"
+# 设置项的名字/说明走 Localization/*.csv（1.1.0 起才有）。
+if [ -d "$ROOT/mod/Localization" ]; then
+	mkdir -p "$MODS/Localization"
+	rm -f "$MODS/Localization/"*.csv
+	cp "$ROOT/mod/Localization/"*.csv "$MODS/Localization/"
+fi
 # 游戏内模组列表的缩略图读的是 Mods/<文件夹>/preview.png。
 # 注意：新增文件会改变 folderHash，跑完要重签本地信任（见文末提示）。
 if [ -f "$ROOT/mod/preview.png" ]; then

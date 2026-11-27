@@ -1,0 +1,2 @@
+config.multiplier,"Price multiplier: x{0}"
+config.multiplier_help,"Multiplies the injector's vanilla base value (50): 1x = no markup (50), 4x = 200 (default), 10x = 500. Only injectors created after this change are affected - items already in a save keep the price they were made with."

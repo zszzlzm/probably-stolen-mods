@@ -2,50 +2,44 @@
 
 [b]一支奥克莫吸注射器要走完整条化工链，最后只卖 50 信用点——这不合理。[/b]
 
-做一支要经过：梦帽菇 → 菇糊 → 45°C 萃取出梦帽菇萃取液 → 除杂、过滤 → 按 1:1 配还原剂、加脂合剂催化、全程 45–55°C → 得到奥克莫吸 → 再过滤、蒸发 → 每 4 毫升才成型一支。
+梦帽菇 → 菇糊 → 45°C 萃取 → 除杂、过滤 → 按 1:1 配还原剂、加脂合剂催化、全程 45–55°C → 再过滤、蒸发 → 每 4 毫升才成型一支。
 
-更要命的是它在设定里的位置：奥克西莫合法、好用，也危险——处方开得太随便，原版里甚至有「奥克西莫成瘾情况日益严重」的站内新闻事件，各诊所的成瘾与过量病例一起激增。奥克莫吸正是它的[b]非成瘾替代品[/b]：有效镇痛，没有依赖，也没有过量风险。
-结果这样一支优秀的原型药，只需要：50。
-
-而这支药在设定里是李北文拿命在推的原型药：他被大药企栽赃成「持械的卡特尔制毒师」，人头挂着 400 信用点悬赏，卖的就是它。
+它在设定里是奥克西莫的[b]非成瘾替代品[/b]：有效镇痛、没有依赖、没有过量风险；也是李北文拿命在推的原型药——他被大药企栽赃成制毒师，人头挂着 400 信用点悬赏，卖的就是它。而这样一支药，原版定价 50，比原料还便宜。
 
 [h2]它做了什么[/h2]
 [list]
 [*]给「奥克莫吸注射器」（`pink_alt_injector`）加上[b]奢侈品[/b]类型，和赛纳普斯注射器同档。
-[*]基础价值 [b]50 → 350[/b]，与赛纳普斯注射器一致。
+[*]基础价值按倍数加价：[b]50 × 倍数[/b]，默认 4 倍＝200。
+[*]倍数是个[b]设置[/b]（模组设置里 1 到 10 倍）：想要 7 倍＝350 的老价位，或者更轻的 2 倍＝100，自己调。
 [*]买奢侈品的客人与收藏家会开始求购它；展示柜的奢侈品统计也把它算进去。
 [*]配方、纯度、药效、剂量、合法性一律不动，只改类型和价格。
 [/list]
 
-[h2]为什么是 350[/h2]
+[h2]为什么加价、为什么默认 4 倍[/h2]
 [list]
-[*]它的工序比大多数成品药都长：梦帽菇萃取链 + 还原剂还原 + 脂合剂催化，还要控温、除杂、蒸发。
-[*]它是奥克西莫的非成瘾替代品，而奥克西莫的成瘾与过量在设定里已经泛滥；这种替代品如果没有任何溢价，等于在惩罚玩家所以没人愿意做它。
-[*]50 信用点连原料都盖不住；350 是原版已有的价格锚点（赛纳普斯注射器），不是凭空造数。
-[*]李北文剧情里「全部买下打五折」：原版 8 支打包才 400，和他人头悬赏一样多，玩家没理由买；改后 8 支 2800、五折 1400，才像一笔「通缉犯靠卖样品筹钱」的交易。
+[*]它的工序比大多数成品药都长，50 信用点连原料都盖不住，玩家算一遍就转身去做梦尘了。
+[*]350（7 倍）是原版已有的价格锚点（赛纳普斯注射器），不是凭空造数。
+[*]但 1.0.x 固定 7 倍，配上纯度加成后一支上等针管能卖到近 700，玩家反馈偏重，所以 1.1.0 默认降到 4 倍，并把倍率开放成设置。
 [/list]
 
 [h2]对玩家来说也是亏本买卖[/h2]
 拿同样的 100 ml 梦帽菇萃取液算一遍：
 [list]
-[*][b]做梦尘[/b]：有效成分 100 ml，99% 纯度收入约 3,636 信用点，加 15% 零售加价约 3,939；梦尘是[b]中级违禁品[/b]。
-[*][b]做奥克莫吸[/b]：1 ml 萃取液 + 1 ml 还原剂只出 0.6 ml，100 ml 萃取液只剩 60 ml；每支还要 4 ml，等于同样原料只出 15 支，99% 纯度收入约 1,788，加价后约 2,045。
-[*]（90% / 80% / 60% / 45% 纯度下同样成立：梦尘 3,167 / 2,688 / 2,583 / 1,889，奥克莫吸 1,533 / 1,313 / 1,250 / 933。）
-[*]而且奥克莫吸还要额外吃掉 100 ml 还原剂：收益更低、成本更高，还是两者里唯一不违法的那个，结果却是最便宜的那个。
+[*][b]做梦尘[/b]：99% 纯度收入约 3,636 信用点，加 15% 零售加价约 3,939；梦尘是[b]中级违禁品[/b]。
+[*][b]做奥克莫吸[/b]：1 ml 萃取液 + 1 ml 还原剂只出 0.6 ml，100 ml 只剩 60 ml；每支 4 ml，等于只出 15 支，99% 纯度约 1,788，加价后约 2,045，还要多烧 100 ml 还原剂。
+[*]收益更低、成本更高，还是两者里唯一不违法的那个——结果它最便宜。
 [/list]
-所以 50 信用点不是「便宜」，是「没人做」：玩家只要算一遍，就该转身去做梦尘。
 
 [h2]注意[/h2]
 [list]
-[*]老存档里已经存在的注射器仍是原价——价格存在物品实例上，只有新生成或新合成的才是 350。
-[*]只动这一件物品，其他注射器、其他药品原样。
+[*]老存档里已经存在的注射器仍是原价：价格存在物品实例上，只有新生成或新合成的才按当前倍数计价。
+[*]改倍数只影响之后新生成的针管，已经造出来的不会跟着变。
 [/list]
 
 [h2]兼容性[/h2]
 [list]
 [*]游戏版本 0.46D。一个 Harmony 补丁（`MedsItemDirectory.Injector`），只改这一件物品的返回值。
-[*]不声明任何能力（files / network / steam）；不新增物品、不改配方表、不碰存档结构。
-[*]和药剂类、医疗类 mod 的冲突概率很低；如果别的 mod 也改这件物品的价格，看谁的补丁后执行。
+[*]不声明任何能力；不新增物品、不改配方表、不碰存档结构。
 [/list]
 
 [h2]安装[/h2]
@@ -57,54 +51,50 @@
 [h2]反馈[/h2]
 出问题时请附上 Player.log：%LOCALAPPDATA%Low\Questing Goose Studio\Probably Stolen\Player.log
 
---- English ---
+---
 
 [h1]Luxury Nomore Injector[/h1]
 
-[b]A Nomore Injector takes half a chemistry chain to make, and the game sells it for 50 credits. That is not a fair price.[/b]
+[b]A Nomore Injector takes half a chemistry chain to make, and the game sells it for 50 credits.[/b]
 
-Spore cap → mash → 45°C extraction into dream-cap extract → filter out the impurities → blend 1:1 with reducing agent and catalyse with lipid binder at 45–55°C → Nomore → filter and evaporate → 4 ml per finished injector.
+Spore cap → mash → 45°C extraction → filter → blend 1:1 with reducing agent and catalyse with lipid binder at 45–55°C → filter and evaporate → 4 ml per finished injector.
 
-Worse, look at what it is in the setting: Oxymore is legal, effective and dangerous — prescribed far too freely, so freely that the game itself runs an "Oxymore Addiction On The Rise" headline event while clinics drown in addiction and overdose cases. Nomore is its [b]non-addictive replacement[/b]: real analgesia, no dependence, no overdose risk.
-And yet this excellent prototype is priced at just 50.
-
-In the fiction this is the prototype Li Beiwen is pushing at the cost of his life: framed by a pharma giant as an armed cartel chemist, with a 400-credit bounty on his head, and this is what he sells.
+In the fiction it is the [b]non-addictive replacement[/b] for Oxymore: real analgesia, no dependence, no overdose risk — and the prototype Li Beiwen is pushing at the cost of his life, framed as a cartel chemist with a 400-credit bounty on his head. It costs 50.
 
 [h2]What it does[/h2]
 [list]
 [*]Adds the [b]Luxury Item[/b] type to the Nomore Injector (`pink_alt_injector`), the same tier as the Synaprest Injector.
-[*]Raises its base value from [b]50 to 350[/b], matching the Synaprest Injector.
-[*]Luxury buyers and collectors start asking for it, and shop showcases count it as a luxury item.
+[*]Applies a markup over the base value: [b]50 x multiplier[/b], 4x by default (200).
+[*]The multiplier is a [b]mod setting[/b] (1x to 10x): pick the old 7x = 350, or a lighter 2x = 100.
+[*]Luxury buyers and collectors start asking for it, and showcases count it as a luxury item.
 [*]Recipe, purity, effect, dosage and legality are untouched — only the type and the price change.
 [/list]
 
-[h2]Why 350[/h2]
+[h2]Why a markup, and why 4x by default[/h2]
 [list]
-[*]The item costs more work than most finished medicines: a full dream-cap extraction chain plus reducing agent and a lipid-binder catalysis step.
-[*]It is the non-addictive answer to Oxymore, a drug whose addiction and overdose problem runs through the whole station; with no price premium on it, the game is punishing the player, and nobody bothers to make it.
-[*]At 50 it does not even cover the feedstock. 350 is the price already used by the Synaprest Injector, so nothing new is invented.
-[*]Li Beiwen offers his stock "all of it, half price". Vanilla: eight injectors for 400, exactly his bounty, so there is no reason to buy. At 350: 2800, or 1400 at half price — a trade that reads like a wanted man funding his research.
+[*]It costs more work than most finished medicines; at 50 credits it does not even cover the feedstock, so anyone who does the math makes Dream Dust instead.
+[*]350 (7x) is the price already used by the Synaprest Injector, so nothing new is invented.
+[*]But 1.0.x was a flat 7x, which with the purity bonus pushed a top-grade injector towards 700 credits; players said that was too much, so 1.1.0 defaults to 4x and exposes the multiplier as a setting.
 [/list]
 
 [h2]It is a loss for the player too[/h2]
+Take 100 ml of Dream Cap Extract:
 [list]
-[*]Take the same 100 ml of Dream Cap Extract. [b]Dream Dust[/b]: 100 ml of product, about 3,636 credits at 99% purity (3,939 with the 15% retail markup) — and it is [b]mid-tier contraband[/b].
-[*][b]Nomore[/b]: 1 ml extract + 1 ml reducing agent yields only 0.6 ml, so 100 ml of extract becomes 60 ml; four millilitres per injector means 15 injectors, about 1,788 credits at 99% purity (2,045 with markup) — plus 100 ml of reducing agent burned.
-[*]Same pattern at every purity (90 / 80 / 60 / 45%: Dream Dust 3,167 / 2,688 / 2,583 / 1,889 versus Nomore 1,533 / 1,313 / 1,250 / 933).
-[*]Lower revenue, higher input cost, and it is the one that is not even contraband — yet it is the cheaper of the two. At 50 credits this is not a bargain, it is dead content: anyone who does the math goes and makes Dream Dust instead.
+[*][b]Dream Dust[/b]: about 3,636 credits at 99% purity (3,939 with the 15% markup) — and it is [b]mid-tier contraband[/b].
+[*][b]Nomore[/b]: 1 ml extract + 1 ml reducing agent yields 0.6 ml, so 100 ml becomes 60 ml; 4 ml per injector means 15 injectors, about 1,788 credits at 99% purity (2,045 with markup), plus 100 ml of reducing agent burned.
+[*]Lower revenue, higher input cost, and it is the one that is not even contraband — yet it is the cheaper of the two.
 [/list]
 
 [h2]Notes[/h2]
 [list]
-[*]Injectors already sitting in an old save keep the old price: the value is stored on the item instance, so only newly created or newly crafted ones cost 350.
-[*]Only this one item is changed; every other injector and medicine is untouched.
+[*]Injectors already in an old save keep the old price: the value is stored on the item instance, so only newly created ones use the current multiplier.
+[*]Changing the multiplier only affects injectors created afterwards.
 [/list]
 
 [h2]Compatibility[/h2]
 [list]
 [*]Game version 0.46D. One Harmony patch on `MedsItemDirectory.Injector` that only rewrites this item's return value.
-[*]No capabilities declared (files / network / steam); no new items, no recipe table edits, no save format changes.
-[*]If another mod also reprices this item, the patch that runs last wins.
+[*]No capabilities declared; no new items, no recipe edits, no save format changes.
 [/list]
 
 [h2]Install[/h2]

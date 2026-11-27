@@ -47,8 +47,20 @@ bash LuxuryNomoreInjector/scripts/package.sh
 ```
 
 产物在 `dist/`：干净的模组文件夹、zip、`SHA256SUMS.txt`、给 SteamCMD 用的 `.vdf`。
-`package.sh` 会沿用 `.vdf` 里已有的 `publishedfileid` 与 `visibility`，所以更新时不会新建条目、
-也不会把公开条目改回隐藏。上传步骤见各模组的 `packaging/UPLOAD.md`。
+`package.sh` 会沿用 `.vdf` 里已有的 `publishedfileid` 与 `visibility`，所以更新时不会新建条目、也不会把公开条目改回隐藏。
+上传步骤见各模组的 `packaging/UPLOAD.md`。
+
+**描述字段**：把 `packaging/workshop_description.txt` 全文写进 vdf 的 `description`，上传时自动更新页面，
+不用手动粘贴。两个硬限制：
+
+| 限制 | 后果 | 处理 |
+|---|---|---|
+| 描述 **> 8000 字节**（UTF-8，中文约 2600 字） | SteamCMD 内容与预览都传完，最后一步报 `Failed to update workshop item (Invalid Parameter)` | `package.sh` 打包时按字节检查并直接失败 |
+| 值里有 ASCII 双引号 | KeyValues 没有转义，整份 vdf 解析失败 | 源文件只许用「」，`package.sh` 同样会拦 |
+
+**可见性**：`.vdf` 里记的是**首次发布**时的值。如果之后在网页上把条目改成了公开，
+仓库里的 vdf 仍写着 `visibility 2`，直接打包上传会把公开条目改回隐藏——
+这种情况要 `VIS_OVERRIDE=0` 打包，或者手动改 vdf 里的数字。
 
 ## 5. 本地信任（改完代码不出现「未审核」）
 

@@ -3,9 +3,9 @@
   <ID>harness.luxury-nomore-injector</ID>
   <Name>奢侈品奥克莫吸注射器 / Luxury Nomore Injector</Name>
   <Author>harness</Author>
-  <ModVersion>1.0.0</ModVersion>
-  <Description>把「奥克莫吸注射器」归类为奢侈品，基础价值从 50 提到 350——和赛纳普斯注射器同档，摆上柜台能吸引买奢侈品的客人。
-Marks the Nomore Injector as a luxury item and raises its base value from 50 to 350.</Description>
+  <ModVersion>1.1.0</ModVersion>
+  <Description>把「奥克莫吸注射器」归类为奢侈品，并给它加价：基础价值 50 × 倍数，默认 4 倍＝200。倍数在模组设置里可调（1 到 10 倍，1 倍＝不加价），和赛纳普斯注射器同档，摆上柜台能吸引买奢侈品的客人。
+Marks the Nomore Injector as a luxury item and applies a configurable markup: base value 50 x multiplier, default 4x = 200. The multiplier is a mod setting (1-10x, 1x = no markup), matching the Synaprest Injector tier.</Description>
   <GameVersions><Version>0.46D</Version></GameVersions>
   <Prerequisites />
   <Assemblies><Assembly>LuxuryNomoreInjectorMod.dll</Assembly></Assemblies>

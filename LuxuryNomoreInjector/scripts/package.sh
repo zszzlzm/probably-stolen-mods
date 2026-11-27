@@ -40,6 +40,10 @@ cp "$MANIFEST" "$OUT/"
 # 包内放 640x360 的小图：工坊 file_size 只统计 contentfolder
 cp "$SMALL_PREVIEW" "$OUT/preview.png"
 cp "$ROOT/packaging/README.txt" "$OUT/"
+if [ -d "$ROOT/mod/Localization" ]; then
+	mkdir -p "$OUT/Localization"
+	cp "$ROOT/mod/Localization/"*.csv "$OUT/Localization/"
+fi
 
 echo "== verify =="
 fail() { echo "VERIFY FAILED: $*" >&2; exit 1; }
@@ -55,6 +59,14 @@ PREVIEW_DIMS=$("$PY" -c "import sys; from PIL import Image; print('%dx%d' % Imag
 
 grep -q "<Assembly>$DLL</Assembly>" "$OUT/manifest.xml" || fail "manifest does not list the dll"
 grep -q "<Capabilities" "$OUT/manifest.xml" || fail "manifest has no <Capabilities> element"
+
+# 设置项靠 Localization/*.csv 提供名字与说明：少了就只有 "config.multiplier" 原始 key
+LOC_COUNT=$(ls "$OUT/Localization/"*.csv 2>/dev/null | wc -l)
+[ "$LOC_COUNT" -ge 2 ] || fail "expected at least 2 localization files, found $LOC_COUNT"
+for f in "$OUT/Localization/"*.csv; do
+	[ -s "$f" ] || fail "$(basename "$f") is empty"
+	grep -q "^config.multiplier," "$f" || fail "$(basename "$f") lacks the config.multiplier key"
+done
 
 # 模组扫描器会拒绝的载荷：可执行文件、脚本、未知 DLL、压缩包、美术源文件
 BAD=$(find "$OUT" -type f \( -iname '*.exe' -o -iname '*.bat' -o -iname '*.cmd' -o -iname '*.ps1' \
@@ -101,6 +113,31 @@ if [ -f "$VDF" ]; then
 fi
 VIS="${VIS_OVERRIDE:-$VIS}"
 CHANGENOTE="${CHANGENOTE:-v$VER 首次发布。}"
+
+# 工坊长描述由本文件提供（1.1.0 起）。以前这里写死一句短描述，每次上传都会把页面上的长描述冲掉。
+# 坑：KeyValues 没有转义，值里的 ASCII 双引号会提前截断字符串、整份 vdf 解析失败 —— 源文件只许用「」。
+DESC_FILE="$ROOT/packaging/workshop_description.txt"
+[ -s "$DESC_FILE" ] || { echo "ERROR: $DESC_FILE missing" >&2; exit 1; }
+DESC_ESC="$("$PY" -c '
+import sys
+t = open(sys.argv[1], encoding="utf-8").read().rstrip()
+bad = [i + 1 for i, l in enumerate(t.split("\n")) if chr(34) in l]
+if bad:
+    sys.stderr.write("ERROR: ASCII double quote in %s at line(s) %s; "
+                     "KeyValues cannot escape it, use 「」 instead\n"
+                     % (sys.argv[1], ", ".join(map(str, bad))))
+    raise SystemExit(1)
+# Steam 的工坊描述上限按字节算（约 8000）。超了 SteamCMD 只在最后一步报
+# "Failed to update workshop item (Invalid Parameter)"，而且这时内容已经传上去了。
+size = len(t.encode("utf-8"))
+if size > 7900:
+    sys.stderr.write("ERROR: %s is %d UTF-8 bytes; Steam rejects descriptions over 8000 "
+                     "(trim it, about 2600 Chinese characters)\n" % (sys.argv[1], size))
+    raise SystemExit(1)
+sys.stderr.write("  description  %d bytes\n" % size)
+sys.stdout.write(t)
+' "$DESC_FILE")" || exit 1
+
 cat > "$VDF" <<EOF
 "workshopitem"
 {
@@ -110,7 +147,7 @@ cat > "$VDF" <<EOF
 	"previewfile"		"$WIN_PREVIEW"
 	"visibility"		"$VIS"
 	"title"			"更好的奥克莫吸注射器 / Luxury Nomore Injector"
-	"description"		"奥克莫吸注射器要走完整条化工链，原版却只给 50 信用点。现在它和赛纳普斯注射器同档：加上「奢侈品」类型、基础价值 50 → 350，配方、纯度、药效一律不动。The Nomore Injector now prices like the luxury prototype it is: Luxury Item type and a 350 base value, matching the Synaprest Injector."
+	"description"		"$DESC_ESC"
 	"changenote"		"$CHANGENOTE"
 }
 EOF
