@@ -73,8 +73,14 @@ bash LuxuryNomoreInjector/scripts/package.sh
 | `int` / `float` 不带范围 | 输入框 | 是（可编辑） |
 | `string` + `choices` | **下拉框**（`AddDropdown`） | 是，永远显示当前选中项 |
 
-所以离散档位（1–10 倍、几档耗电）一律用 `string` + `choices`；连续数值用输入框。
-滤芯打印机的 `print_power` 当年用了滑条，玩家反馈「拖完不知道设了多少」，就是这张表的第一行。
+所以选控件按值的形状来：
+
+| 值的形状 | 用什么 | 例子 |
+|---|---|---|
+| 少量固定档位 | `string` + `choices` → 下拉框 | 加价倍数 1–10 倍（`LuxuryNomoreInjector`） |
+| 任意数值、范围很宽 | 不带范围的输入框，把当前值写进标签 | 打印耗电 0–100000（`FilterPrinter`：`打印耗电（当前：{0}）`） |
+
+两种都能看见当前值；**别用 min/max**，那是唯一看不见的一种。
 
 ## 5. 本地信任（改完代码不出现「未审核」）
 
