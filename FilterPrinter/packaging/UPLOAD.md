@@ -1,6 +1,7 @@
 # 工坊上传步骤（滤芯打印机）
 
-> **当前状态（2026-11-26 18:00）**：条目 id **3840097356**，`visibility 0`（公开），**v1.1.3 已上传**（2026-11-27 14:50，新增第 37 种「普通水滤芯」，文案按审阅稿更新）。
+> **当前状态（2026-11-27 15:01）**：条目 id **3840097356**，`visibility 0`（公开），**v1.1.4 已上传**（2026-11-27 15:00，英文文案按中文审阅稿重写；删掉 `printer.status.converter`
+> 与 `printer.status.hypertech` 各一条早先的重复条目）。
 > v1.1.1 修了两件事：老存档的机器显示成「？」（§5），以及贴图背景不透明导致的黑色边框（§6）。
 > SteamCMD 会把 id 写回 `.vdf`，之后 `package.sh` 每次都会沿用这个 id 和可见性。
 > 从 v1.1.1 起，工坊长描述也由 `package.sh` 写进 vdf 的 `description` 字段，不用再手动粘贴。
@@ -8,15 +9,15 @@
 ## 1. 打包
 
 ```bash
-CHANGENOTE="v1.1.1：修老存档里机器显示成「？」问号图的问题。" bash scripts/package.sh
+CHANGENOTE="v1.1.4：英文文案按中文审阅稿重写。" bash scripts/package.sh
 ```
 
 产物在 `dist/`：
 
 | 文件 | 用途 |
 |---|---|
-| `FilterPrinter-v1.1.0/` | 上传给 Steam 的 contentfolder（dll、manifest、语言包、preview、Textures） |
-| `FilterPrinter-v1.1.0.zip` | 给不在工坊下载的人手动安装 |
+| `FilterPrinter-v<版本>/` | 上传给 Steam 的 contentfolder（dll、manifest、语言包、preview、Textures） |
+| `FilterPrinter-v<版本>.zip` | 给不在工坊下载的人手动安装 |
 | `SHA256SUMS.txt` | 每个文件的校验和 |
 | `harness.filter-printer.vdf` | SteamCMD 用的条目配置 |
 | `workshop_description.txt` | 工坊描述全文（中文正文 + 英文附录） |

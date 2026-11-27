@@ -1,4 +1,4 @@
-滤芯打印机  v1.1.3
+滤芯打印机  v1.1.4
 ============================================================
 
 【关于这个模组】
@@ -18,10 +18,10 @@
     同时装原版打印机也一眼能分清
 
 【安装】
-1. 把压缩包里的整个 FilterPrinter-v1.1.3 文件夹放进：
+1. 把压缩包里的整个 FilterPrinter-v1.1.4 文件夹放进：
        <游戏目录>/Mods/
    （Steam 版一般是 ...\steamapps\common\Probably Stolen\Mods\，
-     放好后路径形如 Mods\FilterPrinter-v1.1.3\manifest.xml）
+     放好后路径形如 Mods\FilterPrinter-v1.1.4\manifest.xml）
 2. 启动游戏，打开「模组」菜单，找到「滤芯打印机」，点「审核并启用」
 3. 启用后可能需要重启游戏一次
 

@@ -145,6 +145,14 @@ if bad:
                      "KeyValues cannot escape it, use \u201c \u201d instead\n"
                      % (sys.argv[1], ", ".join(map(str, bad))))
     raise SystemExit(1)
+# Steam 的工坊描述上限按字节算（8000）。超了 SteamCMD 只在最后一步报
+# "Failed to update workshop item (Invalid Parameter)"，而这时内容与预览已经传上去了。
+size = len(t.encode("utf-8"))
+if size > 7900:
+    sys.stderr.write("ERROR: %s is %d UTF-8 bytes; Steam rejects descriptions over 8000 "
+                     "(trim it, about 2600 Chinese characters)\n" % (sys.argv[1], size))
+    raise SystemExit(1)
+sys.stderr.write("  description  %d bytes\n" % size)
 sys.stdout.write(t)
 ' "$DESC_FILE")" || exit 1
 

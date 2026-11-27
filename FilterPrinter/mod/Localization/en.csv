@@ -13,8 +13,6 @@ printer.msg.no_battery,"No power cell in the battery slot (this print needs {0})
 printer.status.label,"Power"
 printer.status.empty,"no cell (needs {0})"
 printer.status.power,"{0} / needs {1}"
-printer.status.converter,"external power (needs {0})"
-printer.status.hypertech,"hypertech cell (needs {0})"
 cartridge.name,"{0} Filter Cartridge"
 cartridge.desc,"Blocks {0} and nothing else. Every other substance passes straight through."
 cartridge.flavor,"Printed to order. The pores are printed around one structure, so nothing else is retained."

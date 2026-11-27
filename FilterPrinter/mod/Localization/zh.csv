@@ -13,8 +13,6 @@ printer.msg.no_battery,"电池槽里没有电池（这次打印需要 {0} 电）
 printer.status.label,"电量"
 printer.status.empty,"未安装电池（需要 {0}）"
 printer.status.power,"{0} / 需要 {1}"
-printer.status.converter,"外部供电（需要 {0}）"
-printer.status.hypertech,"高压电池供电（需要 {0}）"
 cartridge.name,"{0}滤芯"
 cartridge.desc,"只截留{0}，其余物质直接通过。"
 cartridge.flavor,"按单打印。孔隙是按照单质结构打印出来的，其他物质不会被截留。"

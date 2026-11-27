@@ -1,6 +1,6 @@
 # 工坊上传步骤（还原剂蕨）
 
-> **当前状态（2026-11-22 23:22）**：已上架，条目 id **3844217940**，`visibility 0`（公开）。
+> **当前状态（2026-11-27 15:01）**：已上架，条目 id **3844217940**，`visibility 0`（公开），**v0.1.3 已上传**（2026-11-27 15:00，英文文案按中文审阅稿重写）。
 > `dist/harness.reduction-fern.vdf` 里已经写死这两个值，`package.sh` 每次都会沿用——
 > 更新时只要重跑打包 + 上传，不会新建条目、也不会把公开改回隐藏。
 > 链接：https://steamcommunity.com/sharedfiles/filedetails/?id=3844217940
@@ -15,8 +15,8 @@ bash scripts/package.sh
 
 | 文件 | 用途 |
 |---|---|
-| `ReductionFern-v0.1.2/` | 上传给 Steam 的 contentfolder（只含运行时文件） |
-| `ReductionFern-v0.1.2.zip` | 给不在工坊下载的人手动安装 |
+| `ReductionFern-v0.1.3/` | 上传给 Steam 的 contentfolder（只含运行时文件） |
+| `ReductionFern-v0.1.3.zip` | 给不在工坊下载的人手动安装 |
 | `SHA256SUMS.txt` | 每个文件的校验和 |
 | `harness.reduction-fern.vdf` | SteamCMD 用的条目配置 |
 | `workshop_description.txt` | 工坊描述全文（中文正文 + 英文附录），复制到 Steam 页面 |
@@ -49,4 +49,4 @@ C:\steamcmd\steamcmd.exe +login <账号> +workshop_build_item "C:\Users\zszzl\Do
 ## 4. 安全
 
 - `C:\steamcmd\logs\console_log.txt` 会把 `+login<账号><密码>` 明文写进日志，事后要脱敏并考虑改密码。
-- 上传前把 `dist/` 之外的东西都当草稿；只有 `ReductionFern-v0.1.2/` 里的内容会进包。
+- 上传前把 `dist/` 之外的东西都当草稿；只有 `ReductionFern-v0.1.3/` 里的内容会进包。
